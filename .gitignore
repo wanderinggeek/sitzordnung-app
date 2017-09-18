@@ -1,0 +1,11 @@
+Sitzplanverteilung/build/*
+Sitzplanverteilung/.DS_Store
+*.suo
+*.user
+*.sdf
+Sitzplanverteilung/bin/*
+Sitzplanverteilung/obj/*
+*.opensdf
+*.tlog
+*.log
+git
