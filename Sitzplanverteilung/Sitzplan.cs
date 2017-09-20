@@ -25,6 +25,28 @@ namespace Sitzplanverteilung
 
         public void verteileSchueler(List<Schueler> schuelerListe) 
         {
+            int moeglichePlaetze = tischgruppe.Length * maxProTisch;
+            decimal schuelerProTischTatsaechlich = schuelerListe.Count()/tischgruppe.Length;
+            if (moeglichePlaetze > schuelerListe.Count())
+            {
+                if (schuelerProTischTatsaechlich > 6) 
+                {
+                    //Verteilung der Schüler
+                    foreach (Schueler schueler in schuelerListe) 
+                    {
+
+                    }
+                }
+                else
+                {
+                    //Fehler maximal 6 Schüler pro Tisch
+                }
+            }
+            else 
+            {
+                //Fehler nicht genug Platz an den Tischen
+                //Beispiel User gibt 5 TGs an und 4 Schüler pro Tisch, also Platz für 20 Schüler. Aber 25 Schüler wurden angegeben. 
+            }
             verteilerDummy(schuelerListe);
         }
 

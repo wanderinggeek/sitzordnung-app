@@ -39,7 +39,7 @@ namespace Sitzplanverteilung
             //Schülerliste importieren
             List<Schueler> liste = Verwaltungskram.importiereSchuelerListe();
 
-            //Erstellen der einzelnen Sitzpläne
+            //Erstellen der 6 einzelnen Sitzpläne
             for (int i = 0; i < 6; i++)
             {
                 sitzplan[i] = new Sitzplan(anzahlGruppen, maxSchueler);

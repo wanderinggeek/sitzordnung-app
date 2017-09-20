@@ -55,6 +55,10 @@ namespace Sitzplanverteilung
         {
             return this.geschlecht;
         }
+        public String getKlasse()
+        {
+            return this.klasse;
+        }
         public void setName(String name)
         {
             this.name = name;
@@ -77,6 +81,10 @@ namespace Sitzplanverteilung
             {
                 this.geschlecht = geschlecht;
             }
+        }
+        public void setKlasse(String klasse)
+        {
+            this.klasse = klasse;
         }
 
         public override string ToString()
