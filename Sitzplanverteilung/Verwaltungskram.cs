@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Sitzplanverteilung
 {
@@ -12,39 +13,58 @@ namespace Sitzplanverteilung
     {
         public static List<Schueler> importiereSchuelerListe ()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
             String zeile;
+            int zeilenNummer = 0;
             List<Schueler> schuelerListe = new List<Schueler>();
+            List<Int32> fehlerhafteZeilen = new List<Int32>();
+            bool error = false;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV Datei (*.csv)|*.csv"; // Es sollen nur CSV-Dateien geöffnet werden können
             if (openFileDialog.ShowDialog() == true)
             {
-                Console.WriteLine(openFileDialog.FileName);
-                Console.ReadLine();
-                StreamReader sr = new StreamReader(openFileDialog.FileName);
+                StreamReader sr = new StreamReader(openFileDialog.FileName, System.Text.Encoding.Default);
                 do
                 {
+                    zeilenNummer++;
                     zeile = sr.ReadLine();
-                    schuelerListe.Add(leseEingabeDatei(zeile));
+                    String[] daten = zeile.Split(';'); 
+                    // daten Index = Wert in CSV Datei (eventuell dem Konstruktor der Klasse Schüler anpassen?)
+                    // 0 = Nachname
+                    // 1 = Vorname
+                    // 2 = Firma
+                    // 5 = Berufsgruppe
+                    // 4 = Geschlecht
+                    if (pruefeDatensatz(daten))
+                    {
+                        schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[5], Convert.ToChar(daten[4])));
+                    }
+                    else
+                    {
+                        fehlerhafteZeilen.Add(zeilenNummer);
+                        error = true;
+                    }
                 } while (!sr.EndOfStream);
                 sr.Close();
             }
-            //Zwei Zeilen Überschriften enfernen
-            schuelerListe.Remove(schuelerListe[0]);
-            schuelerListe.Remove(schuelerListe[0]);
+            string bericht = Convert.ToString(zeilenNummer - fehlerhafteZeilen.Count) + " von " + Convert.ToString(zeilenNummer) + " Datensätze eingelesen.";
+            if (error)
+            {
+                bericht += "\n\nFehlerhafte Datensätze in den Zeilen " + String.Join(" , ", fehlerhafteZeilen) + " gefunden.";
+                bericht += "\n\nBitte den Aufbau der Datensätze gemäß des Anwenderhandbuchs kontrollieren.";
+            }
+            MessageBox.Show(bericht, "Import Ergebnis", MessageBoxButton.OK, MessageBoxImage.Information);
             return schuelerListe;
         }
 
-        private static Schueler leseEingabeDatei(String schuelerDaten) 
+        private static bool pruefeDatensatz(String[] daten) 
         {
-            Schueler schueler = new Schueler();
-            Console.WriteLine(schuelerDaten);
-            String[] substrings = schuelerDaten.Split(';');
-            schueler.setName(substrings[0]);
-            schueler.setVorname(substrings[1]);
-            schueler.setFirma(substrings[2]);
-            schueler.setBerufsgruppe(substrings[3]);
-            schueler.setGeschlecht(substrings[4][0]); 
-            return schueler;
-
+            // Fehlerhafte Anzahl an Werten im Datensatz
+            if (daten.Count() != 6)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
