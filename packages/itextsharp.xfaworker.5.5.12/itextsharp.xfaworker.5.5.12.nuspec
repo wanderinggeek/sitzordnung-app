@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>itextsharp.xfaworker</id>
+    <version>5.5.12</version>
+    <title>iTextSharp XFA Worker</title>
+    <authors>iText Software</authors>
+    <owners>iText Software</owners>
+    <licenseUrl>http://itextpdf.com/legal</licenseUrl>
+    <projectUrl>http://itextpdf.com/</projectUrl>
+    <iconUrl>http://itextpdf.com/sites/default/files/ITSC-avatar.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>XFA Worker lets you program dynamic PDFs as well as convert them into static, protected PDF files for security reasons. XFA Worker is an add-on to the full iText suite, and as a closed-source project, it is only available with a commercial license.</description>
+    <summary>XFA Worker lets you program dynamic PDFs as well as convert them into static, protected PDF files for security reasons.</summary>
+    <releaseNotes>http://itextpdf.com/blog/release-notes-itext-5512</releaseNotes>
+    <copyright>Copyright (c) 1998-2017 iText Group NV</copyright>
+    <language>en-US</language>
+    <tags>itext itextsharp c# csharp xmlworker pdf html xhtml css xfa xfaworker</tags>
+    <dependencies>
+      <dependency id="iTextSharp" version="5.5.12" />
+      <dependency id="itextsharp.xmlworker" version="5.5.12" />
+      <dependency id="itextsharp.licensekey" version="1.0.4" />
+      <dependency id="log4net" version="2.0.3" />
+      <dependency id="Antlr" version="3.4.1.9004" />
+    </dependencies>
+  </metadata>
+</package>
