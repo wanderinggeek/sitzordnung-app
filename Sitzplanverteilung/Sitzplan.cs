@@ -31,6 +31,8 @@ namespace Sitzplanverteilung
             {
                 if (schuelerProTischTatsaechlich > 6) 
                 {
+                    //Sortieren der Schüler?
+ 
                     //Verteilung der Schüler
                     foreach (Schueler schueler in schuelerListe) 
                     {
@@ -56,9 +58,9 @@ namespace Sitzplanverteilung
             for (int i = 0; i < this.tischgruppe.Length; i++) 
             {
                 this.tischgruppe[i] = new Tischgruppe();
-                for (int j = 0; j < this.maxProTisch && k < schuelerListe.Count(); j++) 
+                for (int j = 0; j <= this.maxProTisch && k < schuelerListe.Count(); j++) 
                 {
-                    tischgruppe[i].addSchueler(schuelerListe.ElementAt(k), maxProTisch);
+                    tischgruppe[i].addSchueler(schuelerListe.ElementAt(k), j);
                     k++;
                 }
             }
@@ -81,6 +83,28 @@ namespace Sitzplanverteilung
         public void setTischgruppe(Tischgruppe tischgruppe, int index)
         {
             this.tischgruppe[index] = tischgruppe;
+        }
+
+        public List<Schueler> sortiereSchuelerListe(List<Schueler> schuelerListe)
+        {
+            Schueler speicher;
+            //Sortieren nach Geschlecht
+            for (int i = 0; i < schuelerListe.Count; i++) 
+            {
+                for(int j = 0; j< schuelerListe.Count -1; j++)
+                {
+                    if (schuelerListe[j].getGeschlecht() > schuelerListe[j + 1].getGeschlecht())
+                    {
+                        speicher = schuelerListe[j];
+                        schuelerListe[j] = schuelerListe[j + 1];
+                        schuelerListe[j + 1] = speicher;
+                    }
+                }
+            }
+            //Sortieren nach Berufsgruppe
+            
+            //Sortieren nach Firma
+                return schuelerListe;
         }
 
         public override string ToString()

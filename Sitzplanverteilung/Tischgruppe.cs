@@ -8,37 +8,79 @@ namespace Sitzplanverteilung
 {
     class Tischgruppe
     {
-        List<Schueler> gruppe;
+        Schueler[] gruppe;
 
         public Tischgruppe() 
         {
-            gruppe = new List<Schueler>();
+            gruppe = new Schueler[6];
         }
 
-        public Tischgruppe(List<Schueler> gruppe)
+        public Tischgruppe(Schueler[] gruppe)
         {
             this.gruppe = gruppe;
         }
+        public Tischgruppe(int plaetze)
+        {
+            this.gruppe = new Schueler[plaetze];
+        }
 
-        public List<Schueler> getGruppe() 
+        public Schueler[] getGruppe() 
         {
             return this.gruppe;
         }
-        public void setGruppe(List<Schueler> gruppe) 
+        public void setGruppe(Schueler[] gruppe) 
         {
             this.gruppe = gruppe;
         }
 
-        public void addSchueler(Schueler schueler, int anzahl) 
+        public void addSchueler(Schueler schueler, int position) 
         {
-            if (this.gruppe.Count() < anzahl) 
-            {
-                gruppe.Add(schueler);
-            }
+            gruppe[position] = schueler;
         }
         public void removeSchueler(Schueler schueler) 
         {
-            gruppe.Remove(schueler);
+            int i = 0;
+            foreach (Schueler s in gruppe) 
+            {
+                if (s.Equals(schueler)) 
+                {
+                    gruppe[i] = null;
+                    break;
+                }
+                i++;
+            }
+        }
+
+        public void removeSchueler(int position)
+        {
+            gruppe[position] = null;
+        }
+
+        public void swapSchueler(int positionVon, int positionBis) 
+        {
+            Schueler speicher = gruppe[positionVon];
+            gruppe[positionVon] = gruppe[positionBis];
+            gruppe[positionBis] = speicher;
+        }
+
+        public void swapSchueler(Schueler von, Schueler bis) 
+        {
+            int i = 0;
+            bool istGetauscht = false;
+            foreach (Schueler s in gruppe)
+            {
+                if (s.Equals(von))
+                {
+                    gruppe[i] = bis;
+                    istGetauscht = true;
+                }
+                if (s.Equals(bis) && !istGetauscht)
+                {
+                    gruppe[i] = von;
+                }
+                istGetauscht = false;
+                i++;
+            }
         }
 
         public int getGruppengroesse() 

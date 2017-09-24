@@ -31,6 +31,7 @@ namespace Sitzplanverteilung
                 sitzplan[i] = new Sitzplan();
                 sitzplan[i].verteileSchueler(liste);
             }
+            Console.WriteLine("sitzplan");
         }
 
         //Sitzplan verteilen mit variablen Gruppengrößen/Anzahl Tischgruppen
