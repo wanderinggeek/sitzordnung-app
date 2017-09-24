@@ -32,12 +32,14 @@ namespace Sitzplanverteilung
                     // daten Index = Wert in CSV Datei (eventuell dem Konstruktor der Klasse Schüler anpassen?)
                     // 0 = Nachname
                     // 1 = Vorname
-                    // 2 = Firma
-                    // 5 = Berufsgruppe
+                    // 2 = Klasse
+                    // 3 = Firma
                     // 4 = Geschlecht
+                    // 5 = Berufsgruppe
+                   
                     if (pruefeDatensatz(daten))
                     {
-                        schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[5], Convert.ToChar(daten[4])));
+                        schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[3], daten[4][0], daten[5]));
                     }
                     else
                     {

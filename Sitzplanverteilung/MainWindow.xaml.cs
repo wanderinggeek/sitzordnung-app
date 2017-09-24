@@ -33,6 +33,7 @@ namespace Sitzplanverteilung
         {
             SitzplanKartei sk = new SitzplanKartei();
             sk.sitzplaeneGenerierenMitDatei();
+            MessageBox.Show(sk.getSitzplaene()[0].getTischgruppe(0).getGruppe()[0].getGeschlecht().ToString());
 
         }
     }

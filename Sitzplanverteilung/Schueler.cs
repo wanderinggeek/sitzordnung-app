@@ -25,11 +25,12 @@ namespace Sitzplanverteilung
             this.geschlecht = 'm';
         }
 
-        public Schueler(String name, String vorname, String firma, String berufssgruppe, char geschlecht) 
+        public Schueler(String name, String vorname, String klasse, String firma, char geschlecht, String berufssgruppe) 
         {
             this.name = name;
             this.vorname = vorname;
             this.firma = firma;
+            this.klasse = klasse;
             this.berufssgruppe = berufssgruppe;
             // geschlecht mit dem Character <m>ännlich oder <w>eiblich
             this.geschlecht = geschlecht;
