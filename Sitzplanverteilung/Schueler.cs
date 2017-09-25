@@ -12,17 +12,19 @@ namespace Sitzplanverteilung
         String vorname;
         String klasse;
         String firma;
-        char geschlecht;
+        char   geschlecht;
         String berufssgruppe;
-        //Bild?
+        String bild;
 
         public Schueler() 
         {
             this.name = "Musterschüler";
             this.vorname = "Manni";
             this.firma = "Musterschüler KG";
+            this.klasse = "Musterklasse";
             this.berufssgruppe = "Sohn vom Eigentümer";
             this.geschlecht = 'm';
+            this.bild = erstelleBilddateiName();
         }
 
         public Schueler(String name, String vorname, String klasse, String firma, char geschlecht, String berufssgruppe) 
@@ -34,6 +36,7 @@ namespace Sitzplanverteilung
             this.berufssgruppe = berufssgruppe;
             // geschlecht mit dem Character <m>ännlich oder <w>eiblich
             this.geschlecht = geschlecht;
+            this.bild = erstelleBilddateiName();
         }
 
         public String getName() 
@@ -87,7 +90,10 @@ namespace Sitzplanverteilung
         {
             this.klasse = klasse;
         }
-
+        private String erstelleBilddateiName() 
+        {
+            return this.name + this.vorname.Replace(' ', '_') + ".jpg"; ;
+        }
         public override string ToString()
         {
             return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufssgruppe + ", " + this.geschlecht;

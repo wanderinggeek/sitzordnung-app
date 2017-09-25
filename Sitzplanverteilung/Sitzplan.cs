@@ -8,25 +8,33 @@ namespace Sitzplanverteilung
 {
     class Sitzplan
     {
-        Tischgruppe[] tischgruppe;
+        List<Tischgruppe> tischgruppe;
         int maxProTisch;
 
         public Sitzplan()
         {
-            this.tischgruppe = new Tischgruppe[5];
+            this.tischgruppe = new List<Tischgruppe>();
+            for (int i = 0; i < 5; i++) 
+            {
+                hinzufuegenTischgruppe(null);
+            }
             this.maxProTisch = 5;
         }
         
         public Sitzplan(int anzahlGruppen, int max) 
         {
-            this.tischgruppe = new Tischgruppe[anzahlGruppen];
+            this.tischgruppe = new List<Tischgruppe>();
+            for (int i = 0; i < anzahlGruppen; i++)
+            {
+                hinzufuegenTischgruppe(null);
+            }
             this.maxProTisch = max;
         }
 
         public void verteileSchueler(List<Schueler> schuelerListe) 
         {
-            int moeglichePlaetze = tischgruppe.Length * maxProTisch;
-            decimal schuelerProTischTatsaechlich = schuelerListe.Count()/tischgruppe.Length;
+            int moeglichePlaetze = tischgruppe.Count * maxProTisch;
+            decimal schuelerProTischTatsaechlich = schuelerListe.Count()/tischgruppe.Count;
             if (moeglichePlaetze > schuelerListe.Count())
             {
                 if (schuelerProTischTatsaechlich > 6) 
@@ -55,7 +63,7 @@ namespace Sitzplanverteilung
         public void verteilerDummy(List<Schueler> schuelerListe) 
         {
             int k = 0;
-            for (int i = 0; i < this.tischgruppe.Length; i++) 
+            for (int i = 0; i < this.tischgruppe.Count; i++) 
             {
                 this.tischgruppe[i] = new Tischgruppe();
                 for (int j = 0; j <= this.maxProTisch && k < schuelerListe.Count(); j++) 
@@ -66,7 +74,8 @@ namespace Sitzplanverteilung
             }
         }
 
-        public Tischgruppe[] getTischgruppen()
+
+        public List<Tischgruppe> getTischgruppen()
         {
             return tischgruppe;
         }
@@ -76,7 +85,7 @@ namespace Sitzplanverteilung
             return tischgruppe[index];
         }
 
-        public void setTischgruppen(Tischgruppe[] tischgruppen) 
+        public void setTischgruppen(List<Tischgruppe> tischgruppen) 
         {
             this.tischgruppe = tischgruppen;
         }
@@ -105,6 +114,10 @@ namespace Sitzplanverteilung
             
             //Sortieren nach Firma
                 return schuelerListe;
+        }
+        public void hinzufuegenTischgruppe(Tischgruppe tischgruppe) 
+        {
+            this.tischgruppe.Add(tischgruppe);
         }
 
         public override string ToString()

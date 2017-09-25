@@ -8,47 +8,46 @@ namespace Sitzplanverteilung
 {
     class Tischgruppe
     {
-        Schueler[] gruppe;
+        List<Schueler> gruppe;
 
         public Tischgruppe() 
         {
-            gruppe = new Schueler[6];
+            gruppe = new List<Schueler>();
         }
 
-        public Tischgruppe(Schueler[] gruppe)
+        public Tischgruppe(List<Schueler> gruppe)
         {
             this.gruppe = gruppe;
         }
         public Tischgruppe(int plaetze)
         {
-            this.gruppe = new Schueler[plaetze];
+            this.gruppe = new List<Schueler>();
+            for (int i = 0; i < plaetze; i++ )
+            {
+                this.gruppe.Add(null);
+            }
         }
 
-        public Schueler[] getGruppe() 
+        public List<Schueler> getGruppe() 
         {
             return this.gruppe;
         }
-        public void setGruppe(Schueler[] gruppe) 
+        public void setGruppe(List<Schueler> gruppe) 
         {
             this.gruppe = gruppe;
         }
 
         public void addSchueler(Schueler schueler, int position) 
         {
-            gruppe[position] = schueler;
+            if (position < gruppe.Count)
+            {
+                gruppe[position] = schueler;
+            }
         }
         public void removeSchueler(Schueler schueler) 
         {
-            int i = 0;
-            foreach (Schueler s in gruppe) 
-            {
-                if (s.Equals(schueler)) 
-                {
-                    gruppe[i] = null;
-                    break;
-                }
-                i++;
-            }
+            int index = this.gruppe.IndexOf(schueler);
+            this.gruppe[index] = null;
         }
 
         public void removeSchueler(int position)
