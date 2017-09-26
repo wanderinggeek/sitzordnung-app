@@ -14,21 +14,23 @@ namespace Sitzplanverteilung
         public Sitzplan()
         {
             this.tischgruppe = new List<Tischgruppe>();
+            this.maxProTisch = 5;
             for (int i = 0; i < 5; i++) 
             {
-                hinzufuegenTischgruppe(null);
+                hinzufuegenTischgruppe(new Tischgruppe(Decimal.ToInt32(maxProTisch)));
             }
-            this.maxProTisch = 5;
+           
         }
         
         public Sitzplan(int anzahlGruppen, int max) 
         {
             this.tischgruppe = new List<Tischgruppe>();
+            this.maxProTisch = max;
             for (int i = 0; i < anzahlGruppen; i++)
             {
-                hinzufuegenTischgruppe(null);
+                hinzufuegenTischgruppe(new Tischgruppe(max));
             }
-            this.maxProTisch = max;
+            
         }
 
         public void verteileSchueler(List<Schueler> schuelerListe) 
@@ -37,14 +39,30 @@ namespace Sitzplanverteilung
             decimal schuelerProTischTatsaechlich = schuelerListe.Count()/tischgruppe.Count;
             if (moeglichePlaetze > schuelerListe.Count())
             {
-                if (schuelerProTischTatsaechlich > 6) 
+                if (schuelerProTischTatsaechlich < 6) 
                 {
-                    //Sortieren der Schüler?
- 
+                    SortedList<String, int> firmenVerteilung = ermittleFirmen(schuelerListe); 
+                    int k = 0;
                     //Verteilung der Schüler
-                    foreach (Schueler schueler in schuelerListe) 
+                    foreach (Tischgruppe tisch in tischgruppe) 
                     {
-
+                        int i = 0;
+                        //zufälliges Sortieren der Schüler 
+                        schuelerListe = Verwaltungskram.Shuffle(schuelerListe);
+                        List<Schueler> zufallsListe = new List<Schueler>();
+                        zufallsListe.AddRange(schuelerListe);
+                        foreach(Schueler schueler in zufallsListe)
+                        {
+                            if (i < schuelerProTischTatsaechlich) //mehr Bedingungen abfragen, ob Firma schon in Betrieb
+                            {
+                                //tisch.addSchueler(schueler, i);
+                                this.tischgruppe[k].addSchueler(schueler, i);
+                                schuelerListe.Remove(schueler);
+                                i++;
+                            }
+                        }
+                        //this.tischgruppe[k] = tisch;
+                        k++;                      
                     }
                 }
                 else
@@ -57,7 +75,79 @@ namespace Sitzplanverteilung
                 //Fehler nicht genug Platz an den Tischen
                 //Beispiel User gibt 5 TGs an und 4 Schüler pro Tisch, also Platz für 20 Schüler. Aber 25 Schüler wurden angegeben. 
             }
-            verteilerDummy(schuelerListe);
+            //verteilerDummy(schuelerListe);
+        }
+
+        public int berechneStrafpunkte() 
+        {
+            /*
+                        Aufbau Tisch:
+                        +-----+-----+
+                        |-----|-----|
+                        |--2--|--3--|
+                        |-----|-----|
+                        +-----+-----+
+                        |-----|-----|
+                        |--1--G--4--|
+                        |-----|-----|
+                        +-----+-----+
+                        |-----|-----|
+                        |--0--G--5--|
+                        |-----|-----|
+                        +-----+-----+
+                        Gegenüber zählt nicht!!!
+                        0 sitzt neben 1 
+                        1 sitzt neben 0 und 2
+                        2 sitzt neben 1 und 3
+                        3 sitzt neben 4 und 2
+                        4 sitzt neben 5 und 3 
+                        5 sitzt neben 4
+              */
+            int strafPunkte= 0;
+            
+            foreach (Tischgruppe tisch in this.tischgruppe) 
+            {
+                SortedList<String, int> firmenAmTisch = ermittleFirmen(tisch.getGruppe());
+                
+
+                //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Firma
+                if (tisch.getGruppe()[0].getFirma().Equals(tisch.getGruppe()[1].getFirma()))
+                {
+                    strafPunkte += 3000;
+                }
+
+                if (tisch.getGruppe().Count > 3 && tisch.getGruppe()[2] != null)
+                {
+                    if (tisch.getGruppe()[1].getFirma().Equals(tisch.getGruppe()[2].getFirma()))
+                    {
+                        strafPunkte += 3000;
+                    }
+                }
+                if (tisch.getGruppe().Count > 4 && tisch.getGruppe()[3] != null)
+                {
+                    if (tisch.getGruppe()[2].getFirma().Equals(tisch.getGruppe()[3].getFirma()))
+                    {
+                        strafPunkte += 3000;
+                    }
+                }
+                if (tisch.getGruppe().Count > 5 && tisch.getGruppe()[4] != null)
+                {
+                    if ( tisch.getGruppe()[3].getFirma().Equals(tisch.getGruppe()[4].getFirma()))
+                    {
+                        strafPunkte += 3000;
+                    }
+                }
+                if (tisch.getGruppe().Count == 6 && tisch.getGruppe()[5] != null)
+                {
+                    if (tisch.getGruppe()[4].getFirma().Equals(tisch.getGruppe()[5].getFirma()))
+                    {
+                        strafPunkte += 3000;
+                    }
+                }
+                //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Berufsgruppe
+                //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Geschlecht
+            }
+            return strafPunkte;
         }
 
         public void verteilerDummy(List<Schueler> schuelerListe) 
@@ -72,6 +162,27 @@ namespace Sitzplanverteilung
                     k++;
                 }
             }
+        }
+
+        public SortedList<String, int> ermittleFirmen(List<Schueler> schuelerListe) 
+        {
+            SortedList<String, int> zuordnung = new SortedList<string, int>();
+            foreach (Schueler schueler in schuelerListe) 
+            {
+                if (schueler != null)
+                {
+                    if (zuordnung.ContainsKey(schueler.getFirma()))
+                    {
+                        zuordnung[schueler.getFirma()] += 1;
+                    }
+                    else
+                    {
+                        zuordnung.Add(schueler.getFirma(), 1);
+                    }
+                }
+
+            }
+            return zuordnung;
         }
 
 

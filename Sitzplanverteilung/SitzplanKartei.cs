@@ -27,15 +27,36 @@ namespace Sitzplanverteilung
         public void sitzplaeneGenerierenMitDatei()
         {
             //Schülerliste importieren
-            List<Schueler> liste = Verwaltungskram.importiereSchuelerListe();
-
+            List<Schueler> eingabeListe = new List<Schueler>();
+            eingabeListe.AddRange(Verwaltungskram.importiereSchuelerListe());
+            List<Schueler> liste;
+            
             //Erstellen der einzelnen Sitzpläne
+            int strafPunkteMin;
+            int strafPunkte;
             for (int i = 0; i < 6; i++)
             {
+                Sitzplan preSitzplan = new Sitzplan();
                 sitzplan[i] = new Sitzplan();
+                liste = new List<Schueler>();
+                liste.AddRange(eingabeListe);
                 sitzplan[i].verteileSchueler(liste);
+                strafPunkteMin = sitzplan[i].berechneStrafpunkte();
+                for (int j = 0; j < 1000; j++)
+                {
+                    liste = new List<Schueler>();
+                    liste.AddRange(eingabeListe);
+                    preSitzplan.verteileSchueler(liste);
+                    strafPunkte = preSitzplan.berechneStrafpunkte();
+                    if (strafPunkteMin > strafPunkte) 
+                    {
+                        strafPunkteMin = strafPunkte;
+                        sitzplan[i] = preSitzplan;
+                    }
+                    Console.WriteLine(strafPunkte);
+                }
             }
-            Console.WriteLine("sitzplan");
+            Console.WriteLine("sitzplan fertiggestellt");
         }
 
         //Sitzplan verteilen mit variablen Gruppengrößen/Anzahl Tischgruppen
