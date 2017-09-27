@@ -66,10 +66,12 @@ namespace Sitzplanverteilung
         public void setName(String name)
         {
             this.name = name;
+            this.bild = erstelleBilddateiName();
         }
         public void setVorname(String vorname)
         {
             this.vorname = vorname;
+            this.bild = erstelleBilddateiName();
         }
         public void setFirma(String firma)
         {
@@ -86,18 +88,29 @@ namespace Sitzplanverteilung
                 this.geschlecht = geschlecht;
             }
         }
+        public String getBild() 
+        {
+            return this.bild;
+        }
+
+        public void setBild(String bild) 
+        {
+            this.bild = bild;
+        }
+
         public void setKlasse(String klasse)
         {
             this.klasse = klasse;
-        }
-        private String erstelleBilddateiName() 
-        {
-            return this.name + this.vorname.Replace(' ', '_') + ".jpg"; ;
         }
         public override string ToString()
         {
             return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufssgruppe + ", " + this.geschlecht;
         }
+        private String erstelleBilddateiName()
+        {
+            return this.name +"_"+ this.vorname.Replace(' ', '_') + ".jpg"; ;
+        }
+
         
     }
 }

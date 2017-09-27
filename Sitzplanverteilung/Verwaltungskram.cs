@@ -37,7 +37,6 @@ namespace Sitzplanverteilung
                     // 3 = Firma
                     // 4 = Geschlecht
                     // 5 = Berufsgruppe
-                   
                     if (pruefeDatensatz(daten))
                     {
                         schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[3], daten[4][0], daten[5]));
