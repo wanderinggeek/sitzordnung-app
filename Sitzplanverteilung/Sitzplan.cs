@@ -37,6 +37,7 @@ namespace Sitzplanverteilung
         {
             int moeglichePlaetze = tischgruppe.Count * maxProTisch;
             decimal schuelerProTischTatsaechlich = schuelerListe.Count()/tischgruppe.Count;
+            int restPlaetze = schuelerListe.Count() % tischgruppe.Count;
             if (moeglichePlaetze > schuelerListe.Count())
             {
                 if (schuelerProTischTatsaechlich < 6) 
@@ -61,7 +62,12 @@ namespace Sitzplanverteilung
                                 i++;
                             }
                         }
-                        //this.tischgruppe[k] = tisch;
+                        if (restPlaetze > 0) 
+                        {
+                            this.tischgruppe[k].addSchueler(schuelerListe[0], i);
+                            schuelerListe.Remove(schuelerListe[0]);
+                            restPlaetze--;
+                        }
                         k++;                      
                     }
                 }
@@ -111,9 +117,23 @@ namespace Sitzplanverteilung
                 
 
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Firma
-                if (tisch.getGruppe()[0].getFirma().Equals(tisch.getGruppe()[1].getFirma()))
+                //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleichem Beruf
+                //Strafpunkte vergeben durch Sitzen neben Mitschüler mit gleichem Geschlecht
+                
+                if (tisch.getGruppe().Count > 2 && tisch.getGruppe()[1] != null)
                 {
-                    strafPunkte += 3000;
+                    if (tisch.getGruppe()[0].getFirma().Equals(tisch.getGruppe()[1].getFirma()))
+                    {
+                        strafPunkte += 3000;
+                    }
+                    if (tisch.getGruppe()[0].getBerufsgruppe().Equals(tisch.getGruppe()[1].getBerufsgruppe()))
+                    {
+                        strafPunkte += 2000;
+                    }
+                    if (tisch.getGruppe()[0].getGeschlecht().Equals(tisch.getGruppe()[1].getGeschlecht()))
+                    {
+                        strafPunkte += 1000;
+                    }
                 }
 
                 if (tisch.getGruppe().Count > 3 && tisch.getGruppe()[2] != null)
@@ -122,12 +142,28 @@ namespace Sitzplanverteilung
                     {
                         strafPunkte += 3000;
                     }
+                    if (tisch.getGruppe()[1].getBerufsgruppe().Equals(tisch.getGruppe()[2].getBerufsgruppe()))
+                    {
+                        strafPunkte += 2000;
+                    }
+                    if (tisch.getGruppe()[1].getGeschlecht().Equals(tisch.getGruppe()[2].getGeschlecht()))
+                    {
+                        strafPunkte += 1000;
+                    }
                 }
                 if (tisch.getGruppe().Count > 4 && tisch.getGruppe()[3] != null)
                 {
                     if (tisch.getGruppe()[2].getFirma().Equals(tisch.getGruppe()[3].getFirma()))
                     {
                         strafPunkte += 3000;
+                    }
+                    if (tisch.getGruppe()[2].getBerufsgruppe().Equals(tisch.getGruppe()[3].getBerufsgruppe()))
+                    {
+                        strafPunkte += 2000;
+                    }
+                    if (tisch.getGruppe()[2].getGeschlecht().Equals(tisch.getGruppe()[3].getGeschlecht()))
+                    {
+                        strafPunkte += 1000;
                     }
                 }
                 if (tisch.getGruppe().Count > 5 && tisch.getGruppe()[4] != null)
@@ -136,12 +172,28 @@ namespace Sitzplanverteilung
                     {
                         strafPunkte += 3000;
                     }
+                    if (tisch.getGruppe()[3].getBerufsgruppe().Equals(tisch.getGruppe()[4].getBerufsgruppe()))
+                    {
+                        strafPunkte += 2000;
+                    }
+                    if (tisch.getGruppe()[3].getGeschlecht().Equals(tisch.getGruppe()[4].getGeschlecht()))
+                    {
+                        strafPunkte += 1000;
+                    }
                 }
                 if (tisch.getGruppe().Count == 6 && tisch.getGruppe()[5] != null)
                 {
                     if (tisch.getGruppe()[4].getFirma().Equals(tisch.getGruppe()[5].getFirma()))
                     {
                         strafPunkte += 3000;
+                    }
+                    if (tisch.getGruppe()[4].getBerufsgruppe().Equals(tisch.getGruppe()[5].getBerufsgruppe()))
+                    {
+                        strafPunkte += 2000;
+                    }
+                    if (tisch.getGruppe()[4].getGeschlecht().Equals(tisch.getGruppe()[5].getGeschlecht()))
+                    {
+                        strafPunkte += 1000;
                     }
                 }
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Berufsgruppe
