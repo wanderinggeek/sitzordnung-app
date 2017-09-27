@@ -14,7 +14,7 @@ namespace Sitzplanverteilung
         String firma;
         char geschlecht;
         String berufssgruppe;
-        //Bild?
+        String bild;
 
         public Schueler() 
         {
@@ -23,16 +23,19 @@ namespace Sitzplanverteilung
             this.firma = "Musterschüler KG";
             this.berufssgruppe = "Sohn vom Eigentümer";
             this.geschlecht = 'm';
+            this.bild = erstelleBilddateiName();
         }
 
-        public Schueler(String name, String vorname, String firma, String berufssgruppe, char geschlecht) 
+        public Schueler(String name, String vorname, String klasse, String firma, char geschlecht, String berufssgruppe) 
         {
             this.name = name;
             this.vorname = vorname;
             this.firma = firma;
+            this.klasse = klasse;
             this.berufssgruppe = berufssgruppe;
             // geschlecht mit dem Character <m>ännlich oder <w>eiblich
             this.geschlecht = geschlecht;
+            this.bild = erstelleBilddateiName();
         }
 
         public String getName() 
@@ -58,10 +61,12 @@ namespace Sitzplanverteilung
         public void setName(String name)
         {
             this.name = name;
+            this.bild = erstelleBilddateiName();
         }
         public void setVorname(String vorname)
         {
             this.vorname = vorname;
+            this.bild = erstelleBilddateiName();
         }
         public void setFirma(String firma)
         {
@@ -78,11 +83,33 @@ namespace Sitzplanverteilung
                 this.geschlecht = geschlecht;
             }
         }
+        public String getBild() 
+        {
+            return this.bild;
+        }
 
+        public void setBild(String bild) 
+        {
+            this.bild = bild;
+        }
+        public String getKlasse()
+        {
+            return this.klasse;
+        }
+
+        public void setKlasse(String klasse)
+        {
+            this.klasse = klasse;
+        }
         public override string ToString()
         {
             return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufssgruppe + ", " + this.geschlecht;
         }
+        private String erstelleBilddateiName()
+        {
+            return this.name +"_"+ this.vorname.Replace(' ', '_') + ".jpg"; ;
+        }
+
         
     }
 }
