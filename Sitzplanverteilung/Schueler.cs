@@ -82,7 +82,15 @@ namespace Sitzplanverteilung
                 this.geschlecht = geschlecht;
             }
         }
+        public String getBild() 
+        {
+            return this.bild;
+        }
 
+        public void setBild(String bild) 
+        {
+            this.bild = bild;
+        }
         public override string ToString()
         {
             return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufssgruppe + ", " + this.geschlecht;
