@@ -8,16 +8,20 @@ namespace Sitzplanverteilung
 {
     class SitzplanKartei
     {
-        Sitzplan[] sitzplan;
+        List<Sitzplan> sitzplaene;
 
         public SitzplanKartei()
         {
-            this.sitzplan = new Sitzplan[6];
+            this.sitzplaene = new List<Sitzplan>();
+            for (int i = 0; i < 6; i++ )
+            {
+                this.sitzplaene.Add(null);
+            }
         }
 
-        public SitzplanKartei(Sitzplan[] sitzplan)
+        public SitzplanKartei(List<Sitzplan> sitzplaene)
         {
-            this.sitzplan = sitzplan;
+            this.sitzplaene = sitzplaene;
         }
 
         public void sitzplaeneGenerierenMitDatei()
@@ -28,19 +32,30 @@ namespace Sitzplanverteilung
             //Erstellen der einzelnen Sitzpläne
             for (int i = 0; i < 6; i++)
             {
-                sitzplan[i] = new Sitzplan();
-                sitzplan[i].verteileSchueler(liste);
+                sitzplaene[i] = new Sitzplan();
+                sitzplaene[i].verteileSchueler(liste);
             }
+            Console.WriteLine("fertig");
         }
 
-        public Sitzplan[] getSitzplaene() 
+        public List<Sitzplan> getSitzplaene() 
         {
-            return this.sitzplan;
+            return this.sitzplaene;
         }
 
-        public void setSitzplaene(Sitzplan[] sitzplaene) 
+        public void setSitzplaene(List<Sitzplan> sitzplaene) 
         {
-            this.sitzplan = sitzplaene;
+            this.sitzplaene = sitzplaene;
+        }
+
+        public Sitzplan getSitzplan(int index)
+        {
+            return this.sitzplaene[index];
+        }
+
+        public void setSitzplaene(Sitzplan sitzplan, int index)
+        {
+            this.sitzplaene[index] = sitzplan;
         }
            
     }
