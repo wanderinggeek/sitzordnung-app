@@ -22,18 +22,21 @@ namespace Sitzplanverteilung
     public partial class MainWindow : Window
     {
         // 6 Schulblöcke sind für eine Berufsschulklasse üblich.
-        const int  bloecke = 6;
+        const int bloecke = 6;
 
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SitzplanKartei sk = new SitzplanKartei();
-            sk.sitzplaeneGenerierenMitDatei();
-           // MessageBox.Show(sk.getSitzplaene()[0].getTischgruppe(0).getGruppe()[0].getGeschlecht().ToString());
+            // SitzplanKartei sk = new SitzplanKartei();
+            // sk.sitzplaeneGenerierenMitDatei();
+            SitzplanGUI win2 = new SitzplanGUI();
+            win2.Show();
+            this.Close();
 
         }
     }

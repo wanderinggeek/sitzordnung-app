@@ -24,6 +24,11 @@ namespace Sitzplanverteilung
             openFileDialog.Filter = "CSV Datei (*.csv)|*.csv"; // Es sollen nur CSV-Dateien geöffnet werden können
             if (openFileDialog.ShowDialog() == true)
             {
+                if (openFileDialog.FileName.Substring(openFileDialog.FileName.Length - 3) != "csv")
+                {
+                    MessageBox.Show("Bitte wählen Sie eine CSV-Datei aus.", "Datei", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return schuelerListe;
+                }
                 StreamReader sr = new StreamReader(openFileDialog.FileName, System.Text.Encoding.Default);
                 do
                 {
@@ -49,6 +54,10 @@ namespace Sitzplanverteilung
                 } while (!sr.EndOfStream);
                 sr.Close();
             }
+            else
+            {
+                return schuelerListe;
+            }
             string bericht = Convert.ToString(zeilenNummer - fehlerhafteZeilen.Count) + " von " + Convert.ToString(zeilenNummer) + " Datensätze eingelesen.";
             if (error)
             {
@@ -63,6 +72,11 @@ namespace Sitzplanverteilung
         {
             // Fehlerhafte Anzahl an Werten im Datensatz
             if (daten.Count() != 6)
+            {
+                return false;
+            }
+            // Geschlecht nicht M oder W
+            if (!(daten[4].ToLower().Equals("m") || daten[4].ToLower().Equals("w")))
             {
                 return false;
             }
