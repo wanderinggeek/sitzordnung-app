@@ -8,42 +8,49 @@ namespace Sitzplanverteilung
 {
     class Tischgruppe
     {
-        List<Schueler> gruppe;
+        List<Schueler> sitzplaetze;
 
         public Tischgruppe() 
         {
-            gruppe = new List<Schueler>();
+            sitzplaetze = new List<Schueler>();
+            //Maximal dürfen 6 Schüler an einer Tischgruppe sitzen.
+            //Plaetze werden
+            for (int i = 0; i < 6; i++) 
+            {
+                this.sitzplaetze.Add(null);
+            }
         }
 
-        public Tischgruppe(List<Schueler> gruppe)
+        public Tischgruppe(List<Schueler> sitzplaetze)
         {
-            this.gruppe = gruppe;
+            this.sitzplaetze = sitzplaetze;
         }
 
         public List<Schueler> getGruppe() 
         {
-            return this.gruppe;
+            return this.sitzplaetze;
         }
-        public void setGruppe(List<Schueler> gruppe) 
+        public void setSitzplaetze(List<Schueler> sitzplaetze) 
         {
-            this.gruppe = gruppe;
+            this.sitzplaetze = sitzplaetze;
         }
 
-        public void addSchueler(Schueler schueler, int anzahl) 
+        public void setzeSchueler(Schueler schueler, int position) 
         {
-            if (this.gruppe.Count() < anzahl) 
+            if (position < this.sitzplaetze.Count()) 
             {
-                gruppe.Add(schueler);
+                sitzplaetze[position] = schueler;
             }
         }
         public void removeSchueler(Schueler schueler) 
         {
-            gruppe.Remove(schueler);
+            int index = this.sitzplaetze.IndexOf(schueler);
+            this.sitzplaetze[index] = null;
         }
 
         public int getGruppengroesse() 
         {
-            return gruppe.Count();
+            return sitzplaetze.Count();
         }
     }
 }
