@@ -27,12 +27,16 @@ namespace Sitzplanverteilung
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SitzplanKartei sk = new SitzplanKartei();
-            sk.sitzplaeneGenerierenMitDatei();
+           // SitzplanKartei sk = new SitzplanKartei();
+           // sk.sitzplaeneGenerierenMitDatei();
+            SitzplanGUI win2 = new SitzplanGUI();
+            win2.Show();
+            this.Close();
 
         }
     }
