@@ -96,8 +96,12 @@
     <Compile Include="Schueler.cs" />
     <Compile Include="SitzplanKartei.cs" />
     <Compile Include="Tischgruppe.cs" />
+    <Compile Include="ViewModels\SitzplanMit2TischenModel.cs" />
     <Compile Include="Views\SitzplanMit1TischView.xaml.cs">
       <DependentUpon>SitzplanMit1TischView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SitzplanMit2TischenView.xaml.cs">
+      <DependentUpon>SitzplanMit2TischenView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SitzplanMit1TischView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SitzplanMit2TischenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

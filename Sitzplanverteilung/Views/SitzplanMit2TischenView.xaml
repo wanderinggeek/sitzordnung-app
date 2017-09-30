@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Sitzplanverteilung.Views.SitzplanMit2TischenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sitzplanverteilung"
+             xmlns:viewmodels="clr-namespace:Sitzplanverteilung.ViewModels" 
+             xmlns:views="clr-namespace:Sitzplanverteilung.Views" 
+             mc:Ignorable="d" 
+             d:DesignHeight="570" d:DesignWidth="631">
+    <UserControl.Resources>
+        <DataTemplate x:Name="sitzplanMit1TischTemplate" DataType="{x:Type viewmodels:SitzplanMit1TischModel}">
+            <views:SitzplanMit1TischView DataContext="{Binding}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Name="mainGrid" >
+        <ContentControl x:Name="tisch1" Grid.Column="0" Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentControl>
+        <ContentControl x:Name="tisch2" Grid.Column="2" Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentControl>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>       
+    </Grid>
+</UserControl>
