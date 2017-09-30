@@ -8,19 +8,27 @@ namespace Sitzplanverteilung
 {
     class Sitzplan
     {
-        Tischgruppe[] tischgruppe;
+        List<Tischgruppe> tischgruppen;
         int maxProTisch;
 
         public Sitzplan()
         {
-            this.tischgruppe = new Tischgruppe[5];
+            this.tischgruppen = new List<Tischgruppe>();
             this.maxProTisch = 5;
+            for (int i = 0; i < 5; i++) 
+            {
+                hinzufuegenTischgruppe(new Tischgruppe());
+            }
         }
         
         public Sitzplan(int anzahlGruppen, int max) 
         {
-            this.tischgruppe = new Tischgruppe[anzahlGruppen];
+            this.tischgruppen = new List<Tischgruppe>();
             this.maxProTisch = max;
+            for (int i = 0; i < anzahlGruppen; i++) 
+            {
+                hinzufuegenTischgruppe(new Tischgruppe());
+            }
         }
 
         public void verteileSchueler(List<Schueler> schuelerListe) 
@@ -31,50 +39,55 @@ namespace Sitzplanverteilung
         public void verteilerDummy(List<Schueler> schuelerListe) 
         {
             int k = 0;
-            for (int i = 0; i < this.tischgruppe.Length; i++) 
+            for (int i = 0; i < this.tischgruppen.Count; i++) 
             {
-                this.tischgruppe[i] = new Tischgruppe();
+                this.tischgruppen[i] = new Tischgruppe();
                 for (int j = 0; j < this.maxProTisch && k < schuelerListe.Count(); j++) 
                 {
-                    tischgruppe[i].addSchueler(schuelerListe.ElementAt(k), maxProTisch);
+                    tischgruppen[i].setzeSchueler(schuelerListe[k], j);
                     k++;
                 }
             }
         }
 
-        public Tischgruppe[] getTischgruppen()
+        public List<Tischgruppe> getTischgruppen()
         {
-            return tischgruppe;
+            return tischgruppen;
         }
 
         public Tischgruppe getTischgruppe(int index) 
         {
-            return tischgruppe[index];
+            return tischgruppen[index];
         }
 
-        public void setTischgruppen(Tischgruppe[] tischgruppen) 
+        public void setTischgruppen(List<Tischgruppe> tischgruppen) 
         {
-            this.tischgruppe = tischgruppen;
+            this.tischgruppen = tischgruppen;
         }
         public void setTischgruppe(Tischgruppe tischgruppe, int index)
         {
-            this.tischgruppe[index] = tischgruppe;
+            this.tischgruppen[index] = tischgruppe;
         }
 
         public override string ToString()
         {
             int i = 1;
             String ausgabe="";
-            foreach (Tischgruppe tisch in tischgruppe) 
+            foreach (Tischgruppe tischgruppe in tischgruppen) 
             {
                 ausgabe += "Tischgruppe " + i + ":\n";
-                foreach (Schueler schueler in tischgruppe[i - 1].getGruppe()) 
+                foreach (Schueler schueler in tischgruppen[i - 1].getGruppe()) 
                 {
                     ausgabe += schueler.ToString()+"\n";
                 }
                 i++;
             }
             return ausgabe;
+        }
+
+        public void hinzufuegenTischgruppe(Tischgruppe tischgruppe) 
+        {
+            this.tischgruppen.Add(tischgruppe);
         }
 
     }

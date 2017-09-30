@@ -20,7 +20,7 @@ namespace Sitzplanverteilung
     public partial class SitzplanGUI : Window
     {
         SitzplanKartei sk = new SitzplanKartei();
-        Sitzplan[] karteien;
+        List<Sitzplan> karteien;
 
         public SitzplanGUI()
         {
