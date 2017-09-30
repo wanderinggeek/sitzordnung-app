@@ -26,6 +26,7 @@ namespace Sitzplanverteilung.Views
             schuelerGenerien();
         }
 
+
         private void schuelerGenerien()
         {
             var numberOfLabels = 6;

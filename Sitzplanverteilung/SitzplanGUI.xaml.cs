@@ -27,14 +27,13 @@ namespace Sitzplanverteilung
             sitzplaeneDatenOrdnen();
           
             InitializeComponent();
-            DataContext = new SitzplanMit1TischModel();
+            DataContext = new SitzplanMit2TischenModel();
         }
 
         private void sitzplaeneDatenOrdnen ()
         {
             sk.sitzplaeneGenerierenMitDatei();
             karteien = sk.getSitzplaene();
-          //  testblock.Text = "nice";
         }
 
        //TODO Make radio buttons change to purple when selected
