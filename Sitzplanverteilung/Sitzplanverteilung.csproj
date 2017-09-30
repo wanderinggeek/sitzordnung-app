@@ -97,11 +97,27 @@
     <Compile Include="SitzplanKartei.cs" />
     <Compile Include="Tischgruppe.cs" />
     <Compile Include="ViewModels\SitzplanMit2TischenModel.cs" />
+    <Compile Include="ViewModels\SitzplanMit3TischenModel.cs" />
+    <Compile Include="ViewModels\SitzplanMit4TischenModel.cs" />
+    <Compile Include="ViewModels\SitzplanMit5TischenModel.cs" />
+    <Compile Include="ViewModels\SitzplanMit6TischenModel.cs" />
     <Compile Include="Views\SitzplanMit1TischView.xaml.cs">
       <DependentUpon>SitzplanMit1TischView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SitzplanMit2TischenView.xaml.cs">
       <DependentUpon>SitzplanMit2TischenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SitzplanMit3TischenView.xaml.cs">
+      <DependentUpon>SitzplanMit3TischenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SitzplanMit4TischenView.xaml.cs">
+      <DependentUpon>SitzplanMit4TischenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SitzplanMit5TischenView.xaml.cs">
+      <DependentUpon>SitzplanMit5TischenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SitzplanMit6TischenView.xaml.cs">
+      <DependentUpon>SitzplanMit6TischenView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +140,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SitzplanMit2TischenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SitzplanMit3TischenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SitzplanMit4TischenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SitzplanMit5TischenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SitzplanMit6TischenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
