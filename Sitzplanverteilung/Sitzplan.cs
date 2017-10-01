@@ -14,10 +14,10 @@ namespace Sitzplanverteilung
         public Sitzplan()
         {
             this.tischgruppen = new List<Tischgruppe>();
-            this.maxProTisch = 5;
+            this.maxProTisch = 6;
             for (int i = 0; i < 5; i++)
             {
-                hinzufuegenTischgruppe(new Tischgruppe());
+                this.tischgruppen.Add(new Tischgruppe());
             }
         }
 
@@ -27,7 +27,23 @@ namespace Sitzplanverteilung
             this.maxProTisch = max;
             for (int i = 0; i < anzahlGruppen; i++)
             {
-                hinzufuegenTischgruppe(new Tischgruppe());
+                this.tischgruppen.Add(new Tischgruppe());
+            }
+        }
+
+        public Sitzplan(Sitzplan sitzplan)
+        {
+            this.maxProTisch = 6;
+            this.tischgruppen = new List<Tischgruppe>();
+            for (int i = 0; i < sitzplan.getTischgruppen().Count; i++)
+            {
+                int j = 0;
+                this.tischgruppen.Add(new Tischgruppe());
+                foreach (Schueler schueler in sitzplan.getTischgruppe(i).getSitzplaetze()) 
+                {
+                    this.tischgruppen[i].setzeSchueler(schueler, j);
+                    j++;
+                }
             }
         }
 
@@ -82,7 +98,7 @@ namespace Sitzplanverteilung
             //verteilerDummy(schuelerListe);
         }
 
-        public int berechneStrafpunkte()
+        public int berechneStrafpunkte(List<Schueler> schuelerListe)
         {
             /*
                         Aufbau Tisch:
@@ -108,94 +124,103 @@ namespace Sitzplanverteilung
                         5 sitzt neben 4
               */
             int strafPunkte = 0;
+            int firmenPlatzregel = 3000;
+            int berufsPlatzregel = 500;
+            int geschlechtPlatzregel = 100;
+            SortedList<String, int> firmenGesamt = ermittleFirmen(schuelerListe);
 
             foreach (Tischgruppe tisch in this.tischgruppen)
             {
-                SortedList<String, int> firmenAmTisch = ermittleFirmen(tisch.getGruppe());
-
-
+                SortedList<String, int> firmenAmTisch = ermittleFirmen(tisch.getSitzplaetze());
+                //Prüfen, ob an einem Tisch mehr Schüler einer Firma sitzen als zugelassen
+                foreach(String key in firmenAmTisch.Keys)
+                {
+                    if ((firmenGesamt[key] / tischgruppen.Count) + 1 < firmenAmTisch[key]) 
+                    {
+                        strafPunkte += 100000;
+                    }
+                }
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Firma
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleichem Beruf
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler mit gleichem Geschlecht
 
-                if (tisch.getGruppe().Count > 2 && tisch.getGruppe()[1] != null)
+                if (tisch.getSitzplaetze().Count > 2 && tisch.getSitzplaetze()[1] != null)
                 {
-                    if (tisch.getGruppe()[0].getFirma().Equals(tisch.getGruppe()[1].getFirma()))
+                    if (tisch.getSitzplaetze()[0].getFirma().Equals(tisch.getSitzplaetze()[1].getFirma()))
                     {
-                        strafPunkte += 3000;
+                        strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getGruppe()[0].getBerufsgruppe().Equals(tisch.getGruppe()[1].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[0].getBerufsgruppe().Equals(tisch.getSitzplaetze()[1].getBerufsgruppe()))
                     {
-                        strafPunkte += 2000;
+                        strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getGruppe()[0].getGeschlecht().Equals(tisch.getGruppe()[1].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[0].getGeschlecht().Equals(tisch.getSitzplaetze()[1].getGeschlecht()))
                     {
-                        strafPunkte += 1000;
+                        strafPunkte += geschlechtPlatzregel;
                     }
                 }
 
-                if (tisch.getGruppe().Count > 3 && tisch.getGruppe()[2] != null)
+                if (tisch.getSitzplaetze().Count > 3 && tisch.getSitzplaetze()[2] != null)
                 {
-                    if (tisch.getGruppe()[1].getFirma().Equals(tisch.getGruppe()[2].getFirma()))
+                    if (tisch.getSitzplaetze()[1].getFirma().Equals(tisch.getSitzplaetze()[2].getFirma()))
                     {
-                        strafPunkte += 3000;
+                        strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getGruppe()[1].getBerufsgruppe().Equals(tisch.getGruppe()[2].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[1].getBerufsgruppe().Equals(tisch.getSitzplaetze()[2].getBerufsgruppe()))
                     {
-                        strafPunkte += 2000;
+                        strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getGruppe()[1].getGeschlecht().Equals(tisch.getGruppe()[2].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[1].getGeschlecht().Equals(tisch.getSitzplaetze()[2].getGeschlecht()))
                     {
-                        strafPunkte += 1000;
+                        strafPunkte += geschlechtPlatzregel;
                     }
                 }
-                if (tisch.getGruppe().Count > 4 && tisch.getGruppe()[3] != null)
+                if (tisch.getSitzplaetze().Count > 4 && tisch.getSitzplaetze()[3] != null)
                 {
-                    if (tisch.getGruppe()[2].getFirma().Equals(tisch.getGruppe()[3].getFirma()))
+                    if (tisch.getSitzplaetze()[2].getFirma().Equals(tisch.getSitzplaetze()[3].getFirma()))
                     {
-                        strafPunkte += 3000;
+                        strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getGruppe()[2].getBerufsgruppe().Equals(tisch.getGruppe()[3].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[2].getBerufsgruppe().Equals(tisch.getSitzplaetze()[3].getBerufsgruppe()))
                     {
-                        strafPunkte += 2000;
+                        strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getGruppe()[2].getGeschlecht().Equals(tisch.getGruppe()[3].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[2].getGeschlecht().Equals(tisch.getSitzplaetze()[3].getGeschlecht()))
                     {
-                        strafPunkte += 1000;
+                        strafPunkte += geschlechtPlatzregel;
                     }
                 }
-                if (tisch.getGruppe().Count > 5 && tisch.getGruppe()[4] != null)
+                if (tisch.getSitzplaetze().Count > 5 && tisch.getSitzplaetze()[4] != null)
                 {
-                    if (tisch.getGruppe()[3].getFirma().Equals(tisch.getGruppe()[4].getFirma()))
+                    if (tisch.getSitzplaetze()[3].getFirma().Equals(tisch.getSitzplaetze()[4].getFirma()))
                     {
-                        strafPunkte += 3000;
+                        strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getGruppe()[3].getBerufsgruppe().Equals(tisch.getGruppe()[4].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[3].getBerufsgruppe().Equals(tisch.getSitzplaetze()[4].getBerufsgruppe()))
                     {
-                        strafPunkte += 2000;
+                        strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getGruppe()[3].getGeschlecht().Equals(tisch.getGruppe()[4].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[3].getGeschlecht().Equals(tisch.getSitzplaetze()[4].getGeschlecht()))
                     {
-                        strafPunkte += 1000;
+                        strafPunkte += geschlechtPlatzregel;
                     }
                 }
-                if (tisch.getGruppe().Count == 6 && tisch.getGruppe()[5] != null)
+                if (tisch.getSitzplaetze().Count == 6 && tisch.getSitzplaetze()[5] != null)
                 {
-                    if (tisch.getGruppe()[4].getFirma().Equals(tisch.getGruppe()[5].getFirma()))
+                    if (tisch.getSitzplaetze()[4].getFirma().Equals(tisch.getSitzplaetze()[5].getFirma()))
                     {
-                        strafPunkte += 3000;
+                        strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getGruppe()[4].getBerufsgruppe().Equals(tisch.getGruppe()[5].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[4].getBerufsgruppe().Equals(tisch.getSitzplaetze()[5].getBerufsgruppe()))
                     {
-                        strafPunkte += 2000;
+                        strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getGruppe()[4].getGeschlecht().Equals(tisch.getGruppe()[5].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[4].getGeschlecht().Equals(tisch.getSitzplaetze()[5].getGeschlecht()))
                     {
-                        strafPunkte += 1000;
+                        strafPunkte += geschlechtPlatzregel;
                     }
                 }
-                //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Berufsgruppe
-                //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Geschlecht
+
             }
             return strafPunkte;
         }
@@ -276,28 +301,6 @@ namespace Sitzplanverteilung
             return schuelerListe;
         }
 
-        public override string ToString()
-        {
-            int i = 1;
-            String ausgabe = "";
-            foreach (Tischgruppe tischgruppe in tischgruppen)
-            {
-                ausgabe += "Tischgruppe " + i + ":\n";
-                foreach (Schueler schueler in tischgruppen[i - 1].getGruppe())
-                {
-                    ausgabe += schueler.ToString() + "\n";
-                }
-                i++;
-            }
-            return ausgabe;
-        }
-
-        public void hinzufuegenTischgruppe(Tischgruppe tischgruppe)
-        {
-            this.tischgruppen.Add(tischgruppe);
-        }
-
-
         public SortedList<String, int> ermittleFirmen(List<Schueler> schuelerListe)
         {
             SortedList<String, int> zuordnung = new SortedList<string, int>();
@@ -317,6 +320,25 @@ namespace Sitzplanverteilung
 
             }
             return zuordnung;
+        }
+
+        public override string ToString()
+        {
+            int i = 1;
+            String ausgabe = "";
+            foreach (Tischgruppe tischgruppe in tischgruppen)
+            {
+                ausgabe += "Tischgruppe " + i + ":\n";
+                foreach (Schueler schueler in tischgruppen[i - 1].getSitzplaetze())
+                {
+                    if (schueler != null) 
+                    {
+                        ausgabe += schueler.ToString() + "\n";
+                    }
+                }
+                i++;
+            }
+            return ausgabe;
         }
     }
 }

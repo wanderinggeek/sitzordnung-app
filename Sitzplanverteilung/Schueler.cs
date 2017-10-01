@@ -104,7 +104,7 @@ namespace Sitzplanverteilung
         }
         public override string ToString()
         {
-            return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufssgruppe + ", " + this.geschlecht;
+            return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufssgruppe + ", " + this.geschlecht + ", " + this.klasse + ", " + this.bild;
         }
         private String erstelleBilddateiName()
         {
