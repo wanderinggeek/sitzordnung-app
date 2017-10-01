@@ -8,67 +8,65 @@ namespace Sitzplanverteilung
 {
     class Sitzplan
     {
-        List<Tischgruppe> tischgruppe;
+        List<Tischgruppe> tischgruppen;
         int maxProTisch;
 
         public Sitzplan()
         {
-            this.tischgruppe = new List<Tischgruppe>();
+            this.tischgruppen = new List<Tischgruppe>();
             this.maxProTisch = 5;
-            for (int i = 0; i < 5; i++) 
+            for (int i = 0; i < 5; i++)
             {
-                hinzufuegenTischgruppe(new Tischgruppe(Decimal.ToInt32(maxProTisch)));
+                hinzufuegenTischgruppe(new Tischgruppe());
             }
-           
         }
-        
-        public Sitzplan(int anzahlGruppen, int max) 
+
+        public Sitzplan(int anzahlGruppen, int max)
         {
-            this.tischgruppe = new List<Tischgruppe>();
+            this.tischgruppen = new List<Tischgruppe>();
             this.maxProTisch = max;
             for (int i = 0; i < anzahlGruppen; i++)
             {
-                hinzufuegenTischgruppe(new Tischgruppe(max));
+                hinzufuegenTischgruppe(new Tischgruppe());
             }
-            
         }
 
-        public void verteileSchueler(List<Schueler> schuelerListe) 
+        public void verteileSchueler(List<Schueler> schuelerListe)
         {
-            int moeglichePlaetze = tischgruppe.Count * maxProTisch;
-            decimal schuelerProTischTatsaechlich = schuelerListe.Count()/tischgruppe.Count;
-            int restPlaetze = schuelerListe.Count() % tischgruppe.Count;
+            int moeglichePlaetze = tischgruppen.Count * maxProTisch;
+            decimal schuelerProTischTatsaechlich = schuelerListe.Count() / tischgruppen.Count;
+            int restPlaetze = schuelerListe.Count() % tischgruppen.Count;
             if (moeglichePlaetze > schuelerListe.Count())
             {
-                if (schuelerProTischTatsaechlich < 6) 
+                if (schuelerProTischTatsaechlich < 6)
                 {
-                    SortedList<String, int> firmenVerteilung = ermittleFirmen(schuelerListe); 
+                    SortedList<String, int> firmenVerteilung = ermittleFirmen(schuelerListe);
                     int k = 0;
                     //Verteilung der Schüler
-                    foreach (Tischgruppe tisch in tischgruppe) 
+                    foreach (Tischgruppe tisch in tischgruppen)
                     {
                         int i = 0;
                         //zufälliges Sortieren der Schüler 
                         schuelerListe = Verwaltungskram.Shuffle(schuelerListe);
                         List<Schueler> zufallsListe = new List<Schueler>();
                         zufallsListe.AddRange(schuelerListe);
-                        foreach(Schueler schueler in zufallsListe)
+                        foreach (Schueler schueler in zufallsListe)
                         {
                             if (i < schuelerProTischTatsaechlich) //mehr Bedingungen abfragen, ob Firma schon in Betrieb
                             {
                                 //tisch.addSchueler(schueler, i);
-                                this.tischgruppe[k].addSchueler(schueler, i);
+                                this.tischgruppen[k].setzeSchueler(schueler, i);
                                 schuelerListe.Remove(schueler);
                                 i++;
                             }
                         }
-                        if (restPlaetze > 0) 
+                        if (restPlaetze > 0)
                         {
-                            this.tischgruppe[k].addSchueler(schuelerListe[0], i);
+                            this.tischgruppen[k].setzeSchueler(schuelerListe[0], i);
                             schuelerListe.Remove(schuelerListe[0]);
                             restPlaetze--;
                         }
-                        k++;                      
+                        k++;
                     }
                 }
                 else
@@ -76,7 +74,7 @@ namespace Sitzplanverteilung
                     //Fehler maximal 6 Schüler pro Tisch
                 }
             }
-            else 
+            else
             {
                 //Fehler nicht genug Platz an den Tischen
                 //Beispiel User gibt 5 TGs an und 4 Schüler pro Tisch, also Platz für 20 Schüler. Aber 25 Schüler wurden angegeben. 
@@ -84,7 +82,7 @@ namespace Sitzplanverteilung
             //verteilerDummy(schuelerListe);
         }
 
-        public int berechneStrafpunkte() 
+        public int berechneStrafpunkte()
         {
             /*
                         Aufbau Tisch:
@@ -109,17 +107,17 @@ namespace Sitzplanverteilung
                         4 sitzt neben 5 und 3 
                         5 sitzt neben 4
               */
-            int strafPunkte= 0;
-            
-            foreach (Tischgruppe tisch in this.tischgruppe) 
+            int strafPunkte = 0;
+
+            foreach (Tischgruppe tisch in this.tischgruppen)
             {
                 SortedList<String, int> firmenAmTisch = ermittleFirmen(tisch.getGruppe());
-                
+
 
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Firma
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleichem Beruf
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler mit gleichem Geschlecht
-                
+
                 if (tisch.getGruppe().Count > 2 && tisch.getGruppe()[1] != null)
                 {
                     if (tisch.getGruppe()[0].getFirma().Equals(tisch.getGruppe()[1].getFirma()))
@@ -168,7 +166,7 @@ namespace Sitzplanverteilung
                 }
                 if (tisch.getGruppe().Count > 5 && tisch.getGruppe()[4] != null)
                 {
-                    if ( tisch.getGruppe()[3].getFirma().Equals(tisch.getGruppe()[4].getFirma()))
+                    if (tisch.getGruppe()[3].getFirma().Equals(tisch.getGruppe()[4].getFirma()))
                     {
                         strafPunkte += 3000;
                     }
@@ -202,24 +200,24 @@ namespace Sitzplanverteilung
             return strafPunkte;
         }
 
-        public void verteilerDummy(List<Schueler> schuelerListe) 
+        public void verteilerDummy(List<Schueler> schuelerListe)
         {
             int k = 0;
-            for (int i = 0; i < this.tischgruppe.Count; i++) 
+            for (int i = 0; i < this.tischgruppen.Count; i++)
             {
-                this.tischgruppe[i] = new Tischgruppe();
-                for (int j = 0; j <= this.maxProTisch && k < schuelerListe.Count(); j++) 
+                this.tischgruppen[i] = new Tischgruppe();
+                for (int j = 0; j < this.maxProTisch && k < schuelerListe.Count(); j++)
                 {
-                    tischgruppe[i].addSchueler(schuelerListe.ElementAt(k), j);
+                    tischgruppen[i].setzeSchueler(schuelerListe[k], j);
                     k++;
                 }
             }
         }
 
-        public SortedList<String, int> ermittleFirmen(List<Schueler> schuelerListe) 
+        public SortedList<String, int> sitzplaene(List<Schueler> schuelerListe)
         {
             SortedList<String, int> zuordnung = new SortedList<string, int>();
-            foreach (Schueler schueler in schuelerListe) 
+            foreach (Schueler schueler in schuelerListe)
             {
                 if (schueler != null)
                 {
@@ -237,33 +235,32 @@ namespace Sitzplanverteilung
             return zuordnung;
         }
 
-
         public List<Tischgruppe> getTischgruppen()
         {
-            return tischgruppe;
+            return tischgruppen;
         }
 
-        public Tischgruppe getTischgruppe(int index) 
+        public Tischgruppe getTischgruppe(int index)
         {
-            return tischgruppe[index];
+            return tischgruppen[index];
         }
 
-        public void setTischgruppen(List<Tischgruppe> tischgruppen) 
+        public void setTischgruppen(List<Tischgruppe> tischgruppen)
         {
-            this.tischgruppe = tischgruppen;
+            this.tischgruppen = tischgruppen;
         }
         public void setTischgruppe(Tischgruppe tischgruppe, int index)
         {
-            this.tischgruppe[index] = tischgruppe;
+            this.tischgruppen[index] = tischgruppe;
         }
 
         public List<Schueler> sortiereSchuelerListe(List<Schueler> schuelerListe)
         {
             Schueler speicher;
             //Sortieren nach Geschlecht
-            for (int i = 0; i < schuelerListe.Count; i++) 
+            for (int i = 0; i < schuelerListe.Count; i++)
             {
-                for(int j = 0; j< schuelerListe.Count -1; j++)
+                for (int j = 0; j < schuelerListe.Count - 1; j++)
                 {
                     if (schuelerListe[j].getGeschlecht() > schuelerListe[j + 1].getGeschlecht())
                     {
@@ -274,30 +271,52 @@ namespace Sitzplanverteilung
                 }
             }
             //Sortieren nach Berufsgruppe
-            
+
             //Sortieren nach Firma
-                return schuelerListe;
-        }
-        public void hinzufuegenTischgruppe(Tischgruppe tischgruppe) 
-        {
-            this.tischgruppe.Add(tischgruppe);
+            return schuelerListe;
         }
 
         public override string ToString()
         {
             int i = 1;
-            String ausgabe="";
-            foreach (Tischgruppe tisch in tischgruppe) 
+            String ausgabe = "";
+            foreach (Tischgruppe tischgruppe in tischgruppen)
             {
                 ausgabe += "Tischgruppe " + i + ":\n";
-                foreach (Schueler schueler in tischgruppe[i - 1].getGruppe()) 
+                foreach (Schueler schueler in tischgruppen[i - 1].getGruppe())
                 {
-                    ausgabe += schueler.ToString()+"\n";
+                    ausgabe += schueler.ToString() + "\n";
                 }
                 i++;
             }
             return ausgabe;
         }
 
+        public void hinzufuegenTischgruppe(Tischgruppe tischgruppe)
+        {
+            this.tischgruppen.Add(tischgruppe);
+        }
+
+
+        public SortedList<String, int> ermittleFirmen(List<Schueler> schuelerListe)
+        {
+            SortedList<String, int> zuordnung = new SortedList<string, int>();
+            foreach (Schueler schueler in schuelerListe)
+            {
+                if (schueler != null)
+                {
+                    if (zuordnung.ContainsKey(schueler.getFirma()))
+                    {
+                        zuordnung[schueler.getFirma()] += 1;
+                    }
+                    else
+                    {
+                        zuordnung.Add(schueler.getFirma(), 1);
+                    }
+                }
+
+            }
+            return zuordnung;
+        }
     }
 }

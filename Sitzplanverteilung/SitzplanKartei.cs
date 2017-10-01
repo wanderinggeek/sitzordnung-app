@@ -8,20 +8,20 @@ namespace Sitzplanverteilung
 {
     class SitzplanKartei
     {
-        List<Sitzplan> sitzplan;
+        List<Sitzplan> sitzplaene;
 
         public SitzplanKartei()
         {
-            this.sitzplan = new List<Sitzplan>();
-            for (int i = 0; i < 6; i++)
+            this.sitzplaene = new List<Sitzplan>();
+            for (int i = 0; i < 6; i++ )
             {
-                this.sitzplan.Add(null);
+                this.sitzplaene.Add(null);
             }
         }
 
-        public SitzplanKartei(List<Sitzplan> sitzplan)
+        public SitzplanKartei(List<Sitzplan> sitzplaene)
         {
-            this.sitzplan = sitzplan;
+            this.sitzplaene = sitzplaene;
         }
 
         public void sitzplaeneGenerierenMitDatei()
@@ -37,11 +37,11 @@ namespace Sitzplanverteilung
             for (int i = 0; i < 6; i++)
             {
                 Sitzplan preSitzplan = new Sitzplan();
-                sitzplan[i] = new Sitzplan();
+                sitzplaene[i] = new Sitzplan();
                 liste = new List<Schueler>();
                 liste.AddRange(eingabeListe);
-                sitzplan[i].verteileSchueler(liste);
-                strafPunkteMin = sitzplan[i].berechneStrafpunkte();
+                sitzplaene[i].verteileSchueler(liste);
+                strafPunkteMin = sitzplaene[i].berechneStrafpunkte();
                 for (int j = 0; j < 1000; j++)
                 {
                     liste = new List<Schueler>();
@@ -51,7 +51,7 @@ namespace Sitzplanverteilung
                     if (strafPunkteMin > strafPunkte) 
                     {
                         strafPunkteMin = strafPunkte;
-                        sitzplan[i] = preSitzplan;
+                        sitzplaene[i] = preSitzplan;
                     }
                     Console.WriteLine(strafPunkte);
                 }
@@ -68,19 +68,31 @@ namespace Sitzplanverteilung
             //Erstellen der 6 einzelnen Sitzpläne
             for (int i = 0; i < 6; i++)
             {
-                sitzplan[i] = new Sitzplan(anzahlGruppen, maxSchueler);
-                sitzplan[i].verteileSchueler(liste);
+                sitzplaene[i] = new Sitzplan(anzahlGruppen, maxSchueler);
+                sitzplaene[i].verteileSchueler(liste);
             }
+            Console.WriteLine("fertig");
         }
 
         public List<Sitzplan> getSitzplaene() 
         {
-            return this.sitzplan;
+            return this.sitzplaene;
         }
 
         public void setSitzplaene(List<Sitzplan> sitzplaene) 
         {
-            this.sitzplan = sitzplaene;
+            this.sitzplaene = sitzplaene;
+        }
+
+        public Sitzplan getSitzplan(int index)
+        {
+            return this.sitzplaene[index];
+        }
+
+
+        public void setSitzplaene(Sitzplan sitzplan, int index)
+        {
+            this.sitzplaene[index] = sitzplan;
         }
            
     }
