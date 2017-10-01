@@ -239,26 +239,7 @@ namespace Sitzplanverteilung
             }
         }
 
-        public SortedList<String, int> sitzplaene(List<Schueler> schuelerListe)
-        {
-            SortedList<String, int> zuordnung = new SortedList<string, int>();
-            foreach (Schueler schueler in schuelerListe)
-            {
-                if (schueler != null)
-                {
-                    if (zuordnung.ContainsKey(schueler.getFirma()))
-                    {
-                        zuordnung[schueler.getFirma()] += 1;
-                    }
-                    else
-                    {
-                        zuordnung.Add(schueler.getFirma(), 1);
-                    }
-                }
-
-            }
-            return zuordnung;
-        }
+        
 
         public List<Tischgruppe> getTischgruppen()
         {

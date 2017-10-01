@@ -40,6 +40,7 @@ namespace Sitzplanverteilung
             {
                 sitzplaene[i] = new Sitzplan(sitzplanGenerieren(eingabeListe));
             }
+            sitzplaeneVergleichen(3, eingabeListe);
             Console.WriteLine("sitzplan fertiggestellt");
         }
 
@@ -55,7 +56,7 @@ namespace Sitzplanverteilung
             {
                 sitzplaene[i] = new Sitzplan(sitzplanGenerieren(liste, anzahlTische, schuelerMaxProTisch));
             }
-            Console.WriteLine("fertig");
+            Console.WriteLine("sitzplan fertiggestellt");
         }
 
         private Sitzplan sitzplanGenerieren(List<Schueler> schuelerListe)
@@ -116,6 +117,21 @@ namespace Sitzplanverteilung
                 }
             }
             return sitzplan;
+        }
+
+        //Sitzplan mit den vorherigen Plänen vergleichen
+        public Boolean sitzplaeneVergleichen(int index, List<Schueler> schuelerListe)
+        {
+            Sitzplan pruefen = new Sitzplan(this.sitzplaene[index]);
+            //Vergleichen mit früheren Sitzplänen
+            for (int i = index - 1; i >= 0; i--) 
+            {
+                foreach (Tischgruppe tischgruppe in pruefen.getTischgruppen()) 
+                {
+
+                }
+            }
+            return true;
         }
 
         public List<Sitzplan> getSitzplaene() 
