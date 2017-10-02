@@ -38,9 +38,16 @@ namespace Sitzplanverteilung
             //Erstellen der einzelnen Sitzpläne
             for (int i = 0; i < 6; i++)
             {
-                sitzplaene[i] = new Sitzplan(sitzplanGenerieren(eingabeListe));
+                do
+                {
+                    sitzplaene[i] = new Sitzplan(sitzplanGenerieren(eingabeListe));
+                } while (i > 0 && !moeglichstWenigSitzpartnerDopplungen(i, eingabeListe));
             }
-            sitzplaeneVergleichen(3, eingabeListe);
+            foreach (Sitzplan sitz in sitzplaene)
+            {
+                Console.WriteLine("Block " + sitzplaene.IndexOf(sitz));
+                Console.WriteLine(sitz.ToString());
+            }
             Console.WriteLine("sitzplan fertiggestellt");
         }
 
@@ -120,18 +127,95 @@ namespace Sitzplanverteilung
         }
 
         //Sitzplan mit den vorherigen Plänen vergleichen
-        public Boolean sitzplaeneVergleichen(int index, List<Schueler> schuelerListe)
+        public Boolean moeglichstWenigSitzpartnerDopplungen(int index, List<Schueler> schuelerListe)
         {
             Sitzplan pruefen = new Sitzplan(this.sitzplaene[index]);
-            //Vergleichen mit früheren Sitzplänen
-            for (int i = index - 1; i >= 0; i--) 
+            int strafPunkte = 0;
+            
+            foreach (Schueler schuelerAusListe in schuelerListe) 
             {
-                foreach (Tischgruppe tischgruppe in pruefen.getTischgruppen()) 
+                SortedList<String, int> sitznachbarn = new SortedList<string, int>();
+                //Vergleichen mit früheren Sitzplänen
+                for (int i = index; i >= 0; i--)
                 {
-
+                    foreach (Tischgruppe tischgruppe in this.sitzplaene[i].getTischgruppen())
+                    {
+                            int sitzposition = tischgruppe.getSitzplaetze().IndexOf(schuelerAusListe);
+                            if (sitzposition >= 0) 
+                            {
+                                //0 sitzt neben 1
+                                if (sitzposition == 0) 
+                                {
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[1]);
+                                }
+                                //1 sitzt neben 0 und 2
+                                if (sitzposition == 1)
+                                {
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[2]);
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[0]);
+                                }
+                                //2 sitzt neben 1 und 3
+                                if (sitzposition == 2)
+                                {
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[1]);
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[3]);
+                                }
+                                //3 sitzt neben 4 und 2
+                                if (sitzposition == 3)
+                                {
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[4]);
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[2]);
+                                }
+                                //4 sitzt neben 5 und 3 
+                                if (sitzposition == 4)
+                                {
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[5]);
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[3]);
+                                }
+                                //5 sitzt neben 4
+                                if (sitzposition == 5)
+                                {
+                                    sitznachbarn = bestimmeSitznachbar(sitznachbarn, tischgruppe.getSitzplaetze()[4]);
+                                }
+                        }
+                    }
+                }
+                for(int k = 0; k < sitznachbarn.Count; k++)
+                {
+                    if(sitznachbarn.Values[k] > 1)
+                    {
+                        strafPunkte += sitznachbarn.Values[k];
+                    }
                 }
             }
-            return true;
+            if (strafPunkte > 100) 
+            {
+                //Console.WriteLine("Zuviele Dopplungen : " + strafPunkte);
+                return false;
+            }
+            else 
+            {
+                //Console.WriteLine("Dopplungen in Ordnung: " + strafPunkte);
+                return true;
+            }
+            
+        }
+
+        private SortedList<String,int> bestimmeSitznachbar(SortedList<String,int> sitznachbarn, Schueler sitznachbar)
+        {
+            //Sitzplatz auf Besetztheit prüfen
+            if (sitznachbar != null)
+            {
+                if (sitznachbarn.ContainsKey(sitznachbar.getVollerName()))
+                {
+                    sitznachbarn[sitznachbar.getVollerName()] += 1;
+                }
+                else
+                {
+                    sitznachbarn.Add(sitznachbar.getVollerName(), 1);
+                }
+            }
+            return sitznachbarn;
         }
 
         public List<Sitzplan> getSitzplaene() 

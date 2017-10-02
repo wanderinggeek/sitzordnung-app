@@ -47,6 +47,10 @@ namespace Sitzplanverteilung
         {
             return this.vorname;
         }
+        public String getVollerName()
+        {
+            return this.name +" "+ this.vorname;
+        }
         public String getFirma()
         {
             return this.firma;
