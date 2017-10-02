@@ -56,5 +56,18 @@ namespace Sitzplanverteilung
             int index = this.sitzplaetze.IndexOf(schueler);
             this.sitzplaetze[index] = null;
         }
+
+        public int getGruppengroesse()
+        {
+            int groesse = 0;
+            foreach (Schueler schueler in this.sitzplaetze) 
+            {
+                if (schueler != null) 
+                {
+                    groesse++;
+                }
+            }
+            return groesse;
+        }
     }
 }

@@ -17,7 +17,6 @@
         <ContentControl x:Name="tisch1" Grid.Column="0"  Grid.Row="1" Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentControl>
         <ContentControl x:Name="tisch2" Grid.Column="2" Grid.Row="1" Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentControl>
         <ContentControl x:Name="tisch3" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentControl>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>

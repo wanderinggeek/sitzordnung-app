@@ -124,9 +124,9 @@ namespace Sitzplanverteilung
                         5 sitzt neben 4
               */
             int strafPunkte = 0;
-            int firmenPlatzregel = 3000;
-            int berufsPlatzregel = 500;
-            int geschlechtPlatzregel = 100;
+            int firmenPlatzregel = 30;
+            int berufsPlatzregel = 5;
+            int geschlechtPlatzregel = 1;
             SortedList<String, int> firmenGesamt = ermittleFirmen(schuelerListe);
 
             foreach (Tischgruppe tisch in this.tischgruppen)
@@ -137,7 +137,7 @@ namespace Sitzplanverteilung
                 {
                     if ((firmenGesamt[key] / tischgruppen.Count) + 1 < firmenAmTisch[key]) 
                     {
-                        strafPunkte += 100000;
+                        strafPunkte += 100;
                     }
                 }
                 //Strafpunkte vergeben durch Sitzen neben Mitschüler aus gleicher Firma
