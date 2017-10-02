@@ -24,7 +24,16 @@ namespace Sitzplanverteilung.Views
         public SitzplanMit3TischenView()
         {
             InitializeComponent();
+            loadDataForTemplates();
             DataContext = new SitzplanMit1TischModel();
+        }
+
+        private void loadDataForTemplates()
+        {
+            Sitzplan sitzplanFuerBlock = (Sitzplan)App.Current.Properties["Block"];
+            List<Tischgruppe> aktiveTischegruppen = sitzplanFuerBlock.getTischgruppen();
+            App.Current.Properties["tischNummer"] = 0;
+            App.Current.Properties["Tischgruppe"] = aktiveTischegruppen;
         }
     }
 }

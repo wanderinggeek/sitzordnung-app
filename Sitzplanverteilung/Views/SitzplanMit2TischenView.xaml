@@ -19,6 +19,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>       
+        </Grid.ColumnDefinitions>
     </Grid>
 </UserControl>

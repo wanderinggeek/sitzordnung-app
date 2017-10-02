@@ -20,22 +20,88 @@ namespace Sitzplanverteilung
     public partial class SitzplanGUI : Window
     {
         SitzplanKartei sk = new SitzplanKartei();
-        List<Sitzplan> karteien;
+        List<Sitzplan> sitzplaene;
+
+        //TODO: FIX SitzplanMit5TischenView sizing issue with top two tables currently using shared size group that is not resizing
 
         public SitzplanGUI()
         {
             sitzplaeneDatenOrdnen();
-          
             InitializeComponent();
-            DataContext = new SitzplanMit2TischenModel();
         }
 
-        private void sitzplaeneDatenOrdnen ()
+        private void sitzplaeneDatenOrdnen()
         {
             sk.sitzplaeneGenerierenMitDatei();
-            karteien = sk.getSitzplaene();
+            sitzplaene = sk.getSitzplaene();
         }
 
-       //TODO Make radio buttons change to purple when selected
+        private void assignSitzplanView(int anzahlDerTische)
+        {
+            switch (anzahlDerTische)
+            {
+                case 1: DataContext = new SitzplanMit1TischModel();
+                    break;
+                case 2: DataContext = new SitzplanMit2TischenModel();
+                    break;
+                case 3: DataContext = new SitzplanMit3TischenModel();
+                    break;
+                case 4: DataContext = new SitzplanMit4TischenModel();
+                    break;
+                case 5: DataContext = new SitzplanMit5TischenModel();
+                    break;
+                case 6: DataContext = new SitzplanMit6TischenModel();
+                    break;
+            }
+        }
+
+        private void Block1Button_Checked(object sender, RoutedEventArgs e)
+        {
+            Sitzplan block = sitzplaene[0];
+            var tischGruppen = block.getTischgruppen();
+            App.Current.Properties["Block"] = block;
+            assignSitzplanView(tischGruppen.Count);
+        }
+
+        private void Block2Button_Checked(object sender, RoutedEventArgs e)
+        {
+            var block = sitzplaene[1];
+            var tischGruppen = block.getTischgruppen();
+            App.Current.Properties["Block"] = block;
+            assignSitzplanView(tischGruppen.Count);
+        }
+
+        private void Block6Button_Checked(object sender, RoutedEventArgs e)
+        {
+            Sitzplan block = sitzplaene[5];
+            var tischGruppen = block.getTischgruppen();
+            App.Current.Properties["Block"] = block;
+            assignSitzplanView(tischGruppen.Count);
+        }
+
+        private void Block5Button_Checked(object sender, RoutedEventArgs e)
+        {
+            Sitzplan block = sitzplaene[4];
+            var tischGruppen = block.getTischgruppen();
+            App.Current.Properties["Block"] = block;
+            assignSitzplanView(tischGruppen.Count);
+        }
+
+        private void Block4Button_Checked(object sender, RoutedEventArgs e)
+        {
+            Sitzplan block = sitzplaene[3];
+            var tischGruppen = block.getTischgruppen();
+            App.Current.Properties["Block"] = block;
+            assignSitzplanView(tischGruppen.Count);
+        }
+
+        private void Block3Button_Checked(object sender, RoutedEventArgs e)
+        {
+            Sitzplan block = sitzplaene[2];
+            var tischGruppen = block.getTischgruppen();
+            App.Current.Properties["Block"] = block;
+            assignSitzplanView(tischGruppen.Count);
+        }
+
     }
 }

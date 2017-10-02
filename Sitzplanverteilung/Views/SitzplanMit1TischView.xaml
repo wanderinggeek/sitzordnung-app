@@ -16,8 +16,6 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-
-
         </Grid.ColumnDefinitions>
         <Viewbox Name="platz1" Grid.Column="0" Grid.Row="2" Margin="10,15,10,5">
             <Grid >
@@ -97,6 +95,5 @@
                 <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri">Tisch 1</Label>
             </Grid>
         </Viewbox>
-
     </Grid>
 </UserControl>
