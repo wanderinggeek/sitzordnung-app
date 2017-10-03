@@ -41,6 +41,8 @@ namespace Sitzplanverteilung
                  sitzplaene[i] = new Sitzplan(sitzplanGenerieren(eingabeListe, i));
             }
             Console.WriteLine("sitzplan fertiggestellt");
+            this.sitzplaene[0].tauschePlaetze(this.sitzplaene[0].getTischgruppe(0).getSitzplaetze()[2], this.sitzplaene[0].getTischgruppe(2).getSitzplaetze()[3]);
+            Console.WriteLine("getauscht");
         }
 
 
