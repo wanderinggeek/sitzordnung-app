@@ -12,7 +12,7 @@ namespace Sitzplanverteilung
         String vorname;
         String klasse;
         String firma;
-        char geschlecht;
+        char   geschlecht;
         String berufssgruppe;
         String bild;
 
@@ -21,6 +21,7 @@ namespace Sitzplanverteilung
             this.name = "Musterschüler";
             this.vorname = "Manni";
             this.firma = "Musterschüler KG";
+            this.klasse = "Musterklasse";
             this.berufssgruppe = "Sohn vom Eigentümer";
             this.geschlecht = 'm';
             this.bild = erstelleBilddateiName();
@@ -46,6 +47,10 @@ namespace Sitzplanverteilung
         {
             return this.vorname;
         }
+        public String getVollerName()
+        {
+            return this.name +" "+ this.vorname;
+        }
         public String getFirma()
         {
             return this.firma;
@@ -57,6 +62,10 @@ namespace Sitzplanverteilung
         public char getGeschlecht()
         {
             return this.geschlecht;
+        }
+        public String getKlasse()
+        {
+            return this.klasse;
         }
         public void setName(String name)
         {
@@ -92,10 +101,6 @@ namespace Sitzplanverteilung
         {
             this.bild = bild;
         }
-        public String getKlasse()
-        {
-            return this.klasse;
-        }
 
         public void setKlasse(String klasse)
         {
@@ -103,7 +108,7 @@ namespace Sitzplanverteilung
         }
         public override string ToString()
         {
-            return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufssgruppe + ", " + this.geschlecht;
+            return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufssgruppe + ", " + this.geschlecht + ", " + this.klasse + ", " + this.bild;
         }
         private String erstelleBilddateiName()
         {

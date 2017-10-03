@@ -71,7 +71,7 @@ namespace Sitzplanverteilung.Views
         {
 
             aktiveTischgruppe = sitzplan[tischNummer];
-            schueler = aktiveTischgruppe.getGruppe();
+            schueler = aktiveTischgruppe.getSitzplaetze();
 
             int test = (int)App.Current.Properties["tischNummer"];
         }

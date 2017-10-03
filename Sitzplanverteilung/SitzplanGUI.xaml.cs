@@ -32,7 +32,7 @@ namespace Sitzplanverteilung
 
         private void sitzplaeneDatenOrdnen()
         {
-            sk.sitzplaeneGenerierenMitDatei();
+            sk.sitzplaeneGenerieren();
             sitzplaene = sk.getSitzplaene();
         }
 
