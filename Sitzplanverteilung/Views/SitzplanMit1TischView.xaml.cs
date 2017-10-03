@@ -38,32 +38,34 @@ namespace Sitzplanverteilung.Views
             for (int i = 1; i <= tischgroese; i++)
             {
                 int aktiverSitzplatz = i - 1;
-                var labelName = string.Format("platz{0}Name", i);
-                var labelFirma = string.Format("platz{0}Firma", i);
+                var labelName = string.Format("platz{0}NameTB", i);
+                var labelFirma = string.Format("platz{0}FirmaTB", i);
                 var bildName = string.Format("platz{0}Bild", i);
-                var labelFuerName = (Label)this.FindName(labelName);
-                var labelFuerFirma = (Label)this.FindName(labelFirma);
+                var labelFuerName = (TextBlock)this.FindName(labelName);
+                var labelFuerFirma = (TextBlock)this.FindName(labelFirma);
                 var bild = (Image)this.FindName(bildName);
                 if (schueler[aktiverSitzplatz] != null)
                 {
+                    string firma = schueler[aktiverSitzplatz].getFirma();
                     string nachname = schueler[aktiverSitzplatz].getName();
                     string vorname = schueler[aktiverSitzplatz].getVorname();
-                    labelFuerName.Content = string.Join(",", nachname, vorname);
-                    labelFuerFirma.Content = schueler[aktiverSitzplatz].getFirma();
+                    string name = string.Join(",", nachname, vorname);
+                    labelFuerName.Text = name;
+                    labelFuerName.ToolTip = name;
+                    labelFuerFirma.ToolTip = firma;
+                    labelFuerFirma.Text = firma;
                 }
                 else
                 {
                     var platzName = string.Format("platz{0}", i);
-                    var platz = (Viewbox)this.FindName(platzName);
+                    var platz = (Grid)this.FindName(platzName);
                     platz.Visibility = Visibility.Hidden;
                 }
 
 
                 bild.Source = new BitmapImage(new Uri(@"/Bilder/Cat_Melon.jpg", UriKind.Relative));
-
             }
             App.Current.Properties["tischNummer"] = tischNummer + 1;
-
 
         }
 
@@ -71,6 +73,7 @@ namespace Sitzplanverteilung.Views
         {
 
             aktiveTischgruppe = sitzplan[tischNummer];
+            tischNummerLabel.Content =string.Join(" ", "Tisch", (tischNummer + 1).ToString());
             schueler = aktiveTischgruppe.getGruppe();
 
             int test = (int)App.Current.Properties["tischNummer"];
