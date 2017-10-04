@@ -146,15 +146,15 @@ namespace Sitzplanverteilung
 
                 if (tisch.getSitzplaetze().Count > 2 && tisch.getSitzplaetze()[1] != null)
                 {
-                    if (tisch.getSitzplaetze()[0].getFirma().Equals(tisch.getSitzplaetze()[1].getFirma()))
+                    if (tisch.getSitzplaetze()[0].firma.Equals(tisch.getSitzplaetze()[1].firma))
                     {
                         strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[0].getBerufsgruppe().Equals(tisch.getSitzplaetze()[1].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[0].berufsgruppe.Equals(tisch.getSitzplaetze()[1].berufsgruppe))
                     {
                         strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[0].getGeschlecht().Equals(tisch.getSitzplaetze()[1].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[0].geschlecht.Equals(tisch.getSitzplaetze()[1].geschlecht))
                     {
                         strafPunkte += geschlechtPlatzregel;
                     }
@@ -162,60 +162,60 @@ namespace Sitzplanverteilung
 
                 if (tisch.getSitzplaetze().Count > 3 && tisch.getSitzplaetze()[2] != null)
                 {
-                    if (tisch.getSitzplaetze()[1].getFirma().Equals(tisch.getSitzplaetze()[2].getFirma()))
+                    if (tisch.getSitzplaetze()[1].firma.Equals(tisch.getSitzplaetze()[2].firma))
                     {
                         strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[1].getBerufsgruppe().Equals(tisch.getSitzplaetze()[2].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[1].berufsgruppe.Equals(tisch.getSitzplaetze()[2].berufsgruppe))
                     {
                         strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[1].getGeschlecht().Equals(tisch.getSitzplaetze()[2].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[1].geschlecht.Equals(tisch.getSitzplaetze()[2].geschlecht))
                     {
                         strafPunkte += geschlechtPlatzregel;
                     }
                 }
                 if (tisch.getSitzplaetze().Count > 4 && tisch.getSitzplaetze()[3] != null)
                 {
-                    if (tisch.getSitzplaetze()[2].getFirma().Equals(tisch.getSitzplaetze()[3].getFirma()))
+                    if (tisch.getSitzplaetze()[2].firma.Equals(tisch.getSitzplaetze()[3].firma))
                     {
                         strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[2].getBerufsgruppe().Equals(tisch.getSitzplaetze()[3].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[2].berufsgruppe.Equals(tisch.getSitzplaetze()[3].berufsgruppe))
                     {
                         strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[2].getGeschlecht().Equals(tisch.getSitzplaetze()[3].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[2].geschlecht.Equals(tisch.getSitzplaetze()[3].geschlecht))
                     {
                         strafPunkte += geschlechtPlatzregel;
                     }
                 }
                 if (tisch.getSitzplaetze().Count > 5 && tisch.getSitzplaetze()[4] != null)
                 {
-                    if (tisch.getSitzplaetze()[3].getFirma().Equals(tisch.getSitzplaetze()[4].getFirma()))
+                    if (tisch.getSitzplaetze()[3].firma.Equals(tisch.getSitzplaetze()[4].firma))
                     {
                         strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[3].getBerufsgruppe().Equals(tisch.getSitzplaetze()[4].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[3].berufsgruppe.Equals(tisch.getSitzplaetze()[4].berufsgruppe))
                     {
                         strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[3].getGeschlecht().Equals(tisch.getSitzplaetze()[4].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[3].geschlecht.Equals(tisch.getSitzplaetze()[4].geschlecht))
                     {
                         strafPunkte += geschlechtPlatzregel;
                     }
                 }
                 if (tisch.getSitzplaetze().Count == 6 && tisch.getSitzplaetze()[5] != null)
                 {
-                    if (tisch.getSitzplaetze()[4].getFirma().Equals(tisch.getSitzplaetze()[5].getFirma()))
+                    if (tisch.getSitzplaetze()[4].firma.Equals(tisch.getSitzplaetze()[5].firma))
                     {
                         strafPunkte += firmenPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[4].getBerufsgruppe().Equals(tisch.getSitzplaetze()[5].getBerufsgruppe()))
+                    if (tisch.getSitzplaetze()[4].berufsgruppe.Equals(tisch.getSitzplaetze()[5].berufsgruppe))
                     {
                         strafPunkte += berufsPlatzregel;
                     }
-                    if (tisch.getSitzplaetze()[4].getGeschlecht().Equals(tisch.getSitzplaetze()[5].getGeschlecht()))
+                    if (tisch.getSitzplaetze()[4].geschlecht.Equals(tisch.getSitzplaetze()[5].geschlecht))
                     {
                         strafPunkte += geschlechtPlatzregel;
                     }
@@ -268,7 +268,7 @@ namespace Sitzplanverteilung
             {
                 for (int j = 0; j < schuelerListe.Count - 1; j++)
                 {
-                    if (schuelerListe[j].getGeschlecht() > schuelerListe[j + 1].getGeschlecht())
+                    if (schuelerListe[j].geschlecht > schuelerListe[j + 1].geschlecht)
                     {
                         speicher = schuelerListe[j];
                         schuelerListe[j] = schuelerListe[j + 1];
@@ -289,13 +289,13 @@ namespace Sitzplanverteilung
             {
                 if (schueler != null)
                 {
-                    if (zuordnung.ContainsKey(schueler.getFirma()))
+                    if (zuordnung.ContainsKey(schueler.firma))
                     {
-                        zuordnung[schueler.getFirma()] += 1;
+                        zuordnung[schueler.firma] += 1;
                     }
                     else
                     {
-                        zuordnung.Add(schueler.getFirma(), 1);
+                        zuordnung.Add(schueler.firma, 1);
                     }
                 }
 
