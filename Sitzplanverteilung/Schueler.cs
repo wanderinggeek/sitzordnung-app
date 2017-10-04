@@ -12,6 +12,7 @@ namespace Sitzplanverteilung
         String vorname;
         String klasse;
         String firma;
+        String firmenkuerzel;
         char   geschlecht;
         String berufssgruppe;
         String bild;
@@ -21,17 +22,19 @@ namespace Sitzplanverteilung
             this.name = "Musterschüler";
             this.vorname = "Manni";
             this.firma = "Musterschüler KG";
+            this.firmenkuerzel = "MKG";
             this.klasse = "Musterklasse";
             this.berufssgruppe = "Sohn vom Eigentümer";
             this.geschlecht = 'm';
             this.bild = erstelleBilddateiName();
         }
 
-        public Schueler(String name, String vorname, String klasse, String firma, char geschlecht, String berufssgruppe) 
+        public Schueler(String name, String vorname, String klasse, String firma, String kuerzel,char geschlecht, String berufssgruppe) 
         {
             this.name = name;
             this.vorname = vorname;
             this.firma = firma;
+            this.firmenkuerzel = kuerzel;
             this.klasse = klasse;
             this.berufssgruppe = berufssgruppe;
             // geschlecht mit dem Character <m>ännlich oder <w>eiblich
@@ -54,6 +57,10 @@ namespace Sitzplanverteilung
         public String getFirma()
         {
             return this.firma;
+        }
+        public String getFirmenkuerzel()
+        {
+            return this.firmenkuerzel;
         }
         public String getBerufsgruppe()
         {
@@ -80,6 +87,10 @@ namespace Sitzplanverteilung
         public void setFirma(String firma)
         {
             this.firma = firma;
+        }
+        public void setFirmenkuerzel(String kuerzel)
+        {
+            this.firmenkuerzel = kuerzel;
         }
         public void setBerufsgruppe(String berufsgruppe)
         {

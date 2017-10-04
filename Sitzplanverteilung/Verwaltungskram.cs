@@ -40,11 +40,12 @@ namespace Sitzplanverteilung
                     // 1 = Vorname
                     // 2 = Klasse
                     // 3 = Firma
-                    // 4 = Geschlecht
-                    // 5 = Berufsgruppe
+                    // 4 = Kuerzel
+                    // 5 = Geschlecht
+                    // 6 = Berufsgruppe
                     if (pruefeDatensatz(daten))
                     {
-                        schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[3], daten[4][0], daten[5]));
+                        schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[3], daten[4], daten[5][0], daten[6]));
                     }
                     else
                     {
@@ -71,12 +72,12 @@ namespace Sitzplanverteilung
         private static bool pruefeDatensatz(String[] daten) 
         {
             // Fehlerhafte Anzahl an Werten im Datensatz
-            if (daten.Count() != 6)
+            if (daten.Count() != 7)
             {
                 return false;
             }
             // Geschlecht nicht M oder W
-            if (!(daten[4].ToLower().Equals("m") || daten[4].ToLower().Equals("w")))
+            if (!(daten[5].ToLower().Equals("m") || daten[5].ToLower().Equals("w")))
             {
                 return false;
             }
