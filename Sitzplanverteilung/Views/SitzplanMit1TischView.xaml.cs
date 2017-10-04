@@ -46,9 +46,9 @@ namespace Sitzplanverteilung.Views
                 var bild = (Image)this.FindName(bildName);
                 if (schueler[aktiverSitzplatz] != null)
                 {
-                    string firma = schueler[aktiverSitzplatz].getFirma();
-                    string nachname = schueler[aktiverSitzplatz].getName();
-                    string vorname = schueler[aktiverSitzplatz].getVorname();
+                    string firma = schueler[aktiverSitzplatz].firma;
+                    string nachname = schueler[aktiverSitzplatz].name;
+                    string vorname = schueler[aktiverSitzplatz].vorname;
                     string name = string.Join(",", nachname, vorname);
                     labelFuerName.Text = name;
                     labelFuerName.ToolTip = name;
@@ -74,9 +74,8 @@ namespace Sitzplanverteilung.Views
 
             aktiveTischgruppe = sitzplan[tischNummer];
             tischNummerLabel.Content =string.Join(" ", "Tisch", (tischNummer + 1).ToString());
-            schueler = aktiveTischgruppe.getGruppe();
+            schueler = aktiveTischgruppe.getSitzplaetze();
 
-            int test = (int)App.Current.Properties["tischNummer"];
         }
     }
 }
