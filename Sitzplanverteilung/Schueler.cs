@@ -12,11 +12,11 @@ namespace Sitzplanverteilung
         public String vorname { get; set; }
         public String klasse { get; set; }
         public String firma { get; set; }
-        public char  geschlecht {get; set;}
-        public String berufsgruppe {get; set;}
-        public String bild{get; set;}
+        public char geschlecht { get; set; }
+        public String berufsgruppe { get; set; }
+        public String bild { get; set; }
 
-        public Schueler() 
+        public Schueler()
         {
             this.name = "Musterschüler";
             this.vorname = "Manni";
@@ -27,7 +27,7 @@ namespace Sitzplanverteilung
             this.bild = "Bild";
         }
 
-        public Schueler(String name, String vorname, String klasse, String firma, char geschlecht, String berufsgruppe) 
+        public Schueler(String name, String vorname, String klasse, String firma, char geschlecht, String berufsgruppe)
         {
             this.name = name;
             this.vorname = vorname;
@@ -39,36 +39,17 @@ namespace Sitzplanverteilung
             this.bild = "Bild";
         }
 
-      
+
         public String getVollerName()
         {
-            return this.name +" "+ this.vorname;
+            return this.name + " " + this.vorname;
         }
-      
-        public void setName(String name)
-        {
-            this.name = name;
-            this.bild = erstelleBilddateiName();
-        }
-        public void setVorname(String vorname)
-        {
-            this.vorname = vorname;
-            this.bild = erstelleBilddateiName();
-        }
-   
-        public void setGeschlecht(char geschlecht)
-        {
-            if (geschlecht.Equals(Char.ToUpper('m')) || geschlecht.Equals(Char.ToUpper('w'))) 
-            {
-                this.geschlecht = geschlecht;
-            }
-        }
-  
+
         public override string ToString()
         {
             return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufsgruppe + ", " + this.geschlecht + ", " + this.klasse + ", " + this.bild;
         }
 
-        
+
     }
 }
