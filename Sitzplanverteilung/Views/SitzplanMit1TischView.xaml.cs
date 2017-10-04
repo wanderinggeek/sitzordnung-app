@@ -46,10 +46,10 @@ namespace Sitzplanverteilung.Views
                 var bild = (Image)this.FindName(bildName);
                 if (schueler[aktiverSitzplatz] != null)
                 {
-                    string nachname = schueler[aktiverSitzplatz].getName();
-                    string vorname = schueler[aktiverSitzplatz].getVorname();
+                    string nachname = schueler[aktiverSitzplatz].name;
+                    string vorname = schueler[aktiverSitzplatz].vorname;
                     labelFuerName.Content = string.Join(",", nachname, vorname);
-                    labelFuerFirma.Content = schueler[aktiverSitzplatz].getFirma();
+                    labelFuerFirma.Content = schueler[aktiverSitzplatz].firma;
                 }
                 else
                 {
