@@ -32,6 +32,7 @@ namespace Sitzplanverteilung
 
         private void sitzplaeneDatenOrdnen()
         {
+            sk.holeSchuelerAusCSV();
             sk.sitzplaeneGenerieren();
             sitzplaene = sk.getSitzplaene();
         }
