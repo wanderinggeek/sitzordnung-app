@@ -303,6 +303,36 @@ namespace Sitzplanverteilung
             return zuordnung;
         }
 
+        //tauschen mit Positionangaben --> wird benötigt Schüler auf bisher unbesetzte Plätze (null) zu verschieben
+        public void tauschePlaetze(int tischA, int platzA, int tischB, int platzB) 
+        {
+            Schueler speicher = this.tischgruppen[tischA].getSitzplaetze()[platzA];
+            this.tischgruppen[tischA].setzeSchueler(this.tischgruppen[tischB].getSitzplaetze()[platzB], platzA);
+            this.tischgruppen[tischB].setzeSchueler(speicher, platzB);
+        }
+
+        //Tauschen hinweg mit Schülern --> Nukk Elemente können hiermit nicht angesprochen werden
+        public void tauschePlaetze(Schueler schuelerA, Schueler schuelerB) 
+        {
+            int tischA =-1;
+            int platzA =-1;
+            int tischB =-1;
+            int platzB =-1;
+            foreach (Tischgruppe gruppe in this.tischgruppen) 
+            {
+                if (gruppe.getSitzplaetze().IndexOf(schuelerA) >= 0) 
+                {
+                    tischA = this.tischgruppen.IndexOf(gruppe);
+                    platzA = gruppe.getSitzplaetze().IndexOf(schuelerA);
+                }
+                if (gruppe.getSitzplaetze().IndexOf(schuelerB) >= 0)
+                {
+                    tischB = this.tischgruppen.IndexOf(gruppe);
+                    platzB = gruppe.getSitzplaetze().IndexOf(schuelerB);
+                }
+            }
+            tauschePlaetze(tischA, platzA, tischB, platzB);
+        }
         public override string ToString()
         {
             int i = 1;
