@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Security.Cryptography;
 
 namespace Sitzplanverteilung
 {
@@ -80,6 +81,26 @@ namespace Sitzplanverteilung
                 return false;
             }
             return true;
+        }
+
+        //Mischen der SchülerListe
+        public static List<Schueler> Shuffle(List<Schueler> list)
+        {
+
+            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+            int n = list.Count;
+            while (n > 1)
+            {
+                byte[] box = new byte[1];
+                do provider.GetBytes(box);
+                while (!(box[0] < n * (Byte.MaxValue / n)));
+                int k = (box[0] % n);
+                n--;
+                Schueler value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+            return list;
         }
     }
 }

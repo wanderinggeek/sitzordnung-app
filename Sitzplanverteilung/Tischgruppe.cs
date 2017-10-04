@@ -26,7 +26,16 @@ namespace Sitzplanverteilung
             this.sitzplaetze = sitzplaetze;
         }
 
-        public List<Schueler> getGruppe() 
+        //public Tischgruppe(int plaetze)
+        //{
+        //    this.sitzplaetze = new List<Schueler>();
+        //    for (int i = 0; i < plaetze; i++ )
+        //    {
+        //        this.sitzplaetze.Add(null);
+        //    }
+        //}
+
+        public List<Schueler> getSitzplaetze() 
         {
             return this.sitzplaetze;
         }
@@ -34,7 +43,7 @@ namespace Sitzplanverteilung
         {
             this.sitzplaetze = sitzplaetze;
         }
-
+		
         public void setzeSchueler(Schueler schueler, int position) 
         {
             if (position < this.sitzplaetze.Count()) 
@@ -48,9 +57,17 @@ namespace Sitzplanverteilung
             this.sitzplaetze[index] = null;
         }
 
-        public int getGruppengroesse() 
+        public int getGruppengroesse()
         {
-            return sitzplaetze.Count();
+            int groesse = 0;
+            foreach (Schueler schueler in this.sitzplaetze) 
+            {
+                if (schueler != null) 
+                {
+                    groesse++;
+                }
+            }
+            return groesse;
         }
     }
 }
