@@ -9,7 +9,9 @@ namespace Sitzplanverteilung
     class SitzplanKartei
     {
         List<Sitzplan> sitzplaene;
+        List<Schueler> schuelerListe;
 
+        //Leere Sitzpläne
         public SitzplanKartei()
         {
             this.sitzplaene = new List<Sitzplan>();
@@ -17,8 +19,9 @@ namespace Sitzplanverteilung
             {
                 this.sitzplaene.Add(null);
             }
+            this.schuelerListe =  new List<Schueler>();
         }
-
+        //Sitzpläne übergeben
         public SitzplanKartei(List<Sitzplan> sitzplaene)
         {
             this.sitzplaene = new List<Sitzplan>();
@@ -28,56 +31,61 @@ namespace Sitzplanverteilung
             }
         }
 
+        //Schülerliste importieren aus .csv-Datei
+        public void holeSchuelerAusCSV() 
+        {
+            schuelerListe.AddRange(Verwaltungskram.importiereSchuelerListe());
+        }
+
         // Standard mit 5 Tischgruppen und 6 Schülern maximal pro Tisch
         public void sitzplaeneGenerieren()
         {
-            //Schülerliste importieren
-            List<Schueler> eingabeListe = new List<Schueler>();
-            eingabeListe.AddRange(Verwaltungskram.importiereSchuelerListe());
-            
-            //Erstellen der einzelnen Sitzpläne
-            for (int i = 0; i < 6; i++)
+            if (schuelerListe.Count > 0)
             {
-                 sitzplaene[i] = new Sitzplan(sitzplanGenerieren(eingabeListe, i));
+                //Erstellen der einzelnen Sitzpläne
+                for (int i = 0; i < 6; i++)
+                {
+                    sitzplaene[i] = new Sitzplan(sitzplanGenerieren(i));
+                }
+                Console.WriteLine("sitzplan fertiggestellt");
             }
-            Console.WriteLine("sitzplan fertiggestellt");
         }
 
 
         //Sitzplan verteilen mit variablen Gruppengrößen/Anzahl Tischgruppen
         public void sitzplaeneGenerieren(int anzahlTische, int schuelerMaxProTisch)
         {
-            //Schülerliste importieren
-            List<Schueler> eingabeListe = Verwaltungskram.importiereSchuelerListe();
-
-            //Erstellen der 6 einzelnen Sitzpläne
-            for (int i = 0; i < 6; i++)
+            if (schuelerListe.Count > 0)
             {
-                sitzplaene[i] = new Sitzplan(sitzplanGenerieren(eingabeListe, anzahlTische, schuelerMaxProTisch, i));
+                //Erstellen der 6 einzelnen Sitzpläne
+                for (int i = 0; i < 6; i++)
+                {
+                    sitzplaene[i] = new Sitzplan(sitzplanGenerieren(anzahlTische, schuelerMaxProTisch, i));
+                }
+                Console.WriteLine("sitzplan fertiggestellt");
             }
-            Console.WriteLine("sitzplan fertiggestellt");
         }
 
-        private Sitzplan sitzplanGenerieren(List<Schueler> schuelerListe, int index)
+        private Sitzplan sitzplanGenerieren(int index)
         {
             int strafPunkteMin;
             int strafPunkte = 0;
             List<Schueler> liste = new List<Schueler>();
             Sitzplan preSitzplan = new Sitzplan();
             Sitzplan sitzplan = new Sitzplan();
-            liste.AddRange(schuelerListe);
+            liste.AddRange(this.schuelerListe);
             sitzplan.verteileSchueler(liste);
-            strafPunkteMin = sitzplan.berechneStrafpunkte(schuelerListe);
+            strafPunkteMin = sitzplan.berechneStrafpunkte(this.schuelerListe);
             //Den Besten Sitzplan aus 500 bestimmen
             for (int j = 0; j < 500; j++)
             {
                 liste = new List<Schueler>();
-                liste.AddRange(schuelerListe);
+                liste.AddRange(this.schuelerListe);
                 preSitzplan.verteileSchueler(liste);
-                strafPunkte = preSitzplan.berechneStrafpunkte(schuelerListe);
+                strafPunkte = preSitzplan.berechneStrafpunkte(this.schuelerListe);
                 if (index > 0)
                 {
-                    strafPunkte += moeglichstWenigSitzpartnerDopplungen(index, schuelerListe, preSitzplan);
+                    strafPunkte += moeglichstWenigSitzpartnerDopplungen(index, preSitzplan);
                 }
                 if (strafPunkteMin > strafPunkte)
                 {
@@ -93,26 +101,26 @@ namespace Sitzplanverteilung
             return sitzplan;
         }
 
-        private Sitzplan sitzplanGenerieren(List<Schueler> schuelerListe, int anzahlTische, int schuelerMaxProTisch, int index)
+        private Sitzplan sitzplanGenerieren(int anzahlTische, int schuelerMaxProTisch, int index)
         {
             int strafPunkteMin;
             int strafPunkte = 0;
             List<Schueler> liste = new List<Schueler>();
             Sitzplan preSitzplan = new Sitzplan(anzahlTische, schuelerMaxProTisch);
             Sitzplan sitzplan = new Sitzplan(anzahlTische, schuelerMaxProTisch);
-            liste.AddRange(schuelerListe);
+            liste.AddRange(this.schuelerListe);
             sitzplan.verteileSchueler(liste);
-            strafPunkteMin = sitzplan.berechneStrafpunkte(schuelerListe);
+            strafPunkteMin = sitzplan.berechneStrafpunkte(this.schuelerListe);
             //Den Besten Sitzplan aus 500 bestimmen
             for (int j = 0; j < 500; j++)
             {
                 liste = new List<Schueler>();
-                liste.AddRange(schuelerListe);
+                liste.AddRange(this.schuelerListe);
                 preSitzplan.verteileSchueler(liste);
-                strafPunkte = preSitzplan.berechneStrafpunkte(schuelerListe);
+                strafPunkte = preSitzplan.berechneStrafpunkte(this.schuelerListe);
                 if (index > 0)
                 {
-                    strafPunkte += moeglichstWenigSitzpartnerDopplungen(index, schuelerListe, preSitzplan);
+                    strafPunkte += moeglichstWenigSitzpartnerDopplungen(index, preSitzplan);
                 }
                 if (strafPunkteMin > strafPunkte)
                 {
@@ -128,12 +136,12 @@ namespace Sitzplanverteilung
         }
 
         //Sitzplan mit den vorherigen Plänen vergleichen
-        public int moeglichstWenigSitzpartnerDopplungen(int index, List<Schueler> schuelerListe, Sitzplan sitzplan)
+        private int moeglichstWenigSitzpartnerDopplungen(int index, Sitzplan sitzplan)
         {
             Sitzplan pruefen = new Sitzplan(sitzplan);
             int strafPunkte = 0;
             
-            foreach (Schueler schuelerAusListe in schuelerListe) 
+            foreach (Schueler schuelerAusListe in this.schuelerListe) 
             {
                 SortedList<String, int> sitznachbarn = new SortedList<string, int>();
                 //Vergleichen mit früheren Sitzplänen
