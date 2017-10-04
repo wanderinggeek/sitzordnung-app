@@ -31,6 +31,32 @@ namespace Sitzplanverteilung
             }
         }
 
+        public void neuerSchuelerInListe(Schueler schueler)
+        {
+            this.schuelerListe.Add(schueler);
+        }
+        
+        public void entferneSchuelerInListe(Schueler schueler)
+        {
+            this.schuelerListe.Remove(schueler);
+        }
+        
+        public void entferneSchuelerInListe(int index)
+        {
+            Schueler schueler = schuelerListe[index];
+            entferneSchuelerInListe(schueler);
+        }
+        
+        public void aenderSchuelerInListe(Schueler schuelerAlt, Schueler schuelerNeu)
+        {
+            this.schuelerListe[this.schuelerListe.IndexOf(schuelerAlt)] = schuelerNeu;
+        }
+        
+        public void aenderSchuelerInListe(int index, Schueler schuelerNeu)
+        {
+            this.schuelerListe[index] = schuelerNeu;
+        }
+
         //Schülerliste importieren aus .csv-Datei
         public void holeSchuelerAusCSV() 
         {
