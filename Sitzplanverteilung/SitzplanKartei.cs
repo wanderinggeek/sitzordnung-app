@@ -8,26 +8,28 @@ namespace Sitzplanverteilung
 {
     class SitzplanKartei
     {
+        private static SitzplanKartei instance;
         List<Sitzplan> sitzplaene;
         List<Schueler> schuelerListe;
 
-        //Leere Sitzpläne
-        public SitzplanKartei()
-        {
-            this.sitzplaene = new List<Sitzplan>();
-            for (int i = 0; i < 6; i++ )
-            {
-                this.sitzplaene.Add(null);
-            }
-            this.schuelerListe =  new List<Schueler>();
-        }
-        //Sitzpläne übergeben
-        public SitzplanKartei(List<Sitzplan> sitzplaene)
+        private SitzplanKartei()
         {
             this.sitzplaene = new List<Sitzplan>();
             for (int i = 0; i < 6; i++)
             {
-                this.sitzplaene.Add(new Sitzplan(sitzplaene[i]));
+                this.sitzplaene.Add(null);
+            }
+            this.schuelerListe = new List<Schueler>();
+        }
+        public static SitzplanKartei Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new SitzplanKartei();
+                }
+                return instance;
             }
         }
 
