@@ -23,13 +23,14 @@
                 <RowDefinition Height="49*"/>
             </Grid.RowDefinitions>
         </Grid>
-        <DataGrid Name="schuelerGrid" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" AutoGenerateColumns="false" ColumnWidth="*">
+        <DataGrid Name="schuelerGrid" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" AutoGenerateColumns="false" ColumnWidth="*" SelectionChanged="schuelerGrid_SelectionChanged" SelectedCellsChanged="schuelerGrid_SelectedCellsChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Bild" Binding="{Binding Path=firma}"></DataGridTextColumn>
                 <DataGridTextColumn MaxWidth="100" Header="Nachname" Binding="{Binding Path=name}"></DataGridTextColumn>
                 <DataGridTextColumn MaxWidth="100" Header="Vorname"  Binding="{Binding Path=vorname}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Beruf"  Binding="{Binding Path=berufsgruppe}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Firmenname"  Binding="{Binding Path=firma}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Firmenkuerzel"  Binding="{Binding Path=firmenkuerzel}"></DataGridTextColumn>
                 <DataGridTextColumn MaxWidth="70" Header="Geschlecht"  Binding="{Binding Path=geschlecht}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
@@ -53,7 +54,7 @@
                 </Viewbox>
             </Grid>
         </Button>
-        <Button Name="SchuelerErstellenButton"  Grid.Row="3" Click="SchuelerErstellenButton_Click" Background="#f0f0f0" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <Button Name="SchuelerLoeschenButton"  Grid.Row="3" Click="SchuelerLoeschenButton_Click" Background="#f0f0f0" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <Grid Height="276" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="27*"/>
@@ -62,13 +63,13 @@
                     <RowDefinition Height="53*"/>
                 </Grid.RowDefinitions>
                 <Viewbox Grid.Row="1">
-                    <fa:IconImage Icon="UserPlus" Foreground="#4f59d3"/>
+                    <fa:IconImage Icon="MinusCircle" Foreground="#4f59d3"/>
                 </Viewbox>
                 <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
                     <TextBlock Foreground="#727272">Schüler</TextBlock>
                 </Viewbox>
                 <Viewbox Grid.Row="3" Name="fourthTextblock">
-                    <TextBlock Foreground="#727272">hinzufügen</TextBlock>
+                    <TextBlock Foreground="#727272">löschen</TextBlock>
                 </Viewbox>
             </Grid>
         </Button>

@@ -35,6 +35,7 @@ namespace Sitzplanverteilung.Views
         private void schuelerGenerien()
         {
             int tischgroese = aktiveTischgruppe.getGruppengroesse();
+            string firma;
             for (int i = 1; i <= tischgroese; i++)
             {
                 int aktiverSitzplatz = i - 1;
@@ -46,7 +47,14 @@ namespace Sitzplanverteilung.Views
                 var bild = (Image)this.FindName(bildName);
                 if (schueler[aktiverSitzplatz] != null)
                 {
-                    string firma = schueler[aktiverSitzplatz].firma;
+                    if(schueler[aktiverSitzplatz].firmenkuerzel == "")
+                    {
+                         firma = schueler[aktiverSitzplatz].firma;
+                    }
+                    else
+                    {
+                         firma = schueler[aktiverSitzplatz].firmenkuerzel;
+                    }
                     string nachname = schueler[aktiverSitzplatz].name;
                     string vorname = schueler[aktiverSitzplatz].vorname;
 
