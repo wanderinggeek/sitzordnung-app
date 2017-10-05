@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,6 @@ namespace Sitzplanverteilung
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -37,7 +36,7 @@ namespace Sitzplanverteilung
             SitzplanGUI win2 = new SitzplanGUI();
             win2.Show();
             this.Close();
-
+            // ImageCapturer.SaveToPNG(win2.contentControl, @"C:\\Users\Stefan\Desktop\test.png");
         }
     }
 }
