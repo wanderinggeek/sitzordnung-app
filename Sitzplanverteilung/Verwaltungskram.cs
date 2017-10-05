@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,12 +36,13 @@ namespace Sitzplanverteilung
                     zeile = sr.ReadLine();
                     String[] daten = zeile.Split(';'); 
                     // daten Index = Wert in CSV Datei (eventuell dem Konstruktor der Klasse Schüler anpassen?)
-                    // 0 = Nachname
-                    // 1 = Vorname
-                    // 2 = Klasse
-                    // 3 = Firma
-                    // 4 = Kuerzel
-                    // 5 = Geschlecht
+                    // bevorzugtes Format   || Faule Lehrer Format
+                    // 0 = Nachname         || 0=Nachname
+                    // 1 = Vorname          || 1=Vorname
+                    // 2 = Klasse           || 2=Klasse
+                    // 3 = Firma            || 3=Firma
+                    // 4 = Kuerzel          || 4=Geschlecht
+                    // 5 = Geschlecht       || 5=Berufsgruppe 
                     // 6 = Berufsgruppe
                     if (pruefeDatensatz(daten))
                     {
@@ -49,8 +50,15 @@ namespace Sitzplanverteilung
                     }
                     else
                     {
-                        fehlerhafteZeilen.Add(zeilenNummer);
-                        error = true;
+                        if (pruefeDatensatzFauleLehrer(daten)) 
+                        {
+                            schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[3], "", daten[4][0], daten[5]));
+                        }
+                        else
+                        {
+                            fehlerhafteZeilen.Add(zeilenNummer);
+                            error = true;
+                        }
                     }
                 } while (!sr.EndOfStream);
                 sr.Close();
@@ -78,6 +86,20 @@ namespace Sitzplanverteilung
             }
             // Geschlecht nicht M oder W
             if (!(daten[5].ToLower().Equals("m") || daten[5].ToLower().Equals("w")))
+            {
+                return false;
+            }
+            return true;
+        }
+        private static bool pruefeDatensatzFauleLehrer(String[] daten)
+        {
+            // Fehlerhafte Anzahl an Werten im Datensatz
+            if (daten.Count() != 6)
+            {
+                return false;
+            }
+            // Geschlecht nicht M oder W
+            if (!(daten[4].ToLower().Equals("m") || daten[4].ToLower().Equals("w")))
             {
                 return false;
             }

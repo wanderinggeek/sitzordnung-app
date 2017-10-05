@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +19,7 @@ namespace Sitzplanverteilung
     /// </summary>
     public partial class SitzplanGUI : Window
     {
-        SitzplanKartei sk = new SitzplanKartei();
+        SitzplanKartei sk = SitzplanKartei.Instance;
         List<Sitzplan> sitzplaene;
 
         //TODO: FIX SitzplanMit5TischenView sizing issue with top two tables currently using shared size group that is not resizing
