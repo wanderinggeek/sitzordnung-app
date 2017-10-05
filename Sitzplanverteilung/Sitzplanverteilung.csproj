@@ -87,6 +87,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArrayList.cs" />
+    <Compile Include="SchuelerDatenEditierenGUI.xaml.cs">
+      <DependentUpon>SchuelerDatenEditierenGUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageCapturer.cs" />
     <Compile Include="ViewModels\SitzplanMit1TischModel.cs" />
     <Compile Include="SitzplanGUI.xaml.cs">
@@ -132,6 +135,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SchuelerDatenEditierenGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SitzplanGUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

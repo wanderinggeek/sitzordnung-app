@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +49,7 @@ namespace Sitzplanverteilung.Views
                     string firma = schueler[aktiverSitzplatz].firma;
                     string nachname = schueler[aktiverSitzplatz].name;
                     string vorname = schueler[aktiverSitzplatz].vorname;
+
                     string name = string.Join(",", nachname, vorname);
                     labelFuerName.Text = name;
                     labelFuerName.ToolTip = name;
