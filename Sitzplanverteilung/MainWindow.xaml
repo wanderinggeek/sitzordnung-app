@@ -33,7 +33,7 @@
                 <TextBlock Foreground="#0092f8">bevor Sitzpläne erstellt werden können.</TextBlock>
             </Viewbox>
         </Grid>
-        <Button Name="SchuelerdatenImportierenButton"  Grid.Column="0" Click="Button_Click" 
+        <Button Name="SchuelerdatenImportierenButton"  Grid.Column="0" Click="SchuelerdatenImportierenButton_Click" 
          Background="#FF0092F8" FontFamily="Calibri" Foreground="White" Grid.RowSpan="3">
             <Grid Height="276" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
@@ -53,7 +53,7 @@
                 </Viewbox>
             </Grid>
         </Button>
-        <Button Name="SchuelerErstellenButton"  Grid.Row="3" Click="Button_Click" Background="#f0f0f0" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <Button Name="SchuelerErstellenButton"  Grid.Row="3" Click="SchuelerErstellenButton_Click" Background="#f0f0f0" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <Grid Height="276" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="27*"/>

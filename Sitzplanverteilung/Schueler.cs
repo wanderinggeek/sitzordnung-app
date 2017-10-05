@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sitzplanverteilung
 {
-    class Schueler
+    public class Schueler
     {
         public String name { get; set; }
         public String vorname { get; set; }
