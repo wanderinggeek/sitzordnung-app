@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xaml;
 using Sitzplanverteilung.ViewModels;
+
 namespace Sitzplanverteilung
 {
     /// <summary>
@@ -25,8 +26,9 @@ namespace Sitzplanverteilung
         public SitzplanGUI()
         {
             sitzplaeneDatenOrdnen();
-          
+
             InitializeComponent();
+
             DataContext = new SitzplanMit2TischenModel();
         }
 

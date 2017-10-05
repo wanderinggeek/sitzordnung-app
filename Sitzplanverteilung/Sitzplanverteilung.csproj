@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArrayList.cs" />
+    <Compile Include="ImageCapturer.cs" />
     <Compile Include="ViewModels\SitzplanMit1TischModel.cs" />
     <Compile Include="SitzplanGUI.xaml.cs">
       <DependentUpon>SitzplanGUI.xaml</DependentUpon>
