@@ -36,7 +36,11 @@ namespace Sitzplanverteilung
             SitzplanGUI win2 = new SitzplanGUI();
             win2.Show();
             this.Close();
-            // ImageCapturer.SaveToPNG(win2.contentControl, @"C:\\Users\Stefan\Desktop\test.png");
+            string appPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
+            string tmpPath = appPath.Replace("\\bin\\Debug", "\\tmp\\");
+            string fileName = "Sitzplan.png";
+            Console.WriteLine(tmpPath);
+            ImageCapturer.SaveToPNG(win2.contentControl, tmpPath + fileName);
         }
     }
 }
