@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,7 @@ namespace Sitzplanverteilung
     public partial class MainWindow : Window
     {
         // 6 Schulblöcke sind für eine Berufsschulklasse üblich.
-        const int  bloecke = 6;
+        const int bloecke = 6;
 
         public MainWindow()
         {
@@ -36,7 +36,7 @@ namespace Sitzplanverteilung
             SitzplanGUI win2 = new SitzplanGUI();
             win2.Show();
             this.Close();
-            ImageCapturer.SaveToPNG(win2.contentControl, @"C:\\Users\Stefan\Desktop\test.png");
+            // ImageCapturer.SaveToPNG(win2.contentControl, @"C:\\Users\Stefan\Desktop\test.png");
         }
     }
 }

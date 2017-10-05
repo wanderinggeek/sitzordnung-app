@@ -16,87 +16,96 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-
-
         </Grid.ColumnDefinitions>
-        <Viewbox Name="platz1" Grid.Column="0" Grid.Row="2" Margin="10,15,10,5">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Image Name="platz1Bild" Grid.Row="0"></Image>
-                <Label Name="platz1Name" FontWeight="ExtraBold" Grid.Row="1" FontFamily="Calibri" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <Label Name="platz1Firma" FontWeight="ExtraBold" Grid.Row="6" FontFamily="Calibri" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-10,0,0"/>
-            </Grid>
-        </Viewbox>
-        <Viewbox Name="platz2" Grid.Column="0" Grid.Row="1" Margin="10,15,10,5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Image Name="platz2Bild" Grid.Row="0"></Image>
-                <Label Name="platz2Name"  FontWeight="ExtraBold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"></Label>
-                <Label Name="platz2Firma" FontWeight="ExtraBold" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri" Margin="0,-10,0,0"></Label>
-            </Grid>
-        </Viewbox>
-        <Viewbox Name="platz3" Grid.Column="1" Grid.Row="0" Margin="10,15,10,5" VerticalAlignment="Bottom">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition  Height="80"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Image Name="platz3Bild" Grid.Row="0"></Image>
-                <Label Name="platz3Name" FontWeight="ExtraBold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"></Label>
-                <Label Name="platz3Firma" FontWeight="ExtraBold" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri" Margin="0,-10,0,0"></Label>
-            </Grid>
-        </Viewbox>
-        <Viewbox Name="platz4" Grid.Column="2" Grid.Row="0" Margin="10,15,10,5">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Image Name="platz4Bild" Grid.Row="0"></Image>
-                <Label Name="platz4Name" FontWeight="ExtraBold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"></Label>
-                <Label Name="platz4Firma" FontWeight="ExtraBold" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri" Margin="0,-10,0,0"></Label>
-            </Grid>
-        </Viewbox>
-        <Viewbox Name="platz5" Grid.Column="4" Grid.Row="1" Margin="10,15,10,5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Image Name="platz5Bild" Grid.Row="0"></Image>
-                <Label Name="platz5Name" FontWeight="ExtraBold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"></Label>
-                <Label Name="platz5Firma"  FontWeight="ExtraBold" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri" Margin="0,-10,0,0"></Label>
-            </Grid>
-        </Viewbox>
-        <Viewbox Name="platz6" Grid.Column="4" Grid.Row="2" Margin="10,15,10,5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Image Name="platz6Bild" Grid.Row="0"></Image>
-                <Label Name="platz6Name" FontWeight="ExtraBold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"></Label>
-                <Label Name="platz6Firma" FontWeight="ExtraBold" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri" Margin="0,-10,0,0"></Label>
-            </Grid>
-        </Viewbox>
+        <Grid Name="platz1" Grid.Column="0" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="50"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Name="platz1Bild" Grid.Row="0"></Image>
+            <Label Name="platz1Name" Grid.Row="1" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri">
+                <TextBlock Text="{Binding platz1NameText}" Name="platz1NameTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+            <Label Name="platz1Firma" Grid.Row="2" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"  Margin="0,-10,0,0">
+                <TextBlock Text="{Binding platz1FirmaText}" Name="platz1FirmaTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+        </Grid>
+        <Grid Name="platz2" Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="50"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Name="platz2Bild" Grid.Row="0"></Image>
+            <Label Name="platz2Name" Grid.Row="1" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri">
+                <TextBlock Text="{Binding platz2NameText}" Name="platz2NameTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+            <Label Name="platz2Firma" Grid.Row="2" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"  Margin="0,-10,0,0">
+                <TextBlock Text="{Binding platz2FirmaText}" Name="platz2FirmaTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+        </Grid>
+        <Grid Name="platz3" Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="50"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Name="platz3Bild" Grid.Row="0"></Image>
+            <Label Name="platz3Name" Grid.Row="1" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri">
+                <TextBlock Text="{Binding platz1NameText}" Name="platz3NameTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+            <Label Name="platz3Firma" Grid.Row="2" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"  Margin="0,-10,0,0">
+                <TextBlock Text="{Binding platz1FirmaText}" Name="platz3FirmaTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+        </Grid>
+        <Grid Name="platz4" Grid.Column="2" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="50"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Name="platz4Bild" Grid.Row="0"></Image>
+            <Label Name="platz4Name" Grid.Row="1" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri">
+                <TextBlock Text="{Binding platz1NameText}" Name="platz4NameTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+            <Label Name="platz4Firma" Grid.Row="2" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"  Margin="0,-10,0,0">
+                <TextBlock Text="{Binding platz1FirmaText}" Name="platz4FirmaTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+        </Grid>
+        <Grid Name="platz5" Grid.Column="3" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="50"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Name="platz5Bild" Grid.Row="0"></Image>
+            <Label Name="platz5Name" Grid.Row="1" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri">
+                <TextBlock Text="{Binding platz1NameText}" Name="platz5NameTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+            <Label Name="platz5Firma" Grid.Row="2" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"  Margin="0,-10,0,0">
+                <TextBlock Text="{Binding platz1FirmaText}" Name="platz5FirmaTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+        </Grid>
+        <Grid Name="platz6" Grid.Column="3" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="50"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Name="platz6Bild" Grid.Row="0"></Image>
+            <Label Name="platz6Name" Grid.Row="1" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri">
+                <TextBlock Text="{Binding platz1NameText}" Name="platz6NameTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+            <Label Name="platz6Firma" Grid.Row="2" FontWeight="ExtraBold"  HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"  Margin="0,-10,0,0">
+                <TextBlock Text="{Binding platz1FirmaText}" Name="platz6FirmaTB" TextTrimming="WordEllipsis"></TextBlock>
+            </Label>
+        </Grid>
         <Viewbox Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" Stretch="Uniform" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid>
                 <Rectangle Fill="white" Height="130" Width="100" Stroke="Black" />
-                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri">Tisch 1</Label>
+                <Label Name="tischNummerLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Calibri"></Label>
             </Grid>
         </Viewbox>
-
     </Grid>
 </UserControl>

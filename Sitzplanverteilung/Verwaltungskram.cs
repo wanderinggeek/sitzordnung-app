@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,8 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using System.Security.Cryptography;
 
 namespace Sitzplanverteilung
 {
@@ -41,11 +40,12 @@ namespace Sitzplanverteilung
                     // 1 = Vorname
                     // 2 = Klasse
                     // 3 = Firma
-                    // 4 = Geschlecht
-                    // 5 = Berufsgruppe
+                    // 4 = Kuerzel
+                    // 5 = Geschlecht
+                    // 6 = Berufsgruppe
                     if (pruefeDatensatz(daten))
                     {
-                        schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[3], daten[4][0], daten[5]));
+                        schuelerListe.Add(new Schueler(daten[0], daten[1], daten[2], daten[3], daten[4], daten[5][0], daten[6]));
                     }
                     else
                     {
@@ -72,16 +72,36 @@ namespace Sitzplanverteilung
         private static bool pruefeDatensatz(String[] daten) 
         {
             // Fehlerhafte Anzahl an Werten im Datensatz
-            if (daten.Count() != 6)
+            if (daten.Count() != 7)
             {
                 return false;
             }
             // Geschlecht nicht M oder W
-            if (!(daten[4].ToLower().Equals("m") || daten[4].ToLower().Equals("w")))
+            if (!(daten[5].ToLower().Equals("m") || daten[5].ToLower().Equals("w")))
             {
                 return false;
             }
             return true;
+        }
+
+        //Mischen der SchülerListe
+        public static List<Schueler> Shuffle(List<Schueler> list)
+        {
+
+            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
+            int n = list.Count;
+            while (n > 1)
+            {
+                byte[] box = new byte[1];
+                do provider.GetBytes(box);
+                while (!(box[0] < n * (Byte.MaxValue / n)));
+                int k = (box[0] % n);
+                n--;
+                Schueler value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+            return list;
         }
     }
 }
