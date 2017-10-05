@@ -28,21 +28,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="75*"/>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160*"/>
-            <ColumnDefinition Width="632*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" Grid.ColumnSpan="3">
+        <DockPanel Grid.Column="0">
             <Menu DockPanel.Dock="Top"  Height="20" VerticalAlignment="Top" Width="Auto" >
                 <MenuItem Header="Datei">
                     <MenuItem Header="Sitzpläne als PDF exportieren"></MenuItem>
@@ -51,59 +39,76 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <ContentControl x:Name="contentControl" Grid.Column="1" Grid.RowSpan="8" Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Rectangle Grid.Row="1" Fill="Black"></Rectangle>
-        <Viewbox Margin="0,50,0,11" >
-            <TextBlock FontFamily="Calibri" Name="Klassennummer"  Foreground="White" Background="Black" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Bit-15-3</TextBlock>
-        </Viewbox>
-        <RadioButton x:Name="Block1Button" IsChecked="True" Checked="Block1Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="2" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
-            <RadioButton.Content >
-                <Viewbox Height="39" >
-                    <TextBlock>Block 1</TextBlock>
-                </Viewbox>
-            </RadioButton.Content>
-        </RadioButton>
-        <RadioButton x:Name="Block2Button" Checked="Block2Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="3" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
-            <RadioButton.Content >
-                <Viewbox Height="39" >
-                    <TextBlock>Block 2</TextBlock>
-                </Viewbox>
-            </RadioButton.Content>
-        </RadioButton>
-        <RadioButton x:Name="Block3Button" Checked="Block3Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="4" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
-            <RadioButton.Content >
-                <Viewbox Height="39" >
-                    <TextBlock>Block 3</TextBlock>
-                </Viewbox>
-            </RadioButton.Content>
-        </RadioButton>
-        <RadioButton x:Name="Block4Button" Checked="Block4Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="5" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
-            <RadioButton.Content >
-                <Viewbox Height="39" >
-                    <TextBlock>Block 4</TextBlock>
-                </Viewbox>
-            </RadioButton.Content>
-        </RadioButton>
-        <RadioButton x:Name="Block5Button" Checked="Block5Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="6" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
-            <RadioButton.Content >
-                <Viewbox Height="39" >
-                    <TextBlock>Block 5</TextBlock>
-                </Viewbox>
-            </RadioButton.Content>
-        </RadioButton>
-        <RadioButton x:Name="Block6Button" Checked="Block6Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="7" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
-            <RadioButton.Content >
-                <Viewbox Height="39" >
-                    <TextBlock>Block 6</TextBlock>
-                </Viewbox>
-            </RadioButton.Content>
-        </RadioButton>
-        <Button Padding="10" Grid.Column="0" Grid.Row="8" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
-            <Button.Content >
-                <Viewbox Height="39" >
-                    <TextBlock>Ändern Tischgruppen</TextBlock>
-                </Viewbox>
-            </Button.Content>
-        </Button>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="75*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160*"/>
+                <ColumnDefinition Width="632*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ContentControl x:Name="contentControl" Grid.Column="1" Grid.RowSpan="8" Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Rectangle Grid.Row="0" Fill="Black"></Rectangle>
+            <Viewbox Margin="0,10,0,11" >
+                <TextBlock FontFamily="Calibri" Name="Klassennummer"  Foreground="White" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center">Bit-15-3</TextBlock>
+            </Viewbox>
+            <RadioButton x:Name="Block1Button" IsChecked="True" Checked="Block1Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="1" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+                <RadioButton.Content >
+                    <Viewbox Height="39" >
+                        <TextBlock>Block 1</TextBlock>
+                    </Viewbox>
+                </RadioButton.Content>
+            </RadioButton>
+            <RadioButton x:Name="Block2Button" Checked="Block2Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="2" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+                <RadioButton.Content >
+                    <Viewbox Height="39" >
+                        <TextBlock>Block 2</TextBlock>
+                    </Viewbox>
+                </RadioButton.Content>
+            </RadioButton>
+            <RadioButton x:Name="Block3Button" Checked="Block3Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="3" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+                <RadioButton.Content >
+                    <Viewbox Height="39" >
+                        <TextBlock>Block 3</TextBlock>
+                    </Viewbox>
+                </RadioButton.Content>
+            </RadioButton>
+            <RadioButton x:Name="Block4Button" Checked="Block4Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="4" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+                <RadioButton.Content >
+                    <Viewbox Height="39" >
+                        <TextBlock>Block 4</TextBlock>
+                    </Viewbox>
+                </RadioButton.Content>
+            </RadioButton>
+            <RadioButton x:Name="Block5Button" Checked="Block5Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="5" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+                <RadioButton.Content >
+                    <Viewbox Height="39" >
+                        <TextBlock>Block 5</TextBlock>
+                    </Viewbox>
+                </RadioButton.Content>
+            </RadioButton>
+            <RadioButton x:Name="Block6Button" Checked="Block6Button_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="6" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+                <RadioButton.Content >
+                    <Viewbox Height="39" >
+                        <TextBlock>Block 6</TextBlock>
+                    </Viewbox>
+                </RadioButton.Content>
+            </RadioButton>
+            <Button Padding="10" Grid.Column="0" Grid.Row="7" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+                <Button.Content >
+                    <Viewbox Height="39" >
+                        <TextBlock>Ändern Tischgruppen</TextBlock>
+                    </Viewbox>
+                </Button.Content>
+            </Button>
+        </Grid>
     </Grid>
 </Window>
