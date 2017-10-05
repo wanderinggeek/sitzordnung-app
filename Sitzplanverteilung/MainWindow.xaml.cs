@@ -35,7 +35,11 @@ namespace Sitzplanverteilung
             SchuelerDatenEditierenGUI win2 = new SchuelerDatenEditierenGUI();
             win2.Show();
             this.Close();
-
+            string appPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
+            string tmpPath = appPath.Replace("\\bin\\Debug", "\\tmp\\");
+            string fileName = "Sitzplan.png";
+            Console.WriteLine(tmpPath);
+            ImageCapturer.SaveToPNG(win2.contentControl, tmpPath + fileName);
         }
     }
 }
