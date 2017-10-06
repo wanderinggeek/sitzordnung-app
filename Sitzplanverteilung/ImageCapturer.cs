@@ -26,7 +26,7 @@ namespace Sitzplanverteilung
 
         private static void SaveUsingEncoder(FrameworkElement visual, string fileName, BitmapEncoder encoder)
         {
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)visual.ActualWidth, (int)visual.ActualHeight + 100, 96, 96, PixelFormats.Pbgra32);
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)visual.ActualWidth, (int)visual.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             Rect bounds = VisualTreeHelper.GetDescendantBounds(visual);
             DrawingVisual dv = new DrawingVisual();
             using (DrawingContext ctx = dv.RenderOpen())

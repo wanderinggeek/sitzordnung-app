@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xaml;
 using Sitzplanverteilung.ViewModels;
+using Microsoft.Win32;
+
 namespace Sitzplanverteilung
 {
     /// <summary>
@@ -101,6 +103,27 @@ namespace Sitzplanverteilung
             var tischGruppen = block.getTischgruppen();
             App.Current.Properties["Block"] = block;
             assignSitzplanView(tischGruppen.Count);
+        }
+
+        private void MakePDF(object sender, RoutedEventArgs e)
+        {
+            string fileName = System.IO.Path.GetDirectoryName(
+                Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\" + "Sitzplan.png"
+            );
+
+            ImageCapturer.SaveToPNG(this.contentControl, fileName);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF Datei (*.pdf)|*.pdf";
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.FileName = "Sitzplan";
+            if (saveFileDialog.ShowDialog() == true)
+                PDFCreation.MakePDF(saveFileDialog.FileName);
+        }
+
+        private void End(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
     }

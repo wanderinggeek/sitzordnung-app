@@ -33,9 +33,9 @@
         <DockPanel Grid.Column="0">
             <Menu DockPanel.Dock="Top"  Height="20" VerticalAlignment="Top" Width="Auto" >
                 <MenuItem Header="Datei">
-                    <MenuItem Header="Sitzpläne als PDF exportieren"></MenuItem>
+                    <MenuItem Click="MakePDF" Header="Sitzpläne als PDF exportieren"></MenuItem>
                     <MenuItem Header="Speichern"></MenuItem>
-                    <MenuItem Header="Programm beenden"></MenuItem>
+                    <MenuItem Click="End" Header="Programm beenden"></MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>
