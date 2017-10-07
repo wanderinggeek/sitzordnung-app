@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Sitzplanverteilung.MainWindow"
-        Title="Sitzordnung-App" WindowState="Maximized" Width="800" Height="600" MinHeight="600" MinWidth="800">
+        Title="Sitzordnung-App" WindowState="Maximized" Width="800" Height="620" MinHeight="600" MinWidth="800">
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
     </Window.Triggers>

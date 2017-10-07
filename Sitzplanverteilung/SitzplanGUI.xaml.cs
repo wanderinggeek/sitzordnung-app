@@ -27,14 +27,8 @@ namespace Sitzplanverteilung
 
         public SitzplanGUI()
         {
-            sitzplaeneDatenOrdnen();
-            InitializeComponent();
-        }
-
-        private void sitzplaeneDatenOrdnen()
-        {
-            sk.sitzplaeneGenerieren();
             sitzplaene = sk.getSitzplaene();
+            InitializeComponent();
         }
 
         private void assignSitzplanView(int anzahlDerTische)

@@ -23,7 +23,7 @@ namespace Sitzplanverteilung
         ObservableCollection<Schueler> schuelerCollection;
         List<Schueler> schuelerList;
         SitzplanKartei sitzplanKartei = SitzplanKartei.Instance;
-        Schueler item = null;
+        Schueler selectedSchueler = null;
 
         public SchuelerDatenEditierenGUI(List<Schueler> _schuelerList = null)
         {
@@ -61,8 +61,8 @@ namespace Sitzplanverteilung
             if (schuelerList != null)
             {
                 loadAllScheulerInKartei();
-                SitzplanGUI sitzplanGUI = new SitzplanGUI();
-                sitzplanGUI.Show();
+                VerteilungskriteriumGUI verteilungskriteriumGUI = new VerteilungskriteriumGUI();
+                verteilungskriteriumGUI.Show();
                 this.Close();
             }
             else
@@ -73,10 +73,10 @@ namespace Sitzplanverteilung
 
         private void SchuelerLoeschenButton_Click(object sender, RoutedEventArgs e)
         {
-            if (item != null)
+            if (selectedSchueler != null)
             {
-                schuelerCollection.Remove(item);
-                item = null;
+                schuelerCollection.Remove(selectedSchueler);
+                selectedSchueler = null;
                 schuelerGrid.Items.Refresh();
             }
             else
@@ -95,7 +95,7 @@ namespace Sitzplanverteilung
             if (index != -1 && index != (itemCount - 1))
             {
                 DataGridRow row = dg.ItemContainerGenerator.ContainerFromIndex(index) as DataGridRow;
-                item = (Schueler)dg.ItemContainerGenerator.ItemFromContainer(row);
+                selectedSchueler = (Schueler)dg.ItemContainerGenerator.ItemFromContainer(row);
             }
 
         }
