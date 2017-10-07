@@ -49,7 +49,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Viewbox Margin="20"  MaxHeight="30">
-                        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}"></CheckBox>
+                        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}" IsChecked="True"></CheckBox>
                     </Viewbox>
                     <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="20">
                         <TextBlock VerticalAlignment="Center" FontFamily="Calibri" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">Firma</TextBlock>
@@ -61,7 +61,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Viewbox Margin="20"  MaxHeight="30">
-                        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}"></CheckBox>
+                        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}" IsChecked="True"></CheckBox>
                     </Viewbox>
                     <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="20">
                         <TextBlock VerticalAlignment="Center" FontFamily="Calibri" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">Beruf</TextBlock>
