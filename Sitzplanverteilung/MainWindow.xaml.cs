@@ -31,9 +31,15 @@ namespace Sitzplanverteilung
 
         private void SchuelerdatenImportierenButton_Click(object sender, RoutedEventArgs e)
         {
-            SchuelerDatenEditierenGUI win2 = new SchuelerDatenEditierenGUI(Verwaltungskram.importiereSchuelerListe());
-            win2.Show();
-            this.Close();
+            try
+            {
+                SchuelerDatenEditierenGUI win2 = new SchuelerDatenEditierenGUI(Verwaltungskram.importiereSchuelerListe());
+                win2.Show();
+                this.Close();
+            }
+            catch (ArgumentNullException) 
+            {
+            }
         }
 
         private void SchuelerErstellenButton_Click(object sender, RoutedEventArgs e)
