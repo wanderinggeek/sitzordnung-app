@@ -52,10 +52,10 @@
                         <fa:IconImage Icon="Check" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
-                        <TextBlock>Sitzpläene</TextBlock>
+                        <TextBlock>Schülerdaten</TextBlock>
                     </Viewbox>
                     <Viewbox Grid.Row="3" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
-                        <TextBlock>erstellen</TextBlock>
+                        <TextBlock>annehmen</TextBlock>
                     </Viewbox>
                 </Grid>
             </Button>

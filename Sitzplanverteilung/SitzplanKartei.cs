@@ -262,6 +262,11 @@ namespace Sitzplanverteilung
             this.sitzplaene = sitzplaene;
         }
 
+        public List<Schueler> getSchuelerListe()
+        {
+            return this.schuelerListe;
+        }
+
         public Sitzplan getSitzplan(int index)
         {
             return this.sitzplaene[index];
