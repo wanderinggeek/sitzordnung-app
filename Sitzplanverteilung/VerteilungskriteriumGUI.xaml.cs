@@ -32,7 +32,7 @@ namespace Sitzplanverteilung
         {
             anzahlDerTische = (int)AnzahlDerTischeTool.Value;
             schuelerProTisch = (int)SchuelerProTischTool.Value;
-            sitzplanKartei.sitzplaeneGenerieren(anzahlDerTische, schuelerProTisch);
+            sitzplanKartei.sitzplaeneGenerieren(anzahlDerTische, schuelerProTisch, false, true);
             SitzplanGUI sitzplanGUI = new SitzplanGUI();
             sitzplanGUI.Show();
             this.Close();
