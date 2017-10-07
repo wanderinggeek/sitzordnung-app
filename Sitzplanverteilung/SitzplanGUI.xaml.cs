@@ -125,18 +125,34 @@ namespace Sitzplanverteilung
         
         private void MakePDF(object sender, RoutedEventArgs e)
         {
-            string fileName = System.IO.Path.GetDirectoryName(
-                Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\" + "Sitzplan.png"
-            );
-
-            ImageCapturer.SaveToPNG(this.contentControl, fileName);
-
+            MakeBlockPictures();
+            
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Datei (*.pdf)|*.pdf";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             saveFileDialog.FileName = "Sitzplan";
             if (saveFileDialog.ShowDialog() == true)
                 PDFCreation.MakePDF(saveFileDialog.FileName);
+        }
+
+        private void MakeBlockPictures()
+        {
+            string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
+            string picName = "Sitzplan-Block{}.png";
+
+            for (int i = 5; i >= 0; i--)
+            {
+                var block = sitzplaene[i];
+                var tischGruppen = block.getTischgruppen();
+                App.Current.Properties["Block"] = block;
+                assignSitzplanView(tischGruppen.Count);
+                this.UpdateLayout();
+
+                string tmpPicName = picName.Replace("{}", Convert.ToString(i+1));
+                Console.WriteLine(tmpPicName);
+
+                ImageCapturer.SaveToPNG(this.contentControl, tmpPath + tmpPicName);
+            }
         }
 
         private void End(object sender, RoutedEventArgs e)
