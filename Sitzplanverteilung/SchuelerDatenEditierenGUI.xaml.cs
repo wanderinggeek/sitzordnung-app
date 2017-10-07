@@ -102,7 +102,12 @@ namespace Sitzplanverteilung
 
         private void BilderImportierenButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) 
+            {
+                sitzplanKartei.PictureFolder = dialog.SelectedPath;
+            }
         }       
 
         private void addSchuelerButton_Click(object sender, RoutedEventArgs e)

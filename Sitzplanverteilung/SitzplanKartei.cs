@@ -11,6 +11,7 @@ namespace Sitzplanverteilung
         private static SitzplanKartei instance;
         List<Sitzplan> sitzplaene;
         List<Schueler> schuelerListe;
+        string pictureFolder;
 
         private SitzplanKartei()
         {
@@ -280,6 +281,18 @@ namespace Sitzplanverteilung
         public void setSitzplaene(Sitzplan sitzplan, int index)
         {
             this.sitzplaene[index] = sitzplan;
+        }
+
+        public string PictureFolder
+        {
+            get
+            {
+                return this.pictureFolder;
+            }
+            set
+            {
+                this.pictureFolder = value;
+            }
         }
            
     }
