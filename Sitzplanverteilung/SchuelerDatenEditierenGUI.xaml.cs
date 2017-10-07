@@ -99,5 +99,10 @@ namespace Sitzplanverteilung
             }
 
         }
+
+        private void BilderImportierenButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
