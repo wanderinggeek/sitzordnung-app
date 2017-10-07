@@ -86,6 +86,10 @@ namespace Sitzplanverteilung
         {
             if (schuelerListe.Count > 0)
             {
+                if (anzahlTische * schuelerMaxProTisch < schuelerListe.Count) 
+                {
+                    throw new ArgumentOutOfRangeException("Schüleranzahl", "Die aktuelle Schueleranzahl ist größer als die Anzahl der Sitzplätze.");
+                }
                 //Erstellen der 6 einzelnen Sitzpläne
                 for (int i = 0; i < 6; i++)
                 {

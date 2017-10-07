@@ -58,7 +58,7 @@ namespace Sitzplanverteilung
 
         private void SchuelerdatenAnnehmenButton_Click(object sender, RoutedEventArgs e)
         {
-            if (schuelerList != null)
+            if (schuelerCollection != null && schuelerCollection.Count > 0)
             {
                 loadAllScheulerInKartei();
                 VerteilungskriteriumGUI verteilungskriteriumGUI = new VerteilungskriteriumGUI();
@@ -108,6 +108,14 @@ namespace Sitzplanverteilung
             {
                 sitzplanKartei.PictureFolder = dialog.SelectedPath;
             }
+        }       
+
+        private void addSchuelerButton_Click(object sender, RoutedEventArgs e)
+        {
+            Schueler newSchueler = new Schueler();
+            schuelerCollection.Add(newSchueler);
         }
+
+     
     }
 }
