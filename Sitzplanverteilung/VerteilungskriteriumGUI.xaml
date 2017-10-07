@@ -1,0 +1,136 @@
+﻿<Window x:Class="Sitzplanverteilung.VerteilungskriteriumGUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        Title="VerteilungskriteriumGUI" WindowState="Maximized" Width="800" Height="620" MinHeight="600" MinWidth="800">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+    </Window.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Column="0">
+            <Menu DockPanel.Dock="Top"  Height="20" VerticalAlignment="Top" Width="Auto" >
+                <MenuItem Header="Datei">
+                    <MenuItem Header="Speichern"></MenuItem>
+                    <MenuItem Header="Programm beenden"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160*"/>
+                <ColumnDefinition Width="632*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Grid.Row="0" Margin="0,0,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="black">
+                    <Viewbox>
+                        <TextBlock Foreground="White" Text="Verteilungskriterium" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontFamily="Calibri" FontWeight="Bold"></TextBlock>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="1" Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Margin="20"  MaxHeight="30">
+                        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}" IsChecked="True"></CheckBox>
+                    </Viewbox>
+                    <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="20">
+                        <TextBlock VerticalAlignment="Center" FontFamily="Calibri" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">Firma</TextBlock>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="2" Background="#e6e6e6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Margin="20"  MaxHeight="30">
+                        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}" IsChecked="True"></CheckBox>
+                    </Viewbox>
+                    <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="20">
+                        <TextBlock VerticalAlignment="Center" FontFamily="Calibri" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">Beruf</TextBlock>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="3" Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Margin="5"  MaxHeight="40">
+                        <wpfTool:IntegerUpDown Value="5" Minimum="1" Maximum="6" AllowTextInput="False" Name="AnzahlDerTischeTool"/>
+                    </Viewbox>
+                    <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="20">
+                        <TextBlock VerticalAlignment="Center" FontFamily="Calibri" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">Anzahl der Tische</TextBlock>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="4" Background="#e6e6e6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".1*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Margin="5"  MaxHeight="40">
+                        <wpfTool:IntegerUpDown Value="5" Minimum="1" Maximum="6" AllowTextInput="False" Name="SchuelerProTischTool"/>
+                    </Viewbox>
+                    <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="20">
+                        <TextBlock VerticalAlignment="Center" FontFamily="Calibri" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">Max Schüler pro Tisch</TextBlock>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+            <Button Name="SitzplaeneGenerierenButton"  Grid.Column="0" Click="SitzplaeneGenerierenButton_Click" 
+         Background="#FF0092F8" FontFamily="Calibri" Foreground="White" >
+                <Grid Height="276" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="27*"/>
+                        <RowDefinition Height="143*"/>
+                        <RowDefinition Height="53*"/>
+                        <RowDefinition Height="53*"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="1">
+                        <fa:IconImage Icon="Check" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
+                        <TextBlock>Sitzpläne</TextBlock>
+                    </Viewbox>
+                    <Viewbox Grid.Row="3" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
+                        <TextBlock>generieren</TextBlock>
+                    </Viewbox>
+                </Grid>
+            </Button>
+            <Button Name="SchuelerdatenEinsehenButton"  Grid.Row="1" Click="SchuelerdatenEinsehenButton_Click" Background="#f0f0f0" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Grid Height="276" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="27*"/>
+                        <RowDefinition Height="143*"/>
+                        <RowDefinition Height="53*"/>
+                        <RowDefinition Height="53*"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="1">
+                        <fa:IconImage Icon="Eye" Foreground="#4f59d3"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
+                        <TextBlock Foreground="#727272">Schülerdaten</TextBlock>
+                    </Viewbox>
+                    <Viewbox Grid.Row="3" Name="fourthTextblock">
+                        <TextBlock Foreground="#727272">einsehen</TextBlock>
+                    </Viewbox>
+                </Grid>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

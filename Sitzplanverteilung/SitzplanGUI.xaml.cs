@@ -24,35 +24,53 @@ namespace Sitzplanverteilung
         SitzplanKartei sk = SitzplanKartei.Instance;
         List<Sitzplan> sitzplaene;
 
+
         //TODO: FIX SitzplanMit5TischenView sizing issue with top two tables currently using shared size group that is not resizing
 
         public SitzplanGUI()
         {
-            sitzplaeneDatenOrdnen();
-            InitializeComponent();
-        }
-
-        private void sitzplaeneDatenOrdnen()
-        {
-            sk.sitzplaeneGenerieren();
             sitzplaene = sk.getSitzplaene();
+            InitializeComponent();
         }
 
         private void assignSitzplanView(int anzahlDerTische)
         {
             switch (anzahlDerTische)
             {
-                case 1: DataContext = new SitzplanMit1TischModel();
+                case 1:
+
+                    this.DataContext = null;
+                    this.UpdateLayout();
+                    this.DataContext = new SitzplanMit1TischModel();
                     break;
-                case 2: DataContext = new SitzplanMit2TischenModel();
+                case 2:
+
+                    this.DataContext = null;
+                    this.UpdateLayout();
+                    this.DataContext = new SitzplanMit2TischenModel();
                     break;
-                case 3: DataContext = new SitzplanMit3TischenModel();
+                case 3:
+
+                    this.DataContext = null;
+                    this.UpdateLayout();
+                    this.DataContext = new SitzplanMit3TischenModel();
                     break;
-                case 4: DataContext = new SitzplanMit4TischenModel();
+                case 4:
+
+                    this.DataContext = null;
+                    this.UpdateLayout();
+                    this.DataContext = new SitzplanMit4TischenModel();
                     break;
-                case 5: DataContext = new SitzplanMit5TischenModel();
+                case 5:
+                    this.DataContext = null;
+                    this.UpdateLayout();
+                    this.DataContext = new SitzplanMit5TischenModel();
                     break;
-                case 6: DataContext = new SitzplanMit6TischenModel();
+                case 6:
+
+                    this.DataContext = null;
+                    this.UpdateLayout();
+                    this.DataContext = new SitzplanMit6TischenModel();
                     break;
             }
         }
@@ -104,7 +122,7 @@ namespace Sitzplanverteilung
             App.Current.Properties["Block"] = block;
             assignSitzplanView(tischGruppen.Count);
         }
-
+        
         private void MakePDF(object sender, RoutedEventArgs e)
         {
             string fileName = System.IO.Path.GetDirectoryName(
@@ -124,7 +142,7 @@ namespace Sitzplanverteilung
         private void End(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
+        }        
 
     }
 }

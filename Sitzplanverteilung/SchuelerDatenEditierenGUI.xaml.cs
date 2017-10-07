@@ -20,11 +20,10 @@ namespace Sitzplanverteilung
     /// </summary>
     public partial class SchuelerDatenEditierenGUI : Window
     {
-        
         ObservableCollection<Schueler> schuelerCollection;
         List<Schueler> schuelerList;
         SitzplanKartei sitzplanKartei = SitzplanKartei.Instance;
-        Schueler item = null;
+        Schueler selectedSchueler = null;
 
         public SchuelerDatenEditierenGUI(List<Schueler> _schuelerList = null)
         {
@@ -39,19 +38,19 @@ namespace Sitzplanverteilung
                 this.schuelerCollection = new ObservableCollection<Schueler>();
             }
             setUpDataGrid();
-            
+
         }
 
-      
+
         private void setUpDataGrid()
-        {           
+        {
             schuelerGrid.ItemsSource = this.schuelerCollection;
             schuelerGrid.Items.Refresh();
         }
 
         private void loadAllScheulerInKartei()
         {
-            foreach(Schueler schueler in schuelerCollection)
+            foreach (Schueler schueler in schuelerCollection)
             {
                 sitzplanKartei.neuerSchuelerInListe(schueler);
             }
@@ -62,8 +61,8 @@ namespace Sitzplanverteilung
             if (schuelerList != null)
             {
                 loadAllScheulerInKartei();
-                SitzplanGUI sitzplanGUI = new SitzplanGUI();
-                sitzplanGUI.Show();
+                VerteilungskriteriumGUI verteilungskriteriumGUI = new VerteilungskriteriumGUI();
+                verteilungskriteriumGUI.Show();
                 this.Close();
             }
             else
@@ -74,17 +73,17 @@ namespace Sitzplanverteilung
 
         private void SchuelerLoeschenButton_Click(object sender, RoutedEventArgs e)
         {
-            if(item != null)
+            if (selectedSchueler != null)
             {
-                schuelerCollection.Remove(item);
-                item = null;
+                schuelerCollection.Remove(selectedSchueler);
+                selectedSchueler = null;
                 schuelerGrid.Items.Refresh();
             }
             else
             {
                 MessageBox.Show("Wählen Sie einen Schüler aus");
             }
-            
+
         }
 
         private void schuelerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,17 +91,18 @@ namespace Sitzplanverteilung
             var dg = sender as DataGrid;
             if (dg == null) return;
             var index = dg.SelectedIndex;
-            if (index != -1)
+            var itemCount = dg.Items.Count;
+            if (index != -1 && index != (itemCount - 1))
             {
                 DataGridRow row = dg.ItemContainerGenerator.ContainerFromIndex(index) as DataGridRow;
-                item = (Schueler)dg.ItemContainerGenerator.ItemFromContainer(row);
+                selectedSchueler = (Schueler)dg.ItemContainerGenerator.ItemFromContainer(row);
             }
-   
+
         }
 
-        private void schuelerGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        private void BilderImportierenButton_Click(object sender, RoutedEventArgs e)
         {
-        
+
         }
     }
 }

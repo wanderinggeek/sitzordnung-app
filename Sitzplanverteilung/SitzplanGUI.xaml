@@ -105,7 +105,7 @@
             <Button Padding="10" Grid.Column="0" Grid.Row="7" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
                 <Button.Content >
                     <Viewbox Height="39" >
-                        <TextBlock>Ändern Tischgruppen</TextBlock>
+                        <TextBlock>Tischgruppen ändern</TextBlock>
                     </Viewbox>
                 </Button.Content>
             </Button>
