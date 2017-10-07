@@ -20,7 +20,6 @@ namespace Sitzplanverteilung
     /// </summary>
     public partial class SchuelerDatenEditierenGUI : Window
     {
-        
         ObservableCollection<Schueler> schuelerCollection;
         List<Schueler> schuelerList;
         SitzplanKartei sitzplanKartei = SitzplanKartei.Instance;
@@ -39,19 +38,19 @@ namespace Sitzplanverteilung
                 this.schuelerCollection = new ObservableCollection<Schueler>();
             }
             setUpDataGrid();
-            
+
         }
 
-      
+
         private void setUpDataGrid()
-        {           
+        {
             schuelerGrid.ItemsSource = this.schuelerCollection;
             schuelerGrid.Items.Refresh();
         }
 
         private void loadAllScheulerInKartei()
         {
-            foreach(Schueler schueler in schuelerCollection)
+            foreach (Schueler schueler in schuelerCollection)
             {
                 sitzplanKartei.neuerSchuelerInListe(schueler);
             }
@@ -74,7 +73,7 @@ namespace Sitzplanverteilung
 
         private void SchuelerLoeschenButton_Click(object sender, RoutedEventArgs e)
         {
-            if(item != null)
+            if (item != null)
             {
                 schuelerCollection.Remove(item);
                 item = null;
@@ -84,7 +83,7 @@ namespace Sitzplanverteilung
             {
                 MessageBox.Show("Wählen Sie einen Schüler aus");
             }
-            
+
         }
 
         private void schuelerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,17 +91,13 @@ namespace Sitzplanverteilung
             var dg = sender as DataGrid;
             if (dg == null) return;
             var index = dg.SelectedIndex;
-            if (index != -1)
+            var itemCount = dg.Items.Count;
+            if (index != -1 && index != (itemCount - 1))
             {
                 DataGridRow row = dg.ItemContainerGenerator.ContainerFromIndex(index) as DataGridRow;
                 item = (Schueler)dg.ItemContainerGenerator.ItemFromContainer(row);
             }
-   
-        }
 
-        private void schuelerGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
-        {
-        
         }
     }
 }
