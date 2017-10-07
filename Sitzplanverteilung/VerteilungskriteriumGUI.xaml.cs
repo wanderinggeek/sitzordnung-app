@@ -22,17 +22,21 @@ namespace Sitzplanverteilung
         SitzplanKartei sitzplanKartei = SitzplanKartei.Instance;
         int anzahlDerTische;
         int schuelerProTisch;
+        bool filterNachFirma;
+        bool filterNachBeruf;
 
         public VerteilungskriteriumGUI()
         {
-            InitializeComponent();      
+            InitializeComponent();
+            filterNachFirma = firmaCheckbox.IsChecked.Value;
+            filterNachBeruf = berufCheckbox.IsChecked.Value;
         }
 
         private void SitzplaeneGenerierenButton_Click(object sender, RoutedEventArgs e)
         {
             anzahlDerTische = (int)AnzahlDerTischeTool.Value;
             schuelerProTisch = (int)SchuelerProTischTool.Value;
-            sitzplanKartei.sitzplaeneGenerieren(anzahlDerTische, schuelerProTisch, false, true);
+            sitzplanKartei.sitzplaeneGenerieren(anzahlDerTische, schuelerProTisch, filterNachFirma, filterNachBeruf);
             SitzplanGUI sitzplanGUI = new SitzplanGUI();
             sitzplanGUI.Show();
             this.Close();
@@ -43,6 +47,16 @@ namespace Sitzplanverteilung
             SchuelerDatenEditierenGUI schuelerDatenGUI = new SchuelerDatenEditierenGUI(sitzplanKartei.getSchuelerListe());
             schuelerDatenGUI.Show();
             this.Close();
+        }
+
+        private void firmaCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+            filterNachFirma = !filterNachFirma;
+        }
+
+        private void berufCheckbox_Click(object sender, RoutedEventArgs e)
+        {
+            filterNachBeruf = !filterNachBeruf;
         }
     }
 }
