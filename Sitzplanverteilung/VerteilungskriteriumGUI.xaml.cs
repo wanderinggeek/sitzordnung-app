@@ -36,10 +36,20 @@ namespace Sitzplanverteilung
         {
             anzahlDerTische = (int)AnzahlDerTischeTool.Value;
             schuelerProTisch = (int)SchuelerProTischTool.Value;
-            sitzplanKartei.sitzplaeneGenerieren(anzahlDerTische, schuelerProTisch, filterNachFirma, filterNachBeruf);
-            SitzplanGUI sitzplanGUI = new SitzplanGUI();
-            sitzplanGUI.Show();
-            this.Close();
+            try
+            {
+                sitzplanKartei.sitzplaeneGenerieren(anzahlDerTische, schuelerProTisch, filterNachFirma, filterNachBeruf);
+                SitzplanGUI sitzplanGUI = new SitzplanGUI();
+                sitzplanGUI.Show();
+                this.Close();
+            }
+            catch (ArgumentOutOfRangeException exception) 
+            {
+                if (exception.ParamName.Equals("Schüleranzahl")) 
+                {
+                    MessageBox.Show("Nicht genug Sitzplätze.");
+                }
+            }
         }
 
         private void SchuelerdatenEinsehenButton_Click(object sender, RoutedEventArgs e)

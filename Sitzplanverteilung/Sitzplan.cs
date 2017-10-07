@@ -47,7 +47,7 @@ namespace Sitzplanverteilung
             }
         }
 
-        public void verteileSchueler(List<Schueler> schuelerListe)
+        public void verteileSchueler(List<Schueler> schuelerListe) 
         {
             int moeglichePlaetze = tischgruppen.Count * maxProTisch;
             decimal schuelerProTischTatsaechlich = schuelerListe.Count() / tischgruppen.Count;
@@ -92,6 +92,7 @@ namespace Sitzplanverteilung
             }
             else
             {
+                //throw new ArgumentOutOfRangeException("Schüleranzahl", "Die aktuelle Schueleranzahl ist größer als die Anzahl der Sitzplätze.");
                 //Fehler nicht genug Platz an den Tischen
                 //Beispiel User gibt 5 TGs an und 4 Schüler pro Tisch, also Platz für 20 Schüler. Aber 25 Schüler wurden angegeben. 
             }
