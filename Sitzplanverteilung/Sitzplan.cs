@@ -98,7 +98,7 @@ namespace Sitzplanverteilung
             //verteilerDummy(schuelerListe);
         }
 
-        public int berechneStrafpunkte(List<Schueler> schuelerListe)
+        public int berechneStrafpunkte(List<Schueler> schuelerListe, bool beachteFirma, bool beachteBeruf)
         {
             /*
                         Aufbau Tisch:
@@ -128,6 +128,16 @@ namespace Sitzplanverteilung
             int berufsPlatzregel = 5;
             int geschlechtPlatzregel = 1;
             SortedList<String, int> firmenGesamt = ermittleFirmen(schuelerListe);
+            //Anwender ist es egal, ob Schüler mit gleicher Firmenzugehörigkeit zusammensitzen
+            if (!beachteFirma) 
+            {
+                firmenPlatzregel = 0;
+            }
+            //Anwender ist es egal, ob Schüler mit gleichem Beruf zusammensitzen
+            if (!beachteBeruf) 
+            {
+                berufsPlatzregel = 0;
+            }
 
             foreach (Tischgruppe tisch in this.tischgruppen)
             {
