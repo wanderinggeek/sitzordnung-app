@@ -65,7 +65,8 @@ namespace Sitzplanverteilung
             }
             else
             {
-                return schuelerListe;
+
+                throw new ArgumentNullException();
             }
             string bericht = Convert.ToString(zeilenNummer - fehlerhafteZeilen.Count) + " von " + Convert.ToString(zeilenNummer) + " Datensätze eingelesen.";
             if (error)
@@ -74,6 +75,10 @@ namespace Sitzplanverteilung
                 bericht += "\n\nBitte den Aufbau der Datensätze gemäß des Anwenderhandbuchs kontrollieren.";
             }
             MessageBox.Show(bericht, "Import Ergebnis", MessageBoxButton.OK, MessageBoxImage.Information);
+            if(schuelerListe.Count == 0)
+            {
+                throw new ArgumentNullException();
+            }
             return schuelerListe;
         }
 
