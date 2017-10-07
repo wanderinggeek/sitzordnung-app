@@ -27,7 +27,6 @@ namespace Sitzplanverteilung
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void SchuelerdatenImportierenButton_Click(object sender, RoutedEventArgs e)
