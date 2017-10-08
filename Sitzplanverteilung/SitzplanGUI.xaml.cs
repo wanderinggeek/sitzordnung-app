@@ -26,6 +26,7 @@ namespace Sitzplanverteilung
         List<Sitzplan> sitzplaene;
         Sitzplan aktiverBlock;
         int blockNummer;
+        public string klasse {get; set;}
 
 
         //TODO: FIX SitzplanMit5TischenView sizing issue with top two tables currently using shared size group that is not resizing
@@ -34,6 +35,16 @@ namespace Sitzplanverteilung
         {
             sitzplaene = sk.getSitzplaene();
             InitializeComponent();
+            setKlassennummer();
+
+        }
+
+        private void setKlassennummer()
+        {
+            List<Schueler> schuelerListe = sk.getSchuelerListe();
+            Schueler schueler = schuelerListe[1];
+            klasse = schueler.klasse;
+            Klassennummer.Text = klasse;
         }
 
         private void assignSitzplanView(int anzahlDerTische)
@@ -98,12 +109,7 @@ namespace Sitzplanverteilung
             var tischGruppen = aktiverBlock.getTischgruppen();
             App.Current.Properties["Block"] = aktiverBlock;
             assignSitzplanView(tischGruppen.Count);
-        }
-
-        private void TischgruppenAendernButton_Click(object sender, RoutedEventArgs e)
-        {
-       
-        }    
+        }  
         
         private void MakePDF(object sender, RoutedEventArgs e)
         {
@@ -152,6 +158,11 @@ namespace Sitzplanverteilung
             TischgruppenAendernGUI taGUI = new TischgruppenAendernGUI(blockNummer);
             taGUI.Show();
             this.Close();
+        }
+
+        private void NeuGenerienButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
          

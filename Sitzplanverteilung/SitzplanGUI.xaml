@@ -59,7 +59,7 @@
             <ContentControl x:Name="contentControl" Grid.Column="1" Grid.RowSpan="8" Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Rectangle Grid.Row="0" Fill="Black"></Rectangle>
             <Viewbox Margin="0,10,0,11" >
-                <TextBlock FontFamily="Calibri" Name="Klassennummer"  Foreground="White" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center">Bit-15-3</TextBlock>
+                <TextBlock FontFamily="Calibri" Name="Klassennummer"  Foreground="White" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding klasse}"></TextBlock>
             </Viewbox>
             <RadioButton x:Name="Block1Button" IsChecked="True" Checked="BlockButton_Checked" GroupName="Bloecke" Style="{StaticResource {x:Type ToggleButton}}" Padding="10" Grid.Column="0" Grid.Row="1" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
                 <RadioButton.Content >
@@ -187,10 +187,10 @@
                     </Grid>
                 </RadioButton.Content>
             </RadioButton>
-            <Button x:Name="TischgruppenAendernButton" Click="TischgruppenAendernButton_Click" Padding="10" Grid.Column="0" Grid.Row="7" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+            <Button x:Name="NeuGenerienButton" Click="NeuGenerienButton_Click" Padding="10" Grid.Column="0" Grid.Row="7" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
                 <Button.Content >
                     <Viewbox Height="39" >
-                        <TextBlock>Tischgruppen ändern</TextBlock>
+                        <TextBlock>Pläne neu generieren</TextBlock>
                     </Viewbox>
                 </Button.Content>
             </Button>
