@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.IO;
+using Microsoft.Win32;
 
 namespace Sitzplanverteilung
 {
+    [DataContract]
+    [KnownType(typeof(Sitzplan))]
+    [KnownType(typeof(Schueler))]
     class SitzplanKartei
     {
         private static SitzplanKartei instance;
+
+        [DataMember]
         List<Sitzplan> sitzplaene;
+
+        [DataMember]
         List<Schueler> schuelerListe;
+
         string pictureFolder;
 
         private SitzplanKartei()
@@ -22,6 +34,8 @@ namespace Sitzplanverteilung
             }
             this.schuelerListe = new List<Schueler>();
         }
+
+        [DataMember]  
         public static SitzplanKartei Instance
         {
             get
@@ -38,30 +52,30 @@ namespace Sitzplanverteilung
         {
             this.schuelerListe.Add(schueler);
         }
-        
+
         public void entferneSchuelerInListe(Schueler schueler)
         {
             this.schuelerListe.Remove(schueler);
         }
-        
+
         public void entferneSchuelerInListe(int index)
         {
             Schueler schueler = schuelerListe[index];
             entferneSchuelerInListe(schueler);
         }
-        
+
         public void aenderSchuelerInListe(Schueler schuelerAlt, Schueler schuelerNeu)
         {
             this.schuelerListe[this.schuelerListe.IndexOf(schuelerAlt)] = schuelerNeu;
         }
-        
+
         public void aenderSchuelerInListe(int index, Schueler schuelerNeu)
         {
             this.schuelerListe[index] = schuelerNeu;
         }
 
         //Schülerliste importieren aus .csv-Datei
-        public void holeSchuelerAusCSV() 
+        public void holeSchuelerAusCSV()
         {
             schuelerListe.AddRange(Verwaltungskram.importiereSchuelerListe());
         }
@@ -86,7 +100,7 @@ namespace Sitzplanverteilung
         {
             if (schuelerListe.Count > 0)
             {
-                if (anzahlTische * schuelerMaxProTisch < schuelerListe.Count) 
+                if (anzahlTische * schuelerMaxProTisch < schuelerListe.Count)
                 {
                     throw new ArgumentOutOfRangeException("Schüleranzahl", "Die aktuelle Schueleranzahl ist größer als die Anzahl der Sitzplätze.");
                 }
@@ -173,19 +187,19 @@ namespace Sitzplanverteilung
         {
             Sitzplan pruefen = new Sitzplan(sitzplan);
             int strafPunkte = 0;
-            
-            foreach (Schueler schuelerAusListe in this.schuelerListe) 
+
+            foreach (Schueler schuelerAusListe in this.schuelerListe)
             {
                 SortedList<String, int> sitznachbarn = new SortedList<string, int>();
                 //Vergleichen mit früheren Sitzplänen
-                for (int i = index -1; i >= 0; i--)
+                for (int i = index - 1; i >= 0; i--)
                 {
                     sitznachbarn = sitzNachbarnbestimmen(this.sitzplaene[i], schuelerAusListe, sitznachbarn);
                 }
                 sitznachbarn = sitzNachbarnbestimmen(sitzplan, schuelerAusListe, sitznachbarn);
-                for(int k = 0; k < sitznachbarn.Count; k++)
+                for (int k = 0; k < sitznachbarn.Count; k++)
                 {
-                    if(sitznachbarn.Values[k] > 1)
+                    if (sitznachbarn.Values[k] > 1)
                     {
                         strafPunkte += sitznachbarn.Values[k] * 1000;
                     }
@@ -194,7 +208,7 @@ namespace Sitzplanverteilung
             return strafPunkte;
         }
 
-        private SortedList<String, int> sitzNachbarnbestimmen(Sitzplan sitzplan, Schueler schuelerAusListe, SortedList<String, int> sitznachbarn) 
+        private SortedList<String, int> sitzNachbarnbestimmen(Sitzplan sitzplan, Schueler schuelerAusListe, SortedList<String, int> sitznachbarn)
         {
             foreach (Tischgruppe tischgruppe in sitzplan.getTischgruppen())
             {
@@ -240,7 +254,7 @@ namespace Sitzplanverteilung
             return sitznachbarn;
         }
 
-        private SortedList<String,int> bestimmeSitznachbar(SortedList<String,int> sitznachbarn, Schueler sitznachbar)
+        private SortedList<String, int> bestimmeSitznachbar(SortedList<String, int> sitznachbarn, Schueler sitznachbar)
         {
             //Sitzplatz auf Besetztheit prüfen
             if (sitznachbar != null)
@@ -257,12 +271,12 @@ namespace Sitzplanverteilung
             return sitznachbarn;
         }
 
-        public List<Sitzplan> getSitzplaene() 
+        public List<Sitzplan> getSitzplaene()
         {
             return this.sitzplaene;
         }
 
-        public void setSitzplaene(List<Sitzplan> sitzplaene) 
+        public void setSitzplaene(List<Sitzplan> sitzplaene)
         {
             this.sitzplaene = sitzplaene;
         }
@@ -277,12 +291,12 @@ namespace Sitzplanverteilung
             return this.sitzplaene[index];
         }
 
-
         public void setSitzplaene(Sitzplan sitzplan, int index)
         {
             this.sitzplaene[index] = sitzplan;
         }
 
+        [DataMember]
         public string PictureFolder
         {
             get
@@ -294,6 +308,28 @@ namespace Sitzplanverteilung
                 this.pictureFolder = value;
             }
         }
-           
+
+        public void Load()
+        {
+            //
+        }
+
+        public void Save()
+        {
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML Datei (*.xml)|*.xml";
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.FileName = "Sitzplan";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                DataContractSerializer xs = new DataContractSerializer(typeof(SitzplanKartei));
+                using (FileStream fs = File.Open(saveFileDialog.FileName, FileMode.Create))
+                {
+                    xs.WriteObject(fs, this);
+                }
+            }
+        }
+
     }
 }
