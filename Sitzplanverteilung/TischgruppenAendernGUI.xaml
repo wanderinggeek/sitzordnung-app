@@ -33,12 +33,11 @@
                 </Grid.RowDefinitions>
                 <DataGrid Name="schuelerGrid" Grid.Column="1" Grid.Row="0" AutoGenerateColumns="false" ColumnWidth="*" CanUserAddRows="False" SelectionChanged="schuelerGrid_SelectionChanged">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Bild" Binding="{Binding Path=firma}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Nachname" Binding="{Binding Path=name}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Vorname"  Binding="{Binding Path=vorname}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Beruf"  Binding="{Binding Path=berufsgruppe}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Firmenname"  Binding="{Binding Path=firma}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Firmenkuerzel"  Binding="{Binding Path=firmenkuerzel}"></DataGridTextColumn>
+                        <DataGridTextColumn MaxWidth="100" Header="Firmenkuerzel"  Binding="{Binding Path=firmenkuerzel}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="70" Header="Geschlecht"  Binding="{Binding Path=geschlecht}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="40" Header="Tisch" Binding="{Binding Path=tischnummer}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="40" Header="Platz" Binding="{Binding Path=sitzplatznummer}" ></DataGridTextColumn>

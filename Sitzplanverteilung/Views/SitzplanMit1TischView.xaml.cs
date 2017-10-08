@@ -22,6 +22,7 @@ namespace Sitzplanverteilung.Views
     {
         List<Tischgruppe> sitzplan = (List<Tischgruppe>)App.Current.Properties["Tischgruppe"];
         Tischgruppe aktiveTischgruppe;
+        SitzplanKartei sk = SitzplanKartei.Instance;
         int tischNummer = (int)App.Current.Properties["tischNummer"];
         List<Schueler> schueler;
 
@@ -38,6 +39,7 @@ namespace Sitzplanverteilung.Views
             string firma;
             for (int i = 1; i <= tischgroese; i++)
             {
+                string bilddatei;
                 int aktiverSitzplatz = i - 1;
                 var labelName = string.Format("platz{0}NameTB", i);
                 var labelFirma = string.Format("platz{0}FirmaTB", i);
@@ -47,16 +49,25 @@ namespace Sitzplanverteilung.Views
                 var bild = (Image)this.FindName(bildName);
                 if (schueler[aktiverSitzplatz] != null)
                 {
-                    if(schueler[aktiverSitzplatz].firmenkuerzel == "")
+                    if (schueler[aktiverSitzplatz].firmenkuerzel == "")
                     {
-                         firma = schueler[aktiverSitzplatz].firma;
+                        firma = schueler[aktiverSitzplatz].firma;
                     }
                     else
                     {
-                         firma = schueler[aktiverSitzplatz].firmenkuerzel;
+                        firma = schueler[aktiverSitzplatz].firmenkuerzel;
                     }
                     string nachname = schueler[aktiverSitzplatz].name;
                     string vorname = schueler[aktiverSitzplatz].vorname;
+                    bilddatei = schueler[aktiverSitzplatz].bild;
+
+                    try
+                    {
+                        bild.Source = new BitmapImage(new Uri(sk.PictureFolder + bilddatei));
+                    } catch(Exception exception)
+                    {
+                        bild.Source = new BitmapImage(new Uri(@"/Bilder/Cat_Melon.jpg", UriKind.Relative));
+                    }
 
                     string name = string.Join(",", nachname, vorname);
                     labelFuerName.Text = name;
@@ -70,10 +81,8 @@ namespace Sitzplanverteilung.Views
                     var platz = (Grid)this.FindName(platzName);
                     platz.Visibility = Visibility.Hidden;
                 }
-
-
-                bild.Source = new BitmapImage(new Uri(@"/Bilder/Cat_Melon.jpg", UriKind.Relative));
             }
+
             App.Current.Properties["tischNummer"] = tischNummer + 1;
 
         }
