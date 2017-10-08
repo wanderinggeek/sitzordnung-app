@@ -13,6 +13,9 @@ using System.Windows.Shapes;
 using System.Xaml;
 using Sitzplanverteilung.ViewModels;
 using Microsoft.Win32;
+using System.Runtime.Serialization;
+using System.Xml;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Sitzplanverteilung
@@ -131,15 +134,20 @@ namespace Sitzplanverteilung
                 this.UpdateLayout();
 
                 string tmpPicName = picName.Replace("{}", Convert.ToString(i+1));
-                Console.WriteLine(tmpPicName);
 
                 ImageCapturer.SaveToPNG(this.contentControl, tmpPath + tmpPicName);
             }
         }
 
+        private void SitzungSpeichern(object sender, RoutedEventArgs e)
+        {
+            sk.Save();
+        }
+
         private void End(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+
         }
 
         private void BlockIconViewbox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -153,8 +161,5 @@ namespace Sitzplanverteilung
             taGUI.Show();
             this.Close();
         }
-
-         
-
     }
 }

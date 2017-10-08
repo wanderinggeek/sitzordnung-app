@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Xml;
 
 namespace Sitzplanverteilung
 {
+    [DataContract]
     public class Schueler
     {
+        [DataMember]
         public String name { get; set; }
+        [DataMember]
         public String vorname { get; set; }
+        [DataMember]
         public String klasse { get; set; }
+        [DataMember]
         public String firma { get; set; }
+        [DataMember]
         public String firmenkuerzel { get; set; }
+        [DataMember]
         public char geschlecht { get; set; }
+        [DataMember]
         public String berufsgruppe { get; set; }
+        [DataMember]
         public String bild { get; set; }
         public String sitzplatznummer { get; set; }
         public String tischnummer { get; set; }
