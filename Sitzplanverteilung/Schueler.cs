@@ -39,9 +39,8 @@ namespace Sitzplanverteilung
             this.berufsgruppe = berufsgruppe;
             // geschlecht mit dem Character <m>ännlich oder <w>eiblich
             this.geschlecht = geschlecht;
-            this.bild = "Bild";
+            this.bild = this.name + "_" + this.vorname + ".jpg";
         }
-
 
         public String getVollerName()
         {
@@ -52,7 +51,5 @@ namespace Sitzplanverteilung
         {
             return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufsgruppe + ", " + this.geschlecht + ", " + this.klasse + ", " + this.bild;
         }
-
-
     }
 }
