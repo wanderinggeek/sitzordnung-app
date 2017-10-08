@@ -19,13 +19,13 @@ namespace Sitzplanverteilung
 
         public Schueler()
         {
-            this.name = "Musterschüler";
-            this.vorname = "Manni";
-            this.firma = "Musterschüler KG";
-            this.firmenkuerzel = "MKG";
-            this.klasse = "Musterklasse";
-            this.berufsgruppe = "Sohn vom Eigentümer";
-            this.geschlecht = 'm';
+            this.name = "";
+            this.vorname = "";
+            this.firma = "";
+            this.firmenkuerzel = "";
+            this.klasse = "";
+            this.berufsgruppe = "";
+            this.geschlecht = ' ';
             this.bild = null;
         }
 
