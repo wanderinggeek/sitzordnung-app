@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -39,20 +39,23 @@ namespace Sitzplanverteilung
                 this.schuelerCollection = new ObservableCollection<Schueler>();
             }
             setUpDataGrid();
-
         }
 
 
         private void setUpDataGrid()
-        {
+        {         
             schuelerGrid.ItemsSource = this.schuelerCollection;
             schuelerGrid.Items.Refresh();
         }
 
         private void loadAllScheulerInKartei()
         {
+            schuelerList = sitzplanKartei.getSchuelerListe();
+
             foreach (Schueler schueler in schuelerCollection)
             {
+
+
                 if (!schueler.name.Equals("") || !schueler.vorname.Equals("") || !schueler.berufsgruppe.Equals("") || !schueler.firma.Equals(""))
                 {
                     if (Char.ToUpper(schueler.geschlecht) == 'M' || Char.ToUpper(schueler.geschlecht) == 'W')
@@ -67,7 +70,12 @@ namespace Sitzplanverteilung
                 else
                 {
                     throw new ArgumentOutOfRangeException("Leer", "Datensatz nicht vollständig ausgefüllt");
-                }    
+                }   
+
+  		 if (!schuelerList.Contains(schueler))
+               	 {
+                    sitzplanKartei.neuerSchuelerInListe(schueler);
+               	 } 
             }
         }
 
@@ -134,7 +142,7 @@ namespace Sitzplanverteilung
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) 
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 sitzplanKartei.PictureFolder = dialog.SelectedPath;
                 BilderVerkleinern(sitzplanKartei.PictureFolder);
@@ -178,6 +186,6 @@ namespace Sitzplanverteilung
             schuelerCollection.Add(newSchueler);
         }
 
-     
+
     }
 }

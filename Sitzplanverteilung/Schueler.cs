@@ -16,6 +16,8 @@ namespace Sitzplanverteilung
         public char geschlecht { get; set; }
         public String berufsgruppe { get; set; }
         public String bild { get; set; }
+        public String sitzplatznummer { get; set; }
+        public String tischnummer { get; set; }
 
         public Schueler()
         {
@@ -29,7 +31,7 @@ namespace Sitzplanverteilung
             this.bild = null;
         }
 
-        public Schueler(String name, String vorname, String klasse, String firma, String kuerzel, char geschlecht, String berufsgruppe)
+        public Schueler(String name, String vorname, String klasse, String firma, String kuerzel, char geschlecht, String berufsgruppe, String sitzplatznummer = null, String tischnummer = null)
         {
             this.name = name;
             this.vorname = vorname;
@@ -39,7 +41,10 @@ namespace Sitzplanverteilung
             this.berufsgruppe = berufsgruppe;
             // geschlecht mit dem Character <m>ännlich oder <w>eiblich
             this.geschlecht = geschlecht;
+            this.sitzplatznummer = sitzplatznummer;
+            this.tischnummer = tischnummer;
             this.bild = this.name + "_" + this.vorname + ".jpg";
+
         }
 
         public String getVollerName()

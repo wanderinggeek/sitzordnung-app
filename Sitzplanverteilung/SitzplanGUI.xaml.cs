@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Xaml;
 using Sitzplanverteilung.ViewModels;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace Sitzplanverteilung
 {
@@ -23,6 +24,8 @@ namespace Sitzplanverteilung
     {
         SitzplanKartei sk = SitzplanKartei.Instance;
         List<Sitzplan> sitzplaene;
+        Sitzplan aktiverBlock;
+        int blockNummer;
 
 
         //TODO: FIX SitzplanMit5TischenView sizing issue with top two tables currently using shared size group that is not resizing
@@ -75,53 +78,32 @@ namespace Sitzplanverteilung
             }
         }
 
-        private void Block1Button_Checked(object sender, RoutedEventArgs e)
+        private void BlockButton_Checked(object sender, RoutedEventArgs e)
         {
-            Sitzplan block = sitzplaene[0];
-            var tischGruppen = block.getTischgruppen();
-            App.Current.Properties["Block"] = block;
+            string buttonName;
+
+            RadioButton radio = sender as RadioButton;
+
+            if (radio != null)
+            {
+                buttonName = radio.Name.ToString();
+            }
+            else
+            {
+                return;
+            }
+
+            blockNummer = Int32.Parse(Regex.Replace(buttonName, "[^0-9 _]", "")) - 1; 
+            aktiverBlock = sitzplaene[blockNummer];
+            var tischGruppen = aktiverBlock.getTischgruppen();
+            App.Current.Properties["Block"] = aktiverBlock;
             assignSitzplanView(tischGruppen.Count);
         }
 
-        private void Block2Button_Checked(object sender, RoutedEventArgs e)
+        private void TischgruppenAendernButton_Click(object sender, RoutedEventArgs e)
         {
-            var block = sitzplaene[1];
-            var tischGruppen = block.getTischgruppen();
-            App.Current.Properties["Block"] = block;
-            assignSitzplanView(tischGruppen.Count);
-        }
-
-        private void Block6Button_Checked(object sender, RoutedEventArgs e)
-        {
-            Sitzplan block = sitzplaene[5];
-            var tischGruppen = block.getTischgruppen();
-            App.Current.Properties["Block"] = block;
-            assignSitzplanView(tischGruppen.Count);
-        }
-
-        private void Block5Button_Checked(object sender, RoutedEventArgs e)
-        {
-            Sitzplan block = sitzplaene[4];
-            var tischGruppen = block.getTischgruppen();
-            App.Current.Properties["Block"] = block;
-            assignSitzplanView(tischGruppen.Count);
-        }
-
-        private void Block4Button_Checked(object sender, RoutedEventArgs e)
-        {
-            Sitzplan block = sitzplaene[3];
-            var tischGruppen = block.getTischgruppen();
-            App.Current.Properties["Block"] = block;
-            assignSitzplanView(tischGruppen.Count);
-        }
-
-        private void Block3Button_Checked(object sender, RoutedEventArgs e)
-        {
-            Sitzplan block = sitzplaene[2];
-            var tischGruppen = block.getTischgruppen();
-            App.Current.Properties["Block"] = block;
-            assignSitzplanView(tischGruppen.Count);
-        }
+       
+        }    
         
         private void MakePDF(object sender, RoutedEventArgs e)
         {
@@ -158,7 +140,21 @@ namespace Sitzplanverteilung
         private void End(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }        
+        }
+
+        private void BlockIconViewbox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Viewbox vb = sender as Viewbox;
+            string vbName = vb.Name.ToString();
+
+
+            blockNummer = Int32.Parse(Regex.Replace(vbName, "[^0-9 _]", "")) - 1;
+            TischgruppenAendernGUI taGUI = new TischgruppenAendernGUI(blockNummer);
+            taGUI.Show();
+            this.Close();
+        }
+
+         
 
     }
 }
