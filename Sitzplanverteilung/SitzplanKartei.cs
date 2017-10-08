@@ -285,6 +285,11 @@ namespace Sitzplanverteilung
         {
             return this.schuelerListe;
         }
+        public void setSchuelerListe(List<Schueler> liste)
+        {
+            schuelerListe.Clear();
+            schuelerListe.AddRange(liste);
+        }
 
         public Sitzplan getSitzplan(int index)
         {

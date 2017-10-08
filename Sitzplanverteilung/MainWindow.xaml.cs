@@ -66,6 +66,10 @@ namespace Sitzplanverteilung
                 using (FileStream fs = File.Open(openFileDialog.FileName, FileMode.Open))
                 {
                     object skFromFile = xs.ReadObject(fs);
+                    SitzplanKartei kartei = SitzplanKartei.Instance;
+                    SitzplanKartei temp = (SitzplanKartei)skFromFile;
+                    kartei.setSitzplaene(temp.getSitzplaene());
+                    kartei.setSchuelerListe(temp.getSchuelerListe());
                     Console.WriteLine(skFromFile);
 
                     SitzplanGUI sitzplanGUI = new SitzplanGUI();
