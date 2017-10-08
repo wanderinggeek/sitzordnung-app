@@ -27,20 +27,22 @@ namespace Sitzplanverteilung
         public String berufsgruppe { get; set; }
         [DataMember]
         public String bild { get; set; }
+        public String sitzplatznummer { get; set; }
+        public String tischnummer { get; set; }
 
         public Schueler()
         {
-            this.name = "Musterschüler";
-            this.vorname = "Manni";
-            this.firma = "Musterschüler KG";
-            this.firmenkuerzel = "MKG";
-            this.klasse = "Musterklasse";
-            this.berufsgruppe = "Sohn vom Eigentümer";
-            this.geschlecht = 'm';
+            this.name = "";
+            this.vorname = "";
+            this.firma = "";
+            this.firmenkuerzel = "";
+            this.klasse = "";
+            this.berufsgruppe = "";
+            this.geschlecht = ' ';
             this.bild = null;
         }
 
-        public Schueler(String name, String vorname, String klasse, String firma, String kuerzel, char geschlecht, String berufsgruppe)
+        public Schueler(String name, String vorname, String klasse, String firma, String kuerzel, char geschlecht, String berufsgruppe, String sitzplatznummer = null, String tischnummer = null)
         {
             this.name = name;
             this.vorname = vorname;
@@ -50,7 +52,10 @@ namespace Sitzplanverteilung
             this.berufsgruppe = berufsgruppe;
             // geschlecht mit dem Character <m>ännlich oder <w>eiblich
             this.geschlecht = geschlecht;
+            this.sitzplatznummer = sitzplatznummer;
+            this.tischnummer = tischnummer;
             this.bild = this.name + "_" + this.vorname + ".jpg";
+
         }
 
         public String getVollerName()

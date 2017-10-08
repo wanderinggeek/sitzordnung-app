@@ -1,0 +1,90 @@
+﻿<Window x:Class="Sitzplanverteilung.TischgruppenAendernGUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        WindowState="Maximized" Width="800" Height="620" MinHeight="600" MinWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Column="0">
+            <Menu DockPanel.Dock="Top"  Height="20" VerticalAlignment="Top" Width="Auto" >
+                <MenuItem Header="Datei">
+                    <MenuItem Header="Speichern"></MenuItem>
+                    <MenuItem Header="Programm beenden"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>         
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160*"/>
+                <ColumnDefinition Width="632*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1" Grid.RowSpan="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                </Grid.RowDefinitions>
+                <DataGrid Name="schuelerGrid" Grid.Column="1" Grid.Row="0" AutoGenerateColumns="false" ColumnWidth="*" CanUserAddRows="False" SelectionChanged="schuelerGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Bild" Binding="{Binding Path=firma}"></DataGridTextColumn>
+                        <DataGridTextColumn MaxWidth="100" Header="Nachname" Binding="{Binding Path=name}"></DataGridTextColumn>
+                        <DataGridTextColumn MaxWidth="100" Header="Vorname"  Binding="{Binding Path=vorname}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Beruf"  Binding="{Binding Path=berufsgruppe}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Firmenname"  Binding="{Binding Path=firma}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Firmenkuerzel"  Binding="{Binding Path=firmenkuerzel}"></DataGridTextColumn>
+                        <DataGridTextColumn MaxWidth="70" Header="Geschlecht"  Binding="{Binding Path=geschlecht}"></DataGridTextColumn>
+                        <DataGridTextColumn MaxWidth="40" Header="Tisch" Binding="{Binding Path=tischnummer}"></DataGridTextColumn>
+                        <DataGridTextColumn MaxWidth="40" Header="Platz" Binding="{Binding Path=sitzplatznummer}" ></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Button Name="anderungenSpeichernButton"  Grid.Column="0" Click="anderungenSpeichernButton_Click" 
+         Background="#FF0092F8" FontFamily="Calibri" Foreground="White" >
+                <Grid Height="276" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="27*"/>
+                        <RowDefinition Height="143*"/>
+                        <RowDefinition Height="53*"/>
+                        <RowDefinition Height="53*"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="1">
+                        <fa:IconImage Icon="Check" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
+                        <TextBlock>Änderungen</TextBlock>
+                    </Viewbox>
+                    <Viewbox Grid.Row="3" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
+                        <TextBlock>speichern</TextBlock>
+                    </Viewbox>
+                </Grid>
+            </Button>
+            <Button Name="NeuGenerienButton"  Grid.Row="1" Click="NeuGenerienButton_Click" Background="#f0f0f0" FontFamily="Calibri">
+                <Grid Height="276">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="27*"/>
+                        <RowDefinition Height="143*"/>
+                        <RowDefinition Height="53*"/>
+                        <RowDefinition Height="53*"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Row="1">
+                        <fa:IconImage Icon="Refresh" Foreground="#4f59d3"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
+                        <TextBlock Foreground="#727272">Neu</TextBlock>
+                    </Viewbox>
+                    <Viewbox Grid.Row="3" Name="fourthTextblock">
+                        <TextBlock Foreground="#727272">generien</TextBlock>
+                    </Viewbox>
+                </Grid>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

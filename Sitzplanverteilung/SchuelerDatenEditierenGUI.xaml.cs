@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -39,21 +39,43 @@ namespace Sitzplanverteilung
                 this.schuelerCollection = new ObservableCollection<Schueler>();
             }
             setUpDataGrid();
-
         }
 
 
         private void setUpDataGrid()
-        {
+        {         
             schuelerGrid.ItemsSource = this.schuelerCollection;
             schuelerGrid.Items.Refresh();
         }
 
         private void loadAllScheulerInKartei()
         {
+            schuelerList = sitzplanKartei.getSchuelerListe();
+
             foreach (Schueler schueler in schuelerCollection)
             {
-                sitzplanKartei.neuerSchuelerInListe(schueler);
+
+
+                if (!schueler.name.Equals("") || !schueler.vorname.Equals("") || !schueler.berufsgruppe.Equals("") || !schueler.firma.Equals(""))
+                {
+                    if (Char.ToUpper(schueler.geschlecht) == 'M' || Char.ToUpper(schueler.geschlecht) == 'W')
+                    {
+                        sitzplanKartei.neuerSchuelerInListe(schueler);
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException("Geschlecht", schueler, "Das Geschlecht ist nicht gültig");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Leer", "Datensatz nicht vollständig ausgefüllt");
+                }   
+
+  		 if (!schuelerList.Contains(schueler))
+               	 {
+                    sitzplanKartei.neuerSchuelerInListe(schueler);
+               	 } 
             }
         }
 
@@ -61,10 +83,25 @@ namespace Sitzplanverteilung
         {
             if (schuelerCollection != null && schuelerCollection.Count > 0)
             {
-                loadAllScheulerInKartei();
-                VerteilungskriteriumGUI verteilungskriteriumGUI = new VerteilungskriteriumGUI();
-                verteilungskriteriumGUI.Show();
-                this.Close();
+                try
+                {
+                    loadAllScheulerInKartei();
+                    VerteilungskriteriumGUI verteilungskriteriumGUI = new VerteilungskriteriumGUI();
+                    verteilungskriteriumGUI.Show();
+                    this.Close();
+                }
+                catch (ArgumentOutOfRangeException exception) 
+                {
+                    if (exception.ParamName.Equals("Geschlecht")) 
+                    {
+                        Schueler s = (Schueler)exception.ActualValue;
+                        MessageBox.Show("Der Schüler " + s.name + ", " + s.vorname + " hat ein ungültiges Geschlecht. Nur m und w sind gültige Werte.");
+                    }
+                    if (exception.ParamName.Equals("Leer"))
+                    {
+                        MessageBox.Show("Ein oder mehrere Schüler sind nicht vollständig ausgefüllt.");
+                    }
+                }
             }
             else
             {
@@ -105,7 +142,7 @@ namespace Sitzplanverteilung
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) 
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 sitzplanKartei.PictureFolder = dialog.SelectedPath;
                 BilderVerkleinern(sitzplanKartei.PictureFolder);
@@ -149,6 +186,6 @@ namespace Sitzplanverteilung
             schuelerCollection.Add(newSchueler);
         }
 
-     
+
     }
 }
