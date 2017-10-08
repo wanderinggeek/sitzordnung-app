@@ -28,7 +28,7 @@ namespace Sitzplanverteilung
             this.klasse = "Musterklasse";
             this.berufsgruppe = "Sohn vom Eigentümer";
             this.geschlecht = 'm';
-            this.bild = "Bild";
+            this.bild = null;
         }
 
         public Schueler(String name, String vorname, String klasse, String firma, String kuerzel, char geschlecht, String berufsgruppe, String sitzplatznummer = null, String tischnummer = null)
@@ -41,11 +41,11 @@ namespace Sitzplanverteilung
             this.berufsgruppe = berufsgruppe;
             // geschlecht mit dem Character <m>ännlich oder <w>eiblich
             this.geschlecht = geschlecht;
-            this.bild = "Bild";
             this.sitzplatznummer = sitzplatznummer;
             this.tischnummer = tischnummer;
-        }
+            this.bild = this.name + "_" + this.vorname + ".jpg";
 
+        }
 
         public String getVollerName()
         {
@@ -56,7 +56,5 @@ namespace Sitzplanverteilung
         {
             return this.name + ", " + this.vorname + ", " + this.firma + ", " + this.berufsgruppe + ", " + this.geschlecht + ", " + this.klasse + ", " + this.bild;
         }
-
-
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Sitzplanverteilung
 {
@@ -111,8 +112,40 @@ namespace Sitzplanverteilung
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 sitzplanKartei.PictureFolder = dialog.SelectedPath;
+                BilderVerkleinern(sitzplanKartei.PictureFolder);
+                sitzplanKartei.PictureFolder = dialog.SelectedPath + "\\mini\\";
             }
         }       
+
+        private void BilderVerkleinern(string pictureFolder)
+        {
+            string miniPath = pictureFolder + "\\" + "mini";
+            Directory.CreateDirectory(miniPath);
+
+            DirectoryInfo directory = new DirectoryInfo(pictureFolder);
+            FileInfo[] files = directory.GetFiles("*.jpg");
+
+            foreach (var file in files)
+            {
+                System.Drawing.Image bild = System.Drawing.Image.FromFile(pictureFolder + "\\" + file);
+                VerkleinereBild(bild, 300, pictureFolder, Convert.ToString(file));
+            }
+        }
+
+        private void VerkleinereBild(System.Drawing.Image bild, int maxBreite, string pictureFolder, string bildName)
+        {
+            var ratio = (double)maxBreite / bild.Width;
+
+            var newWidth = (int)(bild.Width * ratio);
+            var newHeight = (int)(bild.Height * ratio);
+
+            var newImage = new System.Drawing.Bitmap(newWidth, newHeight);
+            using (var g = System.Drawing.Graphics.FromImage(newImage))
+            {
+                g.DrawImage(bild, 0, 0, newWidth, newHeight);
+            }
+            newImage.Save(pictureFolder + "\\mini\\" + bildName);
+        }
 
         private void addSchuelerButton_Click(object sender, RoutedEventArgs e)
         {
