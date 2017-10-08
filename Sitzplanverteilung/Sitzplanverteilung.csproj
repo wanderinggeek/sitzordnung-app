@@ -116,6 +116,9 @@
       <DependentUpon>SchuelerDatenEditierenGUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageCapturer.cs" />
+    <Compile Include="TischgruppenAendernGUI.xaml.cs">
+      <DependentUpon>TischgruppenAendernGUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VerteilungskriteriumGUI.xaml.cs">
       <DependentUpon>VerteilungskriteriumGUI.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SitzplanGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TischgruppenAendernGUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
