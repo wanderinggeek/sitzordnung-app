@@ -109,6 +109,7 @@ namespace Sitzplanverteilung
             {
                 sitzplanKartei.PictureFolder = dialog.SelectedPath;
                 BilderVerkleinern(sitzplanKartei.PictureFolder);
+                sitzplanKartei.PictureFolder = dialog.SelectedPath + "\\mini\\";
             }
         }       
 
