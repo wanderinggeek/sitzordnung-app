@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -54,10 +54,28 @@ namespace Sitzplanverteilung
 
             foreach (Schueler schueler in schuelerCollection)
             {
-                if (!schuelerList.Contains(schueler))
+
+
+                if (!schueler.name.Equals("") || !schueler.vorname.Equals("") || !schueler.berufsgruppe.Equals("") || !schueler.firma.Equals(""))
                 {
-                    sitzplanKartei.neuerSchuelerInListe(schueler);
+                    if (Char.ToUpper(schueler.geschlecht) == 'M' || Char.ToUpper(schueler.geschlecht) == 'W')
+                    {
+                        sitzplanKartei.neuerSchuelerInListe(schueler);
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException("Geschlecht", schueler, "Das Geschlecht ist nicht gültig");
+                    }
                 }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Leer", "Datensatz nicht vollständig ausgefüllt");
+                }   
+
+  		 if (!schuelerList.Contains(schueler))
+               	 {
+                    sitzplanKartei.neuerSchuelerInListe(schueler);
+               	 } 
             }
         }
 
@@ -65,10 +83,25 @@ namespace Sitzplanverteilung
         {
             if (schuelerCollection != null && schuelerCollection.Count > 0)
             {
-                loadAllScheulerInKartei();
-                VerteilungskriteriumGUI verteilungskriteriumGUI = new VerteilungskriteriumGUI();
-                verteilungskriteriumGUI.Show();
-                this.Close();
+                try
+                {
+                    loadAllScheulerInKartei();
+                    VerteilungskriteriumGUI verteilungskriteriumGUI = new VerteilungskriteriumGUI();
+                    verteilungskriteriumGUI.Show();
+                    this.Close();
+                }
+                catch (ArgumentOutOfRangeException exception) 
+                {
+                    if (exception.ParamName.Equals("Geschlecht")) 
+                    {
+                        Schueler s = (Schueler)exception.ActualValue;
+                        MessageBox.Show("Der Schüler " + s.name + ", " + s.vorname + " hat ein ungültiges Geschlecht. Nur m und w sind gültige Werte.");
+                    }
+                    if (exception.ParamName.Equals("Leer"))
+                    {
+                        MessageBox.Show("Ein oder mehrere Schüler sind nicht vollständig ausgefüllt.");
+                    }
+                }
             }
             else
             {
