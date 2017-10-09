@@ -121,14 +121,23 @@ namespace Sitzplanverteilung
         
         private void MakePDF(object sender, RoutedEventArgs e)
         {
+            this.Cursor = Cursors.Wait;
             MakeBlockPictures();
-            
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Datei (*.pdf)|*.pdf";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             saveFileDialog.FileName = "Sitzplan";
             if (saveFileDialog.ShowDialog() == true)
-                PDFCreation.MakePDF(saveFileDialog.FileName);
+                try
+                {
+                    PDFCreation.MakePDF(saveFileDialog.FileName);
+                    MessageBox.Show("Die Datei " + saveFileDialog.FileName + " wurde gespeichert.", "Ergebnis", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch(Exception error)
+                {
+                    MessageBox.Show("Fehler: " + error, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            this.Cursor = Cursors.Arrow;
         }
 
         private void MakeBlockPictures()
@@ -181,7 +190,13 @@ namespace Sitzplanverteilung
             string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
             PDFCreation.MakePDF(tmpPath + "tmp_Sitzplan.pdf");
 
-            // drucken
+            WebBrowser wb = new WebBrowser();
+            wb.Navigate(new Uri(tmpPath + "tmp_Sitzplan.pdf"));
+
+            PdfGUI pdfGUI = new PdfGUI();
+
+            pdfGUI.Content = wb;
+            pdfGUI.Show();
         }
 
         private void Startseite(object sender, RoutedEventArgs e)
