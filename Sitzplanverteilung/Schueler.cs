@@ -31,6 +31,7 @@ namespace Sitzplanverteilung
         public String sitzplatznummer { get; set; }
         [DataMember]
         public String tischnummer { get; set; }
+        public bool istAusgewaehlt { get; set; }
 
         public Schueler()
         {
@@ -44,7 +45,7 @@ namespace Sitzplanverteilung
             this.bild = null;
         }
 
-        public Schueler(String name, String vorname, String klasse, String firma, String kuerzel, char geschlecht, String berufsgruppe, String sitzplatznummer = null, String tischnummer = null)
+        public Schueler(String name, String vorname, String klasse, String firma, String kuerzel, char geschlecht, String berufsgruppe, String sitzplatznummer = null, String tischnummer = null, bool istAusgewaehlt = false)
         {
             this.name = name;
             this.vorname = vorname;
@@ -56,6 +57,7 @@ namespace Sitzplanverteilung
             this.geschlecht = geschlecht;
             this.sitzplatznummer = sitzplatznummer;
             this.tischnummer = tischnummer;
+            this.istAusgewaehlt = istAusgewaehlt;
             this.bild = this.name + "_" + this.vorname + ".jpg";
 
         }
