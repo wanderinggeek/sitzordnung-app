@@ -143,7 +143,7 @@ namespace Sitzplanverteilung
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
                 sitzplanKartei.PictureFolder = dialog.SelectedPath;
                 BilderVerkleinern(sitzplanKartei.PictureFolder);
