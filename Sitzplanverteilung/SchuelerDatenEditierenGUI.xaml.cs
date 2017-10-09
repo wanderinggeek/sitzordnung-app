@@ -57,7 +57,7 @@ namespace Sitzplanverteilung
             {
 
 
-                if (!schueler.name.Equals("") || !schueler.vorname.Equals("") || !schueler.berufsgruppe.Equals("") || !schueler.firma.Equals(""))
+                if (!schueler.name.Equals("") && !schueler.vorname.Equals("") && !schueler.berufsgruppe.Equals("") && !schueler.firma.Equals(""))
                 {
                     if (Char.ToUpper(schueler.geschlecht) == 'M' || Char.ToUpper(schueler.geschlecht) == 'W')
                     {
@@ -114,7 +114,13 @@ namespace Sitzplanverteilung
         {
             if (selectedSchueler != null)
             {
-                schuelerCollection.Remove(selectedSchueler);
+                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show
+                    ("Wollen Sie " + selectedSchueler.vorname + " " + selectedSchueler.name + " wirklich löschen?",
+                    "Löschen bestätigen", System.Windows.MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    schuelerCollection.Remove(selectedSchueler);
+                }
                 selectedSchueler = null;
                 schuelerGrid.Items.Refresh();
             }

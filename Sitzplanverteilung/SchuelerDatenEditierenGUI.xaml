@@ -33,7 +33,7 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="20"></RowDefinition>
                 </Grid.RowDefinitions>
-                <DataGrid Name="schuelerGrid" Grid.Column="1" Grid.Row="0" AutoGenerateColumns="false" ColumnWidth="*" SelectionChanged="schuelerGrid_SelectionChanged">
+                <DataGrid Name="schuelerGrid" Grid.Column="1" Grid.Row="0" AutoGenerateColumns="false" ColumnWidth="*" SelectionChanged="schuelerGrid_SelectionChanged" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn MaxWidth="100" Header="Nachname" Binding="{Binding Path=name}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Vorname"  Binding="{Binding Path=vorname}"></DataGridTextColumn>
