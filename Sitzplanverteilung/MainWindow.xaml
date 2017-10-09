@@ -56,7 +56,7 @@
                     <RowDefinition Height="53*"/>
                 </Grid.RowDefinitions>
                 <Viewbox Grid.Row="1">
-                    <fa:IconImage Icon="Upload" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <fa:IconImage Icon="Download" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Viewbox>
                 <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
                     <TextBlock>Schüler</TextBlock>
