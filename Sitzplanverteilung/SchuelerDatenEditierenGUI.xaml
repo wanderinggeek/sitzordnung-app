@@ -37,7 +37,13 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn MaxWidth="100" Header="Nachname" Binding="{Binding Path=name}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Vorname"  Binding="{Binding Path=vorname}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Beruf"  Binding="{Binding Path=berufsgruppe}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Beruf"  Binding="{Binding Path=berufsgruppe}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="ToolTip" Value="{Binding Path=berufsgruppe}" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
                         <DataGridTextColumn Header="Firmenname"  Binding="{Binding Path=firma}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Firmenkuerzel"  Binding="{Binding Path=firmenkuerzel}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="70" Header="Geschlecht"  Binding="{Binding Path=geschlecht}"></DataGridTextColumn>
