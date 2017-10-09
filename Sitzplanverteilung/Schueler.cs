@@ -27,7 +27,9 @@ namespace Sitzplanverteilung
         public String berufsgruppe { get; set; }
         [DataMember]
         public String bild { get; set; }
+        [DataMember]
         public String sitzplatznummer { get; set; }
+        [DataMember]
         public String tischnummer { get; set; }
         public bool istAusgewaehlt { get; set; }
 

@@ -31,7 +31,9 @@ namespace Sitzplanverteilung
         {
             this.Title = string.Join(" ", "Block", (blocknummer + 1).ToString(), "ändern");
             InitializeComponent();
+            startseite.IsEnabled = true;
             schuelerListDerKartei.AddRange(sitzplanKartei.getSchuelerListe());
+
             sitzplanFuerBlock = sitzplanKartei.getSitzplan(blocknummer);
             setUpData();
             setUpDataGrid();
@@ -163,12 +165,36 @@ namespace Sitzplanverteilung
             if (anzahl == 2)
             {
                 swapSchuelerButton.IsEnabled = true;
-
             }
             else
             {
                 swapSchuelerButton.IsEnabled = false;
             }
+            
+        private void Neu(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }
+
+        private void End(object sender, RoutedEventArgs e)
+        {
+            Menue.ExitProgram();
+        }
+
+        private void Info(object sender, RoutedEventArgs e)
+        {
+            Menue.Info();
+        }
+
+        private void Documentation(object sender, RoutedEventArgs e)
+        {
+            Menue.Documentation();
+        }
+
+        private void Startseite(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }            
             
         }
     }

@@ -29,6 +29,7 @@ namespace Sitzplanverteilung
         public SchuelerDatenEditierenGUI(List<Schueler> _schuelerList = null)
         {
             InitializeComponent();
+            startseite.IsEnabled = true;
             schuelerList = _schuelerList;
             if (schuelerList != null)
             {
@@ -201,6 +202,29 @@ namespace Sitzplanverteilung
             schuelerCollection.Add(newSchueler);
         }
 
+        private void Neu(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }
 
+        private void End(object sender, RoutedEventArgs e)
+        {
+            Menue.ExitProgram();
+        }
+
+        private void Info(object sender, RoutedEventArgs e)
+        {
+            Menue.Info();
+        }
+
+        private void Documentation(object sender, RoutedEventArgs e)
+        {
+            Menue.Documentation();
+        }
+
+        private void Startseite(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }
     }
 }
