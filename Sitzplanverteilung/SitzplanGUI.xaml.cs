@@ -37,6 +37,12 @@ namespace Sitzplanverteilung
         {
             sitzplaene = sk.getSitzplaene();
             InitializeComponent();
+            sitzungSpeichern.IsEnabled = true;
+            pdf.IsEnabled = true;
+            druck.IsEnabled = true;
+            startseite.IsEnabled = true;
+            schuelerdatenedit.IsEnabled = true;
+            verteilungskriterien.IsEnabled = true;
             setKlassennummer();
 
         }
@@ -144,15 +150,57 @@ namespace Sitzplanverteilung
             }
         }
 
+        private void Neu(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }
+
+        private void End(object sender, RoutedEventArgs e)
+        {
+            Menue.ExitProgram();
+        }
+
+        private void Info(object sender, RoutedEventArgs e)
+        {
+            Menue.Info();
+        }
+
+        private void Documentation(object sender, RoutedEventArgs e)
+        {
+            Menue.Documentation();
+        }
+        
         private void SitzungSpeichern(object sender, RoutedEventArgs e)
         {
             sk.Save();
         }
 
-        private void End(object sender, RoutedEventArgs e)
+        private void Drucken(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            MakeBlockPictures();
+            string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
+            PDFCreation.MakePDF(tmpPath + "tmp_Sitzplan.pdf");
+
+            // drucken
         }
+
+        private void Startseite(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }
+
+        private void Schuelerdaten(object sender, RoutedEventArgs e)
+        {
+            SchuelerDatenEditierenGUI schuelerDatenGUI = new SchuelerDatenEditierenGUI(sk.getSchuelerListe());
+            schuelerDatenGUI.Show();
+            this.Close();
+        }
+
+        private void Kriterien(object sender, RoutedEventArgs e)
+        {
+            Menue.Verteilungskriterien(this);
+        }
+
 
         private void BlockIconViewbox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

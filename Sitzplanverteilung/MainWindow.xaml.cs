@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 using System.Runtime.Serialization;
 using System.Xml;
 using System.IO;
-using Microsoft.Win32;
 
 namespace Sitzplanverteilung
 {
@@ -31,6 +30,8 @@ namespace Sitzplanverteilung
         public MainWindow()
         {
             InitializeComponent();
+            neu.IsEnabled = true;
+            sitzungLaden.IsEnabled = true;
         }
 
         private void SchuelerdatenImportierenButton_Click(object sender, RoutedEventArgs e)
@@ -77,6 +78,26 @@ namespace Sitzplanverteilung
                     this.Close();
                 }
             }
+        }
+
+        private void Neu(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }
+
+        private void End(object sender, RoutedEventArgs e)
+        {
+            Menue.ExitProgram();
+        }
+
+        private void Info(object sender, RoutedEventArgs e)
+        {
+            Menue.Info();
+        }
+
+        private void Documentation(object sender, RoutedEventArgs e)
+        {
+            Menue.Documentation();
         }
     }
 }

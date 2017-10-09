@@ -11,8 +11,53 @@
         <DockPanel Grid.Column="0">
             <Menu DockPanel.Dock="Top"  Height="20" VerticalAlignment="Top" Width="Auto" >
                 <MenuItem Header="Datei">
-                    <MenuItem Header="Speichern"></MenuItem>
-                    <MenuItem Header="Programm beenden"></MenuItem>
+                    <MenuItem x:Name="neu" Click="Neu" Header="Neu" IsEnabled="True">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="file" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="sitzungLaden" Header="Sitzplan öffnen" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="FolderOpenO" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="sitzungSpeichern" Header="Sitzplan speichern" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="FloppyO" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="pdf" Header="Sitzplan als PDF exportieren" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="FilePdfO" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="druck" Header="Sitzplan drucken" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="Print" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Beenden" Click="End" IsEnabled="True">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="WindowClose" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Fenster" IsEnabled="True">
+                    <MenuItem x:Name="startseite" Header="Startseite"  Click="Startseite" IsEnabled="False"></MenuItem>
+                    <MenuItem x:Name="schuelerdatenedit" Header="Schuelerdaten" IsEnabled="False"></MenuItem>
+                    <MenuItem x:Name="verteilungskriterien" Header="Verteilungskriterien" IsEnabled="False"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Hilfe" IsEnabled="True">
+                    <MenuItem Click="Info" Header="Info" IsEnabled="True">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="Info" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Click="Documentation" Header="Benutzerhandbuch" IsEnabled="True">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="Book" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Sitzplanverteilung.MainWindow"
-        Title="Sitzordnung-App" WindowState="Maximized" Width="800" Height="620" MinHeight="600" MinWidth="800">
+        Title="Sitzordnung-Planer - Startseite" WindowState="Maximized" Width="800" Height="620" MinHeight="600" MinWidth="800">
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
     </Window.Triggers>
@@ -15,9 +15,54 @@
         <DockPanel Grid.Column="0">
             <Menu DockPanel.Dock="Top"  Height="20" VerticalAlignment="Top" Width="Auto" >
                 <MenuItem Header="Datei">
-                    <MenuItem Click="SitzungLaden" Header="Sitzplan laden"></MenuItem>
-                    <MenuItem Header="Programm beenden"></MenuItem>
+                    <MenuItem x:Name="neu" Header="Neu" Click="Neu" IsEnabled="True">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="file" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="sitzungLaden" Click="SitzungLaden" Header="Sitzplan öffnen" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="FolderOpenO" Foreground="#4f59d3"></fa:IconImage>   
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="sitzungSpeichern" Header="Sitzplan speichern" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="FloppyO" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="pdf" Header="Sitzplan als PDF exportieren" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="FilePdfO" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="druck" Header="Sitzplan drucken" IsEnabled="False">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="Print" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Beenden" Click="End" IsEnabled="True">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="WindowClose" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
+                <MenuItem Header="Fenster" IsEnabled="True">
+                    <MenuItem x:Name="startseite" Header="Startseite" IsEnabled="False"></MenuItem>
+                    <MenuItem x:Name="schuelerdatenedit" Header="Schuelerdaten" IsEnabled="False"></MenuItem>
+                    <MenuItem x:Name="verteilungskriterien" Header="Verteilungskriterien" IsEnabled="False"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Hilfe" IsEnabled="True">
+                    <MenuItem Click="Info" Header="Info" IsEnabled="True">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="Info" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Click="Documentation" Header="Benutzerhandbuch" IsEnabled="True">
+                        <MenuItem.Icon>
+                            <fa:IconImage Icon="Book" Foreground="#4f59d3"></fa:IconImage>
+                        </MenuItem.Icon>
+                    </MenuItem>                    
+                </MenuItem>                
             </Menu>
         </DockPanel> 
     <Grid Grid.Row="1">

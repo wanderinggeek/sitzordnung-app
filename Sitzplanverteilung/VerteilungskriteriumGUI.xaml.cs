@@ -28,6 +28,8 @@ namespace Sitzplanverteilung
         public VerteilungskriteriumGUI()
         {
             InitializeComponent();
+            startseite.IsEnabled = true;
+            schuelerdatenedit.IsEnabled = true;
             filterNachFirma = firmaCheckbox.IsChecked.Value;
             filterNachBeruf = berufCheckbox.IsChecked.Value;
         }
@@ -69,6 +71,36 @@ namespace Sitzplanverteilung
         private void berufCheckbox_Click(object sender, RoutedEventArgs e)
         {
             filterNachBeruf = !filterNachBeruf;
+        }
+
+        private void Neu(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }
+
+        private void End(object sender, RoutedEventArgs e)
+        {
+            Menue.ExitProgram();
+        }
+
+        private void Info(object sender, RoutedEventArgs e)
+        {
+            Menue.Info();
+        }
+
+        private void Documentation(object sender, RoutedEventArgs e)
+        {
+            Menue.Documentation();
+        }
+
+        private void Startseite(object sender, RoutedEventArgs e)
+        {
+            Menue.Startseite(this);
+        }
+
+        private void Schuelerdaten(object sender, RoutedEventArgs e)
+        {
+            Menue.SchuelerDatenEditieren(this);
         }
     }
 }
