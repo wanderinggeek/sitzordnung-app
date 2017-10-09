@@ -38,6 +38,8 @@ namespace Sitzplanverteilung
             schuelerProTisch = (int)SchuelerProTischTool.Value;
             try
             {
+                this.Cursor = Cursors.Wait;
+
                 sitzplanKartei.sitzplaeneGenerieren(anzahlDerTische, schuelerProTisch, filterNachFirma, filterNachBeruf);
                 SitzplanGUI sitzplanGUI = new SitzplanGUI();
                 sitzplanGUI.Show();

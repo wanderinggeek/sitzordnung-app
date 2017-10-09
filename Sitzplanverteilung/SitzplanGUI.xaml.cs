@@ -166,9 +166,14 @@ namespace Sitzplanverteilung
             this.Close();
         }
 
-        private void NeuGenerienButton_Click(object sender, RoutedEventArgs e)
+        private void NeuGenerierenButton_Click(object sender, RoutedEventArgs e)
         {
-
+            VerteilungskriteriumGUI vkGUI = new VerteilungskriteriumGUI();
+            vkGUI.Show();
+            this.Close();
         }
+
+         
+
     }
 }

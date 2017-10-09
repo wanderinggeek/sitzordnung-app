@@ -21,7 +21,7 @@ namespace Sitzplanverteilung
     public partial class TischgruppenAendernGUI : Window
     {
         ObservableCollection<Schueler> schuelerCollection;
-        List<Schueler> schuelerListDerKartei;
+        List<Schueler> schuelerListDerKartei = new List<Schueler>();
         Sitzplan sitzplanFuerBlock;
         SitzplanKartei sitzplanKartei = SitzplanKartei.Instance;
         Schueler selectedSchueler = null;
@@ -31,7 +31,7 @@ namespace Sitzplanverteilung
         {
             this.Title = string.Join(" ", "Block", (blocknummer + 1).ToString(), "ändern");
             InitializeComponent();
-            schuelerListDerKartei = sitzplanKartei.getSchuelerListe();
+            schuelerListDerKartei.AddRange(sitzplanKartei.getSchuelerListe());
             sitzplanFuerBlock = sitzplanKartei.getSitzplan(blocknummer);
             setUpData();
             setUpDataGrid();
@@ -47,6 +47,7 @@ namespace Sitzplanverteilung
         private void setUpData()
         {
             schuelerCollection = new ObservableCollection<Schueler>(schuelerListDerKartei);
+
             List<Tischgruppe> gruppen = sitzplanFuerBlock.getTischgruppen();
 
             foreach (Schueler schueler in schuelerCollection)
@@ -73,19 +74,6 @@ namespace Sitzplanverteilung
 
         }
 
-        private void loadAllScheulerInKartei()
-        {
-            foreach (Schueler schueler in schuelerCollection)
-            {
-
-                // need to update the sitzplaetze before saving
-                if (!schuelerListDerKartei.Contains(schueler))
-                {
-                    sitzplanKartei.neuerSchuelerInListe(schueler);
-                }
-            }
-        }
-
         private void schuelerGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var dg = sender as DataGrid;
@@ -103,17 +91,9 @@ namespace Sitzplanverteilung
         private void anderungenSpeichernButton_Click(object sender, RoutedEventArgs e)
         {
             entferneHaeckchen();
-            if (schuelerCollection != null && schuelerCollection.Count > 0)
-            {
-                loadAllScheulerInKartei();
-                SitzplanGUI sitzplanGUI = new SitzplanGUI();
-                sitzplanGUI.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Bitte fügen Sie Schüler hinzu");
-            }
+            SitzplanGUI sitzplanGUI = new SitzplanGUI();
+            sitzplanGUI.Show();
+            this.Close();
         }
         private void swapSchuelerButton_Click(object sender, RoutedEventArgs e) 
         {
@@ -157,10 +137,12 @@ namespace Sitzplanverteilung
                 schuelerCollection[schuelerCollection.IndexOf(schueler)].istAusgewaehlt = false;
             }
         }
-        private void NeuGenerienButton_Click(object sender, RoutedEventArgs e)
+
+
+        private void NeuGenerierenButton_Click(object sender, RoutedEventArgs e)
         {
-            VerteilungskriteriumGUI verteilungsGUI = new VerteilungskriteriumGUI();
-            verteilungsGUI.Show();
+            VerteilungskriteriumGUI vkGUI = new VerteilungskriteriumGUI();
+            vkGUI.Show();
             this.Close();
         }
         void OnChecked(object sender, RoutedEventArgs e)
