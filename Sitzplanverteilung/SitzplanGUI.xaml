@@ -1,4 +1,4 @@
-﻿<Window x:Class="Sitzplanverteilung.SitzplanGUI"
+<Window x:Class="Sitzplanverteilung.SitzplanGUI"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Sitzplanverteilung"
@@ -187,7 +187,7 @@
                     </Grid>
                 </RadioButton.Content>
             </RadioButton>
-            <Button x:Name="NeuGenerienButton" Click="NeuGenerienButton_Click" Padding="10" Grid.Column="0" Grid.Row="7" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
+            <Button x:Name="NeuGenerierenButton" Click="NeuGenerierenButton_Click" Padding="10" Grid.Column="0" Grid.Row="7" Background="#FF0092F8" FontFamily="Calibri" Foreground="White" HorizontalContentAlignment="Left">
                 <Button.Content >
                     <Viewbox Height="39" >
                         <TextBlock>Pläne neu generieren</TextBlock>
