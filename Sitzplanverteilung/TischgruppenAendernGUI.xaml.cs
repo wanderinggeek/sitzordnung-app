@@ -170,6 +170,7 @@ namespace Sitzplanverteilung
             {
                 swapSchuelerButton.IsEnabled = false;
             }
+        }
             
         private void Neu(object sender, RoutedEventArgs e)
         {
@@ -195,7 +196,5 @@ namespace Sitzplanverteilung
         {
             Menue.Startseite(this);
         }            
-            
-        }
     }
 }
