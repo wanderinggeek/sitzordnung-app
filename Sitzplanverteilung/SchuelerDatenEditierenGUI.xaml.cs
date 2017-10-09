@@ -146,7 +146,15 @@ namespace Sitzplanverteilung
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 sitzplanKartei.PictureFolder = dialog.SelectedPath;
-                BilderVerkleinern(sitzplanKartei.PictureFolder);
+                try
+                {
+                    BilderVerkleinern(sitzplanKartei.PictureFolder);
+                    MessageBox.Show("Bilder wurden importiert", "Ergebnis", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show("Es ist ein Fehler aufgetreten: " + error, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 sitzplanKartei.PictureFolder = dialog.SelectedPath + "\\mini\\";
             }
         }       
