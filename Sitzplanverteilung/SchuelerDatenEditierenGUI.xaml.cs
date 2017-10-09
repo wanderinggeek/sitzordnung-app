@@ -50,6 +50,7 @@ namespace Sitzplanverteilung
 
         private void loadAllScheulerInKartei()
         {
+            sitzplanKartei.setSchuelerListe(new List<Schueler>());
             schuelerList = sitzplanKartei.getSchuelerListe();
 
             foreach (Schueler schueler in schuelerCollection)
