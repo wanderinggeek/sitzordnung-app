@@ -25,6 +25,7 @@ namespace Sitzplanverteilung
         Sitzplan sitzplanFuerBlock;
         SitzplanKartei sitzplanKartei = SitzplanKartei.Instance;
         Schueler selectedSchueler = null;
+     
 
         public TischgruppenAendernGUI(int blocknummer)
         {
@@ -101,6 +102,7 @@ namespace Sitzplanverteilung
 
         private void anderungenSpeichernButton_Click(object sender, RoutedEventArgs e)
         {
+            entferneHaeckchen();
             if (schuelerCollection != null && schuelerCollection.Count > 0)
             {
                 loadAllScheulerInKartei();
@@ -113,13 +115,79 @@ namespace Sitzplanverteilung
                 MessageBox.Show("Bitte fügen Sie Schüler hinzu");
             }
         }
+        private void swapSchuelerButton_Click(object sender, RoutedEventArgs e) 
+        {
+            int anzahl = 0;
+            Schueler schueler1 = new Schueler();
+            Schueler schueler2 = new Schueler();
+            foreach (Schueler schueler in schuelerGrid.ItemsSource)
+            {
+                if (((CheckBox)checkGrid.GetCellContent(schueler)).IsChecked == true)
+                {
+                    if (anzahl == 0) 
+                    {
+                        schueler1 = schueler;
+                        anzahl++;
+                    }
+                    else if (anzahl == 1) 
+                    {
+                        schueler2 = schueler;
+                        break;
+                    }
+                }
+            }
 
+            sitzplanFuerBlock.tauschePlaetze(schueler1, schueler2);
+            String tischnummerSpeicher = schuelerCollection[schuelerCollection.IndexOf(schueler1)].tischnummer;
+            String platzSpeicher = schuelerCollection[schuelerCollection.IndexOf(schueler1)].sitzplatznummer;
+            entferneHaeckchen();
+            schuelerCollection[schuelerCollection.IndexOf(schueler1)].tischnummer = schuelerCollection[schuelerCollection.IndexOf(schueler2)].tischnummer;
+            schuelerCollection[schuelerCollection.IndexOf(schueler1)].sitzplatznummer = schuelerCollection[schuelerCollection.IndexOf(schueler2)].sitzplatznummer;
+
+            schuelerCollection[schuelerCollection.IndexOf(schueler2)].tischnummer = tischnummerSpeicher;
+            schuelerCollection[schuelerCollection.IndexOf(schueler2)].sitzplatznummer = platzSpeicher;
+            schuelerGrid.Items.Refresh();
+            MessageBox.Show("Schüler " + schueler1.vorname +" "+ schueler1.name +" wurde mit Schüler "+ schueler2.vorname +" "+ schueler2.name +" getauscht");
+        }
+
+        private void entferneHaeckchen() 
+        {
+            foreach (Schueler schueler in schuelerCollection) 
+            {
+                schuelerCollection[schuelerCollection.IndexOf(schueler)].istAusgewaehlt = false;
+            }
+        }
         private void NeuGenerienButton_Click(object sender, RoutedEventArgs e)
         {
             VerteilungskriteriumGUI verteilungsGUI = new VerteilungskriteriumGUI();
             verteilungsGUI.Show();
             this.Close();
         }
+        void OnChecked(object sender, RoutedEventArgs e)
+        {
+            int anzahl=0;
+            foreach (Schueler schueler in this.schuelerCollection)
+            {
+                if (((CheckBox)checkGrid.GetCellContent(schueler)).IsChecked == true)
+                {
+                    anzahl++;
+                    if (anzahl > 2)
+                    {
+                        MessageBox.Show("Sie dürfen nicht mehr als 2 Schüler gleichzeigig auswählen.");
+                        break;
+                    }
+                }
+            }
+            if (anzahl == 2)
+            {
+                swapSchuelerButton.IsEnabled = true;
 
+            }
+            else
+            {
+                swapSchuelerButton.IsEnabled = false;
+            }
+            
+        }
     }
 }

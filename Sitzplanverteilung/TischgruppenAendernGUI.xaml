@@ -33,6 +33,14 @@
                 </Grid.RowDefinitions>
                 <DataGrid Name="schuelerGrid" Grid.Column="1" Grid.Row="0" AutoGenerateColumns="false" ColumnWidth="*" CanUserAddRows="False" SelectionChanged="schuelerGrid_SelectionChanged">
                     <DataGrid.Columns>
+                        <DataGridCheckBoxColumn x:Name="checkGrid" MaxWidth="30" Header="" Binding="{Binding Path=istAusgewaehlt}" IsReadOnly="false">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style>
+                                    <EventSetter Event="CheckBox.Checked" Handler="OnChecked"/>
+                                    <EventSetter Event="CheckBox.Unchecked" Handler="OnChecked"/>
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                        </DataGridCheckBoxColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Nachname" Binding="{Binding Path=name}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Vorname"  Binding="{Binding Path=vorname}"></DataGridTextColumn>
                         <DataGridTextColumn Header="Beruf"  Binding="{Binding Path=berufsgruppe}"></DataGridTextColumn>
@@ -43,6 +51,7 @@
                         <DataGridTextColumn MaxWidth="40" Header="Platz" Binding="{Binding Path=sitzplatznummer}" ></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button Name="swapSchuelerButton" Grid.Row="1" FontFamily="Calibri" Background="#eeeeee" Foreground="Black" FontWeight="Bold" Click="swapSchuelerButton_Click" ToolTip="Bitte nur 2 Schüler auswählen." >Ausgewählte Schüler tauschen</Button>
             </Grid>
 
             <Button Name="anderungenSpeichernButton"  Grid.Column="0" Click="anderungenSpeichernButton_Click" 
