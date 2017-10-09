@@ -42,7 +42,12 @@ namespace Sitzplanverteilung
         
         public static void Info()
         {
-            MessageBox.Show("Sitzordnung-Planer\nVersion 0.90\n\nEntwickelt von\nStefan Apel\nDaniel Berg\nVivian Schmidt");
+            MessageBox.Show(
+                "Sitzordnung-Planer\nVersion 0.95\n\nEntwickelt von\nStefan Apel\nDaniel Berg\nVivian Schmidt\n\nPandabären sind nutzlos!",
+                "Information",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
         }
 
         public static void Documentation()
