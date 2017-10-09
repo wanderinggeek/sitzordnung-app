@@ -56,7 +56,7 @@ namespace Sitzplanverteilung
             int moeglichePlaetze = tischgruppen.Count * maxProTisch;
             decimal schuelerProTischTatsaechlich = schuelerListe.Count() / tischgruppen.Count;
             int restPlaetze = schuelerListe.Count() % tischgruppen.Count;
-            if (moeglichePlaetze > schuelerListe.Count())
+            if (moeglichePlaetze >= schuelerListe.Count())
             {
                 if (schuelerProTischTatsaechlich < 6)
                 {

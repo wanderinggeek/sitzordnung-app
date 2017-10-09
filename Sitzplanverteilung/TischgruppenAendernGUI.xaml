@@ -80,7 +80,13 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn MaxWidth="100" Header="Nachname" Binding="{Binding Path=name}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Vorname"  Binding="{Binding Path=vorname}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Beruf"  Binding="{Binding Path=berufsgruppe}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Beruf"  Binding="{Binding Path=berufsgruppe}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="ToolTip" Value="{Binding Path=berufsgruppe}" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
                         <DataGridTextColumn Header="Firmenname"  Binding="{Binding Path=firma}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="100" Header="Firmenkuerzel"  Binding="{Binding Path=firmenkuerzel}"></DataGridTextColumn>
                         <DataGridTextColumn MaxWidth="70" Header="Geschlecht"  Binding="{Binding Path=geschlecht}"></DataGridTextColumn>
@@ -102,7 +108,7 @@
                     <Viewbox Grid.Row="1">
                         <fa:IconImage Icon="Check" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
+                    <Viewbox Grid.Row="2" Name="firstTextBlock">
                         <TextBlock>Änderungen</TextBlock>
                     </Viewbox>
                     <Viewbox Grid.Row="3" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
@@ -110,7 +116,7 @@
                     </Viewbox>
                 </Grid>
             </Button>
-            <Button Name="NeuGenerienButton"  Grid.Row="1" Click="NeuGenerienButton_Click" Background="#f0f0f0" FontFamily="Calibri">
+            <Button Name="NeuGenerierenButton"  Grid.Row="1" Click="NeuGenerierenButton_Click" Background="#f0f0f0" FontFamily="Calibri">
                 <Grid Height="276">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="27*"/>
@@ -121,11 +127,11 @@
                     <Viewbox Grid.Row="1">
                         <fa:IconImage Icon="Refresh" Foreground="#4f59d3"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">
-                        <TextBlock Foreground="#727272">Neu</TextBlock>
+                    <Viewbox Grid.Row="2" MaxHeight="{Binding ElementName=firstTextBox, Path=ActualHeight}">
+                        <TextBlock Foreground="#727272">Pläne neu</TextBlock>
                     </Viewbox>
-                    <Viewbox Grid.Row="3" Name="fourthTextblock">
-                        <TextBlock Foreground="#727272">generien</TextBlock>
+                    <Viewbox Grid.Row="3" MaxHeight="{Binding ElementName=firstTextBox, Path=ActualHeight}">
+                        <TextBlock Foreground="#727272">generieren</TextBlock>
                     </Viewbox>
                 </Grid>
             </Button>
