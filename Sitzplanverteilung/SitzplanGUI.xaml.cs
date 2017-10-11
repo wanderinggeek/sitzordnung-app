@@ -194,17 +194,19 @@ namespace Sitzplanverteilung
             MakeBlockPictures();
             // string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
             string tmpPath = System.IO.Path.GetTempPath();
-            PDFCreation.MakePDF(tmpPath + "tmp_Sitzplan.pdf");
+            string pdfName = tmpPath + DateTime.Now.ToString("yyyyMMddHHmmssfff") + "_" + "Sitzplan.pdf";
+            PDFCreation.MakePDF(pdfName);
             this.Cursor = Cursors.Arrow;
 
             WebBrowser wb = new WebBrowser();
-            wb.Navigate(new Uri(tmpPath + "tmp_Sitzplan.pdf"));
+            wb.Navigate(new Uri(pdfName));
 
             PdfGUI pdfGUI = new PdfGUI();
 
             pdfGUI.Content = wb;
+            pdfGUI.Topmost = true;
+            pdfGUI.Activate();
             pdfGUI.Show();
-
         }
 
         private void Startseite(object sender, RoutedEventArgs e)
