@@ -145,7 +145,8 @@ namespace Sitzplanverteilung
 
         private void MakeBlockPictures()
         {
-            string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
+            // string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
+            string tmpPath = System.IO.Path.GetTempPath();
             string picName = "Sitzplan-Block{}.png";
 
             for (int i = 5; i >= 0; i--)
@@ -191,7 +192,8 @@ namespace Sitzplanverteilung
         {
             this.Cursor = Cursors.Wait;
             MakeBlockPictures();
-            string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
+            // string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
+            string tmpPath = System.IO.Path.GetTempPath();
             PDFCreation.MakePDF(tmpPath + "tmp_Sitzplan.pdf");
             this.Cursor = Cursors.Arrow;
 
@@ -241,8 +243,5 @@ namespace Sitzplanverteilung
             vkGUI.Show();
             this.Close();
         }
-
-         
-
     }
 }
