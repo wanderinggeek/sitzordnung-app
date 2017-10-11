@@ -118,7 +118,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Viewbox Margin="5"  MaxHeight="40">
-                        <wpfTool:IntegerUpDown Value="5" Minimum="1" Maximum="6" AllowTextInput="False" Name="AnzahlDerTischeTool"/>
+                        <wpfTool:IntegerUpDown Value="5" Minimum="2" Maximum="6" AllowTextInput="False" Name="AnzahlDerTischeTool"/>
                     </Viewbox>
                     <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="20">
                         <TextBlock VerticalAlignment="Center" FontFamily="Calibri" MaxHeight="{Binding ElementName=fourthTextblock, Path=ActualHeight}">Anzahl der Tische</TextBlock>
