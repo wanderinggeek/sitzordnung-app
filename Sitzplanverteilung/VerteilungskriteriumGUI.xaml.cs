@@ -51,6 +51,7 @@ namespace Sitzplanverteilung
             {
                 if (exception.ParamName.Equals("Schüleranzahl")) 
                 {
+                    this.Cursor = Cursors.Arrow;
                     MessageBox.Show("Nicht genug Sitzplätze.");
                 }
             }
