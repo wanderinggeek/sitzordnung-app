@@ -15,6 +15,23 @@ namespace Sitzplanverteilung
 
         public static void ExitProgram()
         {
+            var dir = new System.IO.DirectoryInfo(System.IO.Path.GetTempPath());
+
+            foreach (var file in dir.EnumerateFiles("*Sitzplan*"))
+            {
+                try
+                {
+                    file.Delete();
+                }
+                catch(Exception error)
+                {
+                    MessageBox.Show(
+                        "Fehler beim Löschen der temporären Dateien:" + error,
+                        "Fehler", 
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
             Application.Current.Shutdown();
         }
 
@@ -43,7 +60,7 @@ namespace Sitzplanverteilung
         public static void Info()
         {
             MessageBox.Show(
-                "Sitzordnung-Planer\nVersion 0.95\n\nEntwickelt von\nStefan Apel\nDaniel Berg\nVivian Schmidt\n\nPandabären sind nutzlos!",
+                "Sitzordnung-Planer\nVersion 1.00\n\nEntwickelt von\nStefan Apel\nDaniel Berg\nVivian Schmidt\n\nPandabären sind nutzlos!",
                 "Information",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information

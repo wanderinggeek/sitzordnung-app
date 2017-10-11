@@ -15,17 +15,17 @@ namespace Sitzplanverteilung
     {
         public static void MakePDF(string fileName)
         {
-            // string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
-            string tmpPath = System.IO.Path.GetTempPath();
-            string picName = "Sitzplan-Block{}.png";
-
-            FileStream fs = new FileStream(fileName + DateTime.Now.ToString("yyyyMMddHHmmssfff"), FileMode.Create);
+            FileStream fs = new FileStream(fileName, FileMode.Create);
             Document doc = new Document(PageSize.A4.Rotate(), 10, 10, 10, 10);
             PdfWriter writer = PdfWriter.GetInstance(doc, fs);
 
             doc.AddTitle("Sitzplan");
 
             doc.Open();
+
+            // string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
+            string tmpPath = System.IO.Path.GetTempPath();
+            string picName = "Sitzplan-Block{}.png";
 
             for (int i = 1; i < 7; i++)
             {
