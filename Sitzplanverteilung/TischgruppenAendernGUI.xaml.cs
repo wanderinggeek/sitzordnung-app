@@ -114,22 +114,29 @@ namespace Sitzplanverteilung
                     else if (anzahl == 1) 
                     {
                         schueler2 = schueler;
+                        anzahl++;
                         break;
                     }
                 }
             }
+            if (anzahl == 2)
+            {
+                sitzplanFuerBlock.tauschePlaetze(schueler1, schueler2);
+                String tischnummerSpeicher = schuelerCollection[schuelerCollection.IndexOf(schueler1)].tischnummer;
+                String platzSpeicher = schuelerCollection[schuelerCollection.IndexOf(schueler1)].sitzplatznummer;
+                entferneHaeckchen();
+                schuelerCollection[schuelerCollection.IndexOf(schueler1)].tischnummer = schuelerCollection[schuelerCollection.IndexOf(schueler2)].tischnummer;
+                schuelerCollection[schuelerCollection.IndexOf(schueler1)].sitzplatznummer = schuelerCollection[schuelerCollection.IndexOf(schueler2)].sitzplatznummer;
 
-            sitzplanFuerBlock.tauschePlaetze(schueler1, schueler2);
-            String tischnummerSpeicher = schuelerCollection[schuelerCollection.IndexOf(schueler1)].tischnummer;
-            String platzSpeicher = schuelerCollection[schuelerCollection.IndexOf(schueler1)].sitzplatznummer;
-            entferneHaeckchen();
-            schuelerCollection[schuelerCollection.IndexOf(schueler1)].tischnummer = schuelerCollection[schuelerCollection.IndexOf(schueler2)].tischnummer;
-            schuelerCollection[schuelerCollection.IndexOf(schueler1)].sitzplatznummer = schuelerCollection[schuelerCollection.IndexOf(schueler2)].sitzplatznummer;
-
-            schuelerCollection[schuelerCollection.IndexOf(schueler2)].tischnummer = tischnummerSpeicher;
-            schuelerCollection[schuelerCollection.IndexOf(schueler2)].sitzplatznummer = platzSpeicher;
-            schuelerGrid.Items.Refresh();
-            MessageBox.Show("Schüler " + schueler1.vorname +" "+ schueler1.name +" wurde mit Schüler "+ schueler2.vorname +" "+ schueler2.name +" getauscht");
+                schuelerCollection[schuelerCollection.IndexOf(schueler2)].tischnummer = tischnummerSpeicher;
+                schuelerCollection[schuelerCollection.IndexOf(schueler2)].sitzplatznummer = platzSpeicher;
+                schuelerGrid.Items.Refresh();
+                MessageBox.Show("Schüler " + schueler1.vorname + " " + schueler1.name + " wurde mit Schüler " + schueler2.vorname + " " + schueler2.name + " getauscht");
+            }
+            else 
+            {
+                MessageBox.Show("Sie müssen 2 Schüler auswählen um zu tauschen.");
+            }
         }
 
         private void entferneHaeckchen() 
@@ -162,7 +169,7 @@ namespace Sitzplanverteilung
                     }
                 }
             }
-            if (anzahl == 2)
+            if (anzahl <= 2)
             {
                 swapSchuelerButton.IsEnabled = true;
             }
