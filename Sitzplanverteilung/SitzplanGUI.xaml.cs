@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
+    using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xaml;
@@ -123,21 +123,24 @@ namespace Sitzplanverteilung
         {
             this.Cursor = Cursors.Wait;
             MakeBlockPictures();
+            this.Cursor = Cursors.Arrow;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Datei (*.pdf)|*.pdf";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             saveFileDialog.FileName = "Sitzplan";
             if (saveFileDialog.ShowDialog() == true)
+                this.Cursor = Cursors.Wait;
                 try
                 {
                     PDFCreation.MakePDF(saveFileDialog.FileName);
+                    this.Cursor = Cursors.Arrow;
                     MessageBox.Show("Die Datei " + saveFileDialog.FileName + " wurde gespeichert.", "Ergebnis", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch(Exception error)
                 {
+                    this.Cursor = Cursors.Arrow;
                     MessageBox.Show("Fehler: " + error, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            this.Cursor = Cursors.Arrow;
         }
 
         private void MakeBlockPictures()
@@ -186,9 +189,11 @@ namespace Sitzplanverteilung
 
         private void Drucken(object sender, RoutedEventArgs e)
         {
+            this.Cursor = Cursors.Wait;
             MakeBlockPictures();
             string tmpPath = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]).Replace("\\bin\\Debug", "\\tmp\\");
             PDFCreation.MakePDF(tmpPath + "tmp_Sitzplan.pdf");
+            this.Cursor = Cursors.Arrow;
 
             WebBrowser wb = new WebBrowser();
             wb.Navigate(new Uri(tmpPath + "tmp_Sitzplan.pdf"));
@@ -197,6 +202,7 @@ namespace Sitzplanverteilung
 
             pdfGUI.Content = wb;
             pdfGUI.Show();
+
         }
 
         private void Startseite(object sender, RoutedEventArgs e)
